@@ -70,6 +70,19 @@ end
 
 # 
 class PlayerMaker < CodeMaker
+  def make_code
+    code = []
+    (1..4).each do |num|
+      puts "Please pick which color (#{@@colors}) you'd like as the #{num} spot of the secret code"
+      color_choice = gets.chomp.downcase
+      unless @@colors.include?(color_choice)
+        puts "That is not an appropriate choice"
+        redo 
+      end
+      code << color_choice
+    end
+    code
+  end
 end
 
 # 
@@ -149,6 +162,15 @@ def code_breaker
 end
 
 def code_maker
+  puts 'In Code Maker all you need to do is pick a secret code that the computer will try and guess.'
+  puts 'The computer will have twelve chances to guess your code.'
+  puts 'After each guess the computer will receive automatically generated feedback.'
+  puts 'The gameboard will be displayed after each round so you can see if the computer is getting close!'
+  puts '[press enter to continue]'
+  continue = gets.chomp until continue == ''
+  computer = ComputerBreaker.new
+  player = PlayerMaker.new
+  gameboard = Gameboard.new
 end
 
 start_game
