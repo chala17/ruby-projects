@@ -17,7 +17,7 @@ class CodeMaker
     check_array = @code.clone
     # checks color and node
 
-    checked_exact = guess.map.with_index do | element, index |
+    checked_exact = guess.map.with_index do |element, index|
       if element == check_array[index]
         element = 'bl'
         check_array[index] = ' '
@@ -36,7 +36,7 @@ class CodeMaker
 
     # replaces all colors that weren't found with blank spaces
     checked_similar.map do |element|
-      element = ' ' unless ['bl', 'w'].include?(element)
+      element = ' ' unless %w[bl w].include?(element)
       element
     end
   end
@@ -44,19 +44,18 @@ class CodeMaker
   def correct_guess?(guess)
     @code.eql?(guess)
   end
-
 end
 
 # Additional method to allow players to take a guess at the secret code
 class PlayerBreaker < CodeBreaker
-  def get_guess
+  def player_guess
     code_guess = []
     (1..4).each do |num|
       puts "Please pick which color (#{@@colors}) you think is in the #{num} spot of the secret code"
       color_choice = gets.chomp.downcase
       unless @@colors.include?(color_choice)
-        puts "That is not an appropriate choice" 
-        redo 
+        puts 'That is not an appropriate choice'
+        redo
       end
       code_guess << color_choice
     end
@@ -66,35 +65,32 @@ end
 
 # Additional method that enables the computer to make guesses based upon feedback
 class ComputerBreaker < CodeBreaker
+  def guess(feedback, last_guess, already_chosen, maybe)
+    return Array.new(4) { @@colors.sample }, already_chosen, maybe unless feedback
 
-  def guess(feedback, last_guess)
-    unless feedback
-      return Array.new(4) { @@colors.sample }
-    end
     new_guess = Array.new(4)
-    maybe = []
     feedback.each_with_index do |element, index|
       if element == 'bl'
-        new_guess[index] = last_guess[index] 
-        next
-      elsif maybe != []
-        new_guess[index] = maybe.sample
-        maybe = maybe - Array(new_guess[index])
-        maybe << last_guess[index] if element == 'w'
-        next
+        new_guess[index] = last_guess[index]
       else
+        already_chosen[index] << (last_guess[index])
+        if (maybe - already_chosen[index]).any?
+          new_guess[index] = (maybe - already_chosen[index]).sample
+          maybe -= Array(new_guess[index])
+        else
+          new_guess[index] = (@@colors - already_chosen[index]).sample
+        end
         maybe << last_guess[index] if element == 'w'
-        new_guess[index] = (@@colors - Array(last_guess[index])).sample
       end
     end
-    new_guess
+    return new_guess, already_chosen, maybe
   end
 end
 
 # Additional method to allow a player to pick their own code
 class PlayerMaker < CodeMaker
   def initialize
-    @code = make_code()
+    @code = make_code
   end
 
   def make_code
@@ -104,8 +100,8 @@ class PlayerMaker < CodeMaker
       puts "Please pick which color (#{@@colors}) you'd like as the #{num} spot of the secret code"
       color_choice = gets.chomp.downcase
       unless @@colors.include?(color_choice)
-        puts "That is not an appropriate choice"
-        redo 
+        puts 'That is not an appropriate choice'
+        redo
       end
       code << color_choice
     end
@@ -117,7 +113,7 @@ end
 # additional method to generate a random secret code
 class ComputerMaker < CodeMaker
   def initialize
-    @code = generate_code()
+    @code = generate_code
   end
 
   def generate_code
@@ -127,30 +123,29 @@ end
 
 # displays the gameboard with the previous guesses and feedback, updates each time
 class Gameboard
-
   attr_accessor :guesses, :feedback
 
   def initialize
-    @guesses = Array.new(12,Array.new(4,'.'))
-    @feedback = Array.new(12,Array.new())
+    @guesses = Array.new(12, Array.new(4, '.'))
+    @feedback = Array.new(12, [])
   end
 
   def display_board
-    puts "     guesses        feedback"
+    puts '     guesses        feedback'
     12.times do |i|
-      puts "|| #{@guesses[i].join(" | ")} || #{@feedback[i]}"
+      puts "|| #{@guesses[i].join(' | ')} || #{@feedback[i]}"
     end
   end
 
   def play_again?
     puts "Press the 'Y' key if you'd like to play again!"
     player_response = gets.chomp.downcase
-    player_response == 'y' ? true : false
+    player_response == 'y'
   end
 end
 
 def start_game
-  puts "WELCOME TO MASTERMIND"
+  puts 'WELCOME TO MASTERMIND'
   puts "Would you like to be the code breaker, or the code maker?\n1. Code Breaker \n2. Code Maker"
   breaker_or_maker = gets.chomp.to_i
   code_breaker if breaker_or_maker == 1
@@ -158,12 +153,18 @@ def start_game
 end
 
 def code_breaker
-  puts "The rules for Code Breaker are thus:\nThe computer will pick a secret code 4 nodes long using the following colors [red, yellow, green, blue, pink, orange]"
-  puts "The computer may use a color more than once if it so chooses.\nYour task is to figure out the secret code by guessing the correct colors, in the correct order. "
-  puts "You will have 12 guesses to figure out the secret code.\nAfter each guess you will get feedback depending on how close you are to the secret code."
-  puts "The feedback will be a code of white and black nodes 4 nodes long.\nIf you guess a color of the secret code in the right spot, the feedback will be a black node in that same spot."
+  puts 'The rules for Code Breaker are thus:'
+  puts 'The computer will pick a secret code 4 nodes long using the following colors:'
+  puts '[red, yellow, green, blue, pink, orange]'
+  puts 'The computer may use a color more than once if it so chooses.'
+  puts 'Your task is to figure out the secret code by guessing the correct colors, in the correct order.'
+  puts 'You will have 12 guesses to figure out the secret code.'
+  puts 'After each guess you will get feedback depending on how close you are to the secret code.'
+  puts 'The feedback will be a code of white and black nodes 4 nodes long.'
+  puts 'If you guess a color of the secret code in the right spot, the feedback will be a black node in that same spot.'
   puts 'If you guess a color that is in the secret code, but it is in the wrong spot, you will get a white node in the spot of the color that you guessed.'
-  puts "If you guessed a color that wasn't in the secret code, you will receive a blank node at that spot.\nGOOD LUCK!!!"
+  puts "If you guessed a color that wasn't in the secret code, you will receive a blank node at that spot."
+  puts 'GOOD LUCK!!!'
   puts '[press enter to continue]'
   continue = gets.chomp until continue == ''
   computer = ComputerMaker.new
@@ -172,7 +173,7 @@ def code_breaker
   puts 'The computer has picked their code!'
   (1..12).each do |num|
     puts "Round #{num}!"
-    player_guess = player.get_guess
+    player_guess = player.player_guess
     gameboard.guesses[num - 1] = player_guess
     win = computer.correct_guess?(player_guess)
     if win
@@ -186,7 +187,7 @@ def code_breaker
     end
     puts 'Oh no, you ran out of turns! The computer wins this time' if num == 12
   end
-  gameboard.play_again? ? start_game : puts("Bye! Hope you had fun!")
+  gameboard.play_again? ? start_game : puts('Bye! Hope you had fun!')
 end
 
 def code_maker
@@ -201,9 +202,11 @@ def code_maker
   gameboard = Gameboard.new
   feedback = nil
   computer_guess = []
+  already_chosen = [[], [], [], []]
+  maybe = []
   (1..12).each do |num|
     puts "Round #{num}"
-    computer_guess = computer.guess(feedback, computer_guess)
+    computer_guess, already_chosen, maybe = computer.guess(feedback, computer_guess, already_chosen, maybe)
     gameboard.guesses[num - 1] = computer_guess
     win = player.correct_guess?(computer_guess)
     if win
@@ -215,11 +218,11 @@ def code_maker
       gameboard.feedback[num - 1] = feedback
       gameboard.display_board
       puts '[press the number of this round to continue]'
-      continue = gets.chomp until continue == "#{num}"
+      continue = gets.chomp until continue == num.to_s
     end
     puts 'Game over! The computer was unable to guess your code! You Win!' if num == 12
   end
-  gameboard.play_again? ? start_game : puts("Bye! Hope you had fun!")
+  gameboard.play_again? ? start_game : puts('Bye! Hope you had fun!')
 end
 
 start_game
