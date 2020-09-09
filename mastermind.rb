@@ -1,5 +1,6 @@
 # frozen-string-literal: true
 
+# parent class that contains a class variable
 class CodeBreaker
   @@colors = %w[r y g b p o]
 end
@@ -10,7 +11,6 @@ class CodeMaker
 
   def initialize
     @code = []
-    @feedback = []
   end
 
   def generate_feedback(guess)
@@ -47,7 +47,7 @@ class CodeMaker
 
 end
 
-# 
+# Additional method to allow players to take a guess at the secret code
 class PlayerBreaker < CodeBreaker
   def get_guess
     code_guess = []
@@ -64,14 +64,42 @@ class PlayerBreaker < CodeBreaker
   end
 end
 
-# 
+# Additional method that enables the computer to make guesses based upon feedback
 class ComputerBreaker < CodeBreaker
+
+  def guess(feedback, last_guess)
+    unless feedback
+      return Array.new(4) { @@colors.sample }
+    end
+    new_guess = Array.new(4)
+    maybe = []
+    feedback.each_with_index do |element, index|
+      if element == 'bl'
+        new_guess[index] = last_guess[index] 
+        next
+      elsif maybe != []
+        new_guess[index] = maybe.sample
+        maybe = maybe - Array(new_guess[index])
+        maybe << last_guess[index] if element == 'w'
+        next
+      else
+        maybe << last_guess[index] if element == 'w'
+        new_guess[index] = (@@colors - Array(last_guess[index])).sample
+      end
+    end
+    new_guess
+  end
 end
 
-# 
+# Additional method to allow a player to pick their own code
 class PlayerMaker < CodeMaker
+  def initialize
+    @code = make_code()
+  end
+
   def make_code
     code = []
+    puts 'Time to pick your secret code!'
     (1..4).each do |num|
       puts "Please pick which color (#{@@colors}) you'd like as the #{num} spot of the secret code"
       color_choice = gets.chomp.downcase
@@ -81,15 +109,15 @@ class PlayerMaker < CodeMaker
       end
       code << color_choice
     end
+    puts "Got it, your secret code is: #{code}"
     code
   end
 end
 
-# 
+# additional method to generate a random secret code
 class ComputerMaker < CodeMaker
   def initialize
     @code = generate_code()
-    @feedback = []
   end
 
   def generate_code
@@ -171,6 +199,27 @@ def code_maker
   computer = ComputerBreaker.new
   player = PlayerMaker.new
   gameboard = Gameboard.new
+  feedback = nil
+  computer_guess = []
+  (1..12).each do |num|
+    puts "Round #{num}"
+    computer_guess = computer.guess(feedback, computer_guess)
+    gameboard.guesses[num - 1] = computer_guess
+    win = player.correct_guess?(computer_guess)
+    if win
+      puts "The computer guessed your code, you've been bested!"
+      break
+    else
+      puts 'The computer missed this time!'
+      feedback = player.generate_feedback(computer_guess)
+      gameboard.feedback[num - 1] = feedback
+      gameboard.display_board
+      puts '[press the number of this round to continue]'
+      continue = gets.chomp until continue == "#{num}"
+    end
+    puts 'Game over! The computer was unable to guess your code! You Win!' if num == 12
+  end
+  gameboard.play_again? ? start_game : puts("Bye! Hope you had fun!")
 end
 
 start_game
