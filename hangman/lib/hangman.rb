@@ -3,24 +3,25 @@
 require 'yaml'
 require_relative 'gallows'
 
+# includes functionality to run gameplay and keep gameplay state
 class Game
   include Gallows
 
   attr_accessor :guesses, :secret_word, :correct_letters, :incorrect_letters
 
   def initialize
-    @secret_word = get_secret_word
+    @secret_word = generate_secret_word
     @incorrect_letters = []
     @correct_letters = []
     @guesses = 6
   end
 
   def display
-    guessed_letters = @secret_word.split("").map do |letter| 
+    guessed_letters = @secret_word.split('').map do |letter|
       if @correct_letters.include?(letter)
         letter
       else
-        "_"
+        '_'
       end
     end
     case @guesses
@@ -40,30 +41,32 @@ class Game
       missed_6
     end
     puts "Your word progress so far is: #{guessed_letters.join(' ')}."
-    puts "The letters you've guessed incorrectly are: #{@incorrect_letters.empty? ? 'None yet!' : @incorrect_letters.join(',')}."
+    puts "Your incorrect letters are: #{@incorrect_letters.empty? ? 'None yet!' : @incorrect_letters.join(',')}."
     @guesses == 1 ? puts('You have 1 guess left!') : puts("You have #{@guesses} guesses left.")
   end
 
-  def get_secret_word
+  def generate_secret_word
     dictionary = File.open('../hangman.txt').readlines
     word = 'bad'
     word = dictionary[rand(dictionary.length)].chomp.downcase until word.length > 4 && word.length < 13
     word
   end
 
-  def get_guess
+  def generate_guess
     puts "If you'd like to save the game enter 'save' otherwise, please enter a letter you'd like to guess!"
-    player_guess = gets.chomp.downcase
-    while (@incorrect_letters.include?(player_guess) || @correct_letters.include?(player_guess)) || !is_a_letter(player_guess)
-      return save_game if player_guess == 'save'
+    guess = gets.chomp.downcase
+    while (@incorrect_letters.include?(guess) || @correct_letters.include?(guess)) || !a_letter?(guess)
+      return save_game if guess == 'save'
+
       puts "Invalid entry, please enter a singular letter you haven't yet guessed"
-      player_guess = gets.chomp.downcase
+      guess = gets.chomp.downcase
     end
-    player_guess
+    guess
   end
 
-  def is_a_letter(letter)
+  def a_letter?(letter)
     return false unless letter.is_a? String
+
     letter.match(/[a-z]/) && letter.length == 1
   end
 
@@ -79,8 +82,8 @@ class Game
   end
 
   def out_of_guesses
-    puts "Oh no! You've ran out of guesses!\nThe word was #{@secret_word} if you were wondering!" if @guesses == 0
-    @guesses == 0
+    puts "Oh no! You've ran out of guesses!\nThe word was '#{@secret_word}' if you were wondering!" if @guesses.zero?
+    @guesses.zero?
   end
 
   def game_won
@@ -94,21 +97,21 @@ class Game
 
   def save_game
     game_data = [@guesses, @secret_word, @incorrect_letters, @correct_letters]
-    File.open("save_game.yml", "w") { |file| file.write(game_data.to_yaml) }
-    abort("Game saved, see ya next time!")
+    File.open('save_game.yml', 'w') { |file| file.write(game_data.to_yaml) }
+    abort('Game saved, see ya next time!')
   end
 end
 
-  def load_game
-    loaded_game = YAML.load(File.read('save_game.yml'))
-    game = Game.new
-    game.guesses = loaded_game[0]
-    game.secret_word = loaded_game[1]
-    game.incorrect_letters = loaded_game[2]
-    game.correct_letters = loaded_game[3]
-    game.display
-    game
-  end
+def load_game
+  loaded_game = YAML.safe_load(File.read('save_game.yml'))
+  game = Game.new
+  game.guesses = loaded_game[0]
+  game.secret_word = loaded_game[1]
+  game.incorrect_letters = loaded_game[2]
+  game.correct_letters = loaded_game[3]
+  game.display
+  game
+end
 
 def introduction
   puts 'Hello! Welcome to Hangman!'
@@ -122,7 +125,7 @@ def introduction
   puts "Goodluck! \n\n"
   game = Game.new
   game.display
-  return game
+  game
 end
 
 def keep_playing
@@ -138,24 +141,19 @@ def load_or_new_game
   end
   puts "Hello! If you'd like to load the save game enter 'load', to start a new game enter any other key."
   load_or_new = gets.chomp.downcase
-  if load_or_new == 'load'
-    game = load_game
-  else
-    game = introduction
-  end
-  game
+  load_or_new == 'load' ? load_game : introduction
 end
 
 def logic
   game = load_or_new_game
   winner = false
   until winner
-    player_guess = game.get_guess
+    player_guess = game.generate_guess
     game.correct_letter(player_guess)
     game.display
     winner = true if game.out_of_guesses || game.game_won
   end
-  keep_playing ? logic : puts("See ya later!")
+  keep_playing ? logic : puts('See ya later!')
 end
 
 logic
