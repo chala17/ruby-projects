@@ -1,11 +1,12 @@
 # frozen_string_literal: true
 
+require 'yaml'
 require_relative 'gallows'
 
 class Game
   include Gallows
 
-  attr_reader :guesses
+  attr_accessor :guesses, :secret_word, :correct_letters, :incorrect_letters
 
   def initialize
     @secret_word = get_secret_word
@@ -51,9 +52,10 @@ class Game
   end
 
   def get_guess
-    puts "Please enter a letter you'd like to guess!"
+    puts "If you'd like to save the game enter 'save' otherwise, please enter a letter you'd like to guess!"
     player_guess = gets.chomp.downcase
-    while (@incorrect_letters.include?(player_guess) || @correct_letters.include?(player_guess)) && !is_a_letter(player_guess)
+    while (@incorrect_letters.include?(player_guess) || @correct_letters.include?(player_guess)) || !is_a_letter(player_guess)
+      return save_game if player_guess == 'save'
       puts "Invalid entry, please enter a singular letter you haven't yet guessed"
       player_guess = gets.chomp.downcase
     end
@@ -89,7 +91,24 @@ class Game
     puts "Congrats! You've guessed the secret word!" if answer
     answer
   end
+
+  def save_game
+    game_data = [@guesses, @secret_word, @incorrect_letters, @correct_letters]
+    File.open("save_game.yml", "w") { |file| file.write(game_data.to_yaml) }
+    abort("Game saved, see ya next time!")
+  end
 end
+
+  def load_game
+    loaded_game = YAML.load(File.read('save_game.yml'))
+    game = Game.new
+    game.guesses = loaded_game[0]
+    game.secret_word = loaded_game[1]
+    game.incorrect_letters = loaded_game[2]
+    game.correct_letters = loaded_game[3]
+    game.display
+    game
+  end
 
 def introduction
   puts 'Hello! Welcome to Hangman!'
@@ -106,15 +125,29 @@ def introduction
   return game
 end
 
-def play_again
-  puts "Enter 'y' if you'd like to play again!"
+def keep_playing
+  puts "Enter 'y' if you'd like to keep playing!"
   response = gets.chomp.downcase
   response == 'y'
 end
 
+def load_or_new_game
+  unless File.exist?('save_game.yml')
+    game = introduction
+    return game
+  end
+  puts "Hello! If you'd like to load the save game enter 'load', to start a new game enter any other key."
+  load_or_new = gets.chomp.downcase
+  if load_or_new == 'load'
+    game = load_game
+  else
+    game = introduction
+  end
+  game
+end
 
 def logic
-  game = introduction
+  game = load_or_new_game
   winner = false
   until winner
     player_guess = game.get_guess
@@ -122,7 +155,7 @@ def logic
     game.display
     winner = true if game.out_of_guesses || game.game_won
   end
-  play_again ? logic : puts("See ya later!")
+  keep_playing ? logic : puts("See ya later!")
 end
 
 logic
