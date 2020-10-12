@@ -1,7 +1,7 @@
 # frozen-string-literal: true
 
+# contains all logic used to keep state of a player
 class Player
-
   attr_accessor :player, :symbol
 
   def initialize(one_or_two, symbol)
@@ -12,14 +12,14 @@ class Player
   def make_a_move(board)
     accepted_move = false
     until accepted_move
-      puts "Enter which column you'd like to drop your token in Player#{self.player}"
+      puts "Enter which column you'd like to drop your token in Player#{player}"
       move = gets.chomp.to_i - 1
       until move >= 0 && move <= 5
         puts 'Please enter an integer between 1 and 6!'
         move = gets.chomp.to_i - 1
       end
       if board.spaces[move].length < 6
-        board.spaces[move].push(self.symbol)
+        board.spaces[move].push(symbol)
         accepted_move = true
       else
         puts 'It looks like that column is full!'
@@ -29,8 +29,8 @@ class Player
   end
 end
 
+# contains all logic used to keep state of gameboard
 class Board
-
   attr_accessor :spaces
 
   def initialize
@@ -58,49 +58,46 @@ class Board
     row = spaces[move].length - 1
     1.upto(3) do
       row -= 1
-      return false if row < 0
+      return false if row.negative?
 
       return false unless spaces[move][row] == player.symbol
-
     end
     true
   end
 
   def horizontal?(player, move)
-    row = spaces[move].length - 1
     directions = [1, -1]
+    consecutive = []
     0.upto(1) do |direction|
       column = move
-      win = true
-      1.upto(3) do
+      row = spaces[move].length - 1
+      until spaces[column][row] != player.symbol
+        consecutive.append(spaces[column][row]) unless direction == 1 && column == move
         column += directions[direction]
-        if (column > 5 || column < 0)
-          win = false 
-          break
-        end
-        win = false unless spaces[column][row] == player.symbol
+        break if (row > 5 || row.negative?) || (column > 5 || column.negative?)
       end
-      return true if win
     end
+    return true if consecutive.length >= 4
+
     false
   end
 
   def diagonal?(player, move)
-    directions = [[1, 1], [1, -1], [-1, 1], [-1, -1]]
-    0.upto(3) do |direction|
-      row = spaces[move].length - 1
-      column = move
-      win = true
-      1.upto(3) do
-        row += directions[direction][0]
-        column += directions[direction][1]
-        if (row > 5 || row < 0) || (column > 5 || column < 0)
-          win = false
-          break
+    directions = [[1, 1], [1, -1]]
+    0.upto(1) do |direction|
+      consecutive = []
+      0.upto(1) do |switch|
+        multiplyer = switch == 1 ? -1 : 1
+        column = move
+        row = spaces[move].length - 1
+        until spaces[column][row] != player.symbol
+          consecutive.append(spaces[column][row]) unless switch == 1 && column == move
+          row += directions[direction][0] * multiplyer
+          column += directions[direction][1] * multiplyer
+          break if (row > 5 || row.negative?) || (column > 5 || column.negative?)
         end
-        win = false unless spaces[column][row] == player.symbol
+        return true if consecutive.length >= 4
       end
-      return true if win
     end
     false
   end
@@ -115,12 +112,12 @@ class Board
   end
 end
 
+# contains all the logic for running a complete game
 class Gameplay
-
   def create_players
     puts "Hello players! Welcome to Connect Four!\nPlayer1 would you like to be X or O?"
     player1 = gets.chomp.upcase
-    until %[X O].include?(player1)
+    until %(X O).include?(player1)
       puts 'Please choose either X or O'
       player1 = gets.chomp.upcase
     end
@@ -138,20 +135,25 @@ class Gameplay
     false
   end
 
+  def game_logic(player, board)
+    winner = false
+    move = player.make_a_move(board)
+    board.display_board
+    winner = 'cats' if board.board_full?
+    winner = player if board.winner?(player, move)
+    winner
+  end
+
   def start_game
     player1, player2 = create_players
-    board, winner, player = Board.new, false, player2
+    board = Board.new
+    winner = false
+    player = player2
     board.display_labeled_board
     until winner
       player = player == player1 ? player2 : player1
-      move = player.make_a_move(board)
-      board.display_board
-      winner = 'cats' if board.board_full?
-      winner = player if board.winner?(player, move)
+      winner = game_logic(player, board)
     end
     play_again?(winner) ? start_game : puts('See ya later!')
   end
 end
-
-game = Gameplay.new
-game.start_game

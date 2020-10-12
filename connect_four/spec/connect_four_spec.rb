@@ -5,7 +5,6 @@ require 'stringio'
 
 RSpec.describe Player do
   describe '#make_a_move' do
-
     let(:io) { StringIO.new }
     let(:player) { Player.new(1, 'X') }
     let(:board) { Board.new }
@@ -20,7 +19,7 @@ RSpec.describe Player do
 
     it 'gets user input and pushes it to proper index in board array' do
       $stdin = io
-      expect { player.make_a_move(board) }.to change{ board.spaces[2] }.from([]).to(['X'])
+      expect { player.make_a_move(board) }.to change { board.spaces[2] }.from([]).to(['X'])
       $stdin = STDIN
     end
 
@@ -32,7 +31,7 @@ RSpec.describe Player do
       board.spaces[2].push('X')
       board.spaces[2].push('X')
       board.spaces[2].push('X')
-      expect { player.make_a_move(board) }.to change{ board.spaces[3] }.from([]).to(['X'])
+      expect { player.make_a_move(board) }.to change { board.spaces[3] }.from([]).to(['X'])
       $stdin = STDIN
     end
   end
@@ -40,12 +39,10 @@ end
 
 RSpec.describe Board do
   describe '#vertical?' do
-    
     let(:player) { Player.new(1, 'X') }
     let(:board) { Board.new }
 
     context 'checking for a win vertically (within an array)' do
-      
       it 'returns true when player makes a winning move' do
         board.spaces[0].push('X')
         board.spaces[0].push('X')
@@ -60,19 +57,25 @@ RSpec.describe Board do
     end
   end
 
-  describe '#horizontal' do
-    
+  describe '#horizontal?' do
     let(:player) { Player.new(1, 'X') }
     let(:board) { Board.new }
 
     context 'checking for a win horizontally (across arrays)' do
-      
-      it 'returns true when player makes a winning move' do
+      it 'returns true when player makes a winning move at the end of the four in a row' do
         board.spaces[0].push('X')
         board.spaces[1].push('X')
         board.spaces[2].push('X')
         board.spaces[3].push('X')
         expect(board.horizontal?(player, 3)).to eql(true)
+      end
+
+      it 'return true when player makes a winning move in the middle of the four in a row' do
+        board.spaces[0].push('X')
+        board.spaces[1].push('X')
+        board.spaces[3].push('X')
+        board.spaces[2].push('X')
+        expect(board.horizontal?(player, 2)).to eql(true)
       end
 
       it 'returns false when players move does not cause them to win' do
@@ -82,16 +85,19 @@ RSpec.describe Board do
     end
   end
 
-  describe '#diagonal' do
-    
+  describe '#diagonal?' do
     let(:player) { Player.new(1, 'X') }
     let(:board) { Board.new }
 
     context 'checking for a win diagonally' do
-      
-      it 'returns true when player makes a winning move' do
-        board.spaces = [['X'], ['O','X'], ['O', 'O', 'X'], ['O', 'O', 'O', 'X'], [], []]
+      it 'returns true when player makes a winning move at the end of a four in a row' do
+        board.spaces = [%w[X], %w[O X], %w[O O X], %w[O O O X], [], []]
         expect(board.diagonal?(player, 3)).to eql(true)
+      end
+
+      it 'returns true when player makes a winning move in the middle of a four in a row' do
+        board.spaces = [%w[X], %w[O X], %w[O O X], %w[O O O X], [], []]
+        expect(board.diagonal?(player, 1)).to eql(true)
       end
 
       it 'returns false when player does not make a winning move' do
@@ -102,13 +108,11 @@ RSpec.describe Board do
   end
 
   describe '#display_board' do
-    
     let(:board) { Board.new }
 
     context 'verifying that the gameboard prints out correctly' do
-      
       it 'is capable of printing out an empty gameboard' do
-        expect{ board.display_board }.to output("|___|___|___|___|___|___|
+        expect { board.display_board }.to output("|___|___|___|___|___|___|
 |___|___|___|___|___|___|
 |___|___|___|___|___|___|
 |___|___|___|___|___|___|
@@ -123,7 +127,7 @@ RSpec.describe Board do
         board.spaces[3].push('O')
         board.spaces[3].push('O')
         board.spaces[3].push('O')
-        expect{ board.display_board }.to output("|___|___|___|___|___|___|
+        expect { board.display_board }.to output("|___|___|___|___|___|___|
 |___|___|___|___|___|___|
 |___|___|___|___|___|___|
 |___|___|___|_O_|___|___|
@@ -134,22 +138,20 @@ RSpec.describe Board do
   end
 
   describe '#board_full?' do
-
     let(:board) { Board.new }
 
     context 'checks if board is full which would result in a Cats Game' do
-
       it 'returns false if board is not full' do
         expect(board.board_full?).to eql(false)
       end
 
       it 'returns true if board is completely full' do
-        board.spaces = [['X', 'X', 'X', 'X', 'X', 'X'],
-                        ['X', 'X', 'X', 'X', 'X', 'X'],
-                        ['X', 'X', 'X', 'X', 'X', 'X'],
-                        ['X', 'X', 'X', 'X', 'X', 'X'],
-                        ['X', 'X', 'X', 'X', 'X', 'X'],
-                        ['X', 'X', 'X', 'X', 'X', 'X']]
+        board.spaces = [%w[X X X X X X],
+                        %w[X X X X X X],
+                        %w[X X X X X X],
+                        %w[X X X X X X],
+                        %w[X X X X X X],
+                        %w[X X X X X X]]
         expect(board.board_full?).to eql(true)
       end
     end
@@ -158,14 +160,13 @@ end
 
 RSpec.describe Gameplay do
   describe '#create_players' do
-
     let(:io) { StringIO.new }
     let(:gameplay) { Gameplay.new }
 
     before do
       allow($stdout).to receive(:puts)
       io.puts 'X'
-      io.rewind 
+      io.rewind
     end
 
     it 'returns 2 instances of Player class' do
@@ -178,17 +179,16 @@ RSpec.describe Gameplay do
     it 'returns player classes with expected attributes' do
       $stdin = io
       players = gameplay.create_players
-      expect(players[0]).to have_attributes(:player => 1, :symbol => 'X')
+      expect(players[0]).to have_attributes(player: 1, symbol: 'X')
       $stdin = STDIN
     end
   end
 
   describe '#play_again?' do
-
     let(:gameplay) { Gameplay.new }
     let(:io) { StringIO.new }
     let(:io2) { StringIO.new }
-    let(:player) { Player.new(1, 'X')}
+    let(:player) { Player.new(1, 'X') }
 
     before do
       allow($stdout).to receive(:puts)
@@ -199,7 +199,6 @@ RSpec.describe Gameplay do
     end
 
     context 'returns true or false to decide whether or not to start another game' do
-
       it 'returns true when player wants to play again' do
         $stdin = io
         expect(gameplay.play_again?(player)).to eql(true)
