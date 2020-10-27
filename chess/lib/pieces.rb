@@ -70,7 +70,6 @@ class Rook < Piece
   end
 
   def valid_move?(start, stop, gameboard)
-    gameboard.display_board
     return false unless start[0] - stop[0] == 0 || start[1] - stop[1] == 0
 
     if start[0] - stop[0] == 0
@@ -103,6 +102,13 @@ class Knight < Piece
   end
 
   def valid_move?(start, stop, gameboard)
+    moves = [[1, 2], [1, -2], [-1, 2], [-1, -2], [2, 1], [2, -1], [-2, 1], [-2, -1]]
+    moves.each do |move|
+      move[0] += start[0]
+      move[1] += start[1]
+      return true if move == stop
+    end
+    false
   end
 
 end
@@ -121,8 +127,19 @@ class Bishop < Piece
   end
 
   def valid_move?(start, stop, gameboard)
-  end
+    return false unless (start[0] - stop[0]).abs == (start[1] - stop[1]).abs
 
+    vertical_adjustment = start[0] - stop[0] > 0 ? -1 : 1
+    horizontal_adjustment = start[1] - stop[1] > 0 ? -1 : 1
+    stop[0] -= vertical_adjustment 
+    stop[1] -= horizontal_adjustment
+    until start == stop
+      start[0] += vertical_adjustment
+      start[1] += horizontal_adjustment
+      return false unless gameboard.board[start[0]][start[1]] == ' '
+    end
+    true
+  end
 end
 
 class Queen < Piece
@@ -138,9 +155,37 @@ class Queen < Piece
     color == 'black' ? "\u2655" : "\u265b"
   end
 
+  # combined bishops and rooks move logic
   def valid_move?(start, stop, gameboard)
-  end
+    if (start[0] - stop[0]).abs == (start[1] - stop[1]).abs
+      vertical_adjustment = start[0] - stop[0] > 0 ? -1 : 1
+      horizontal_adjustment = start[1] - stop[1] > 0 ? -1 : 1
+      stop[0] -= vertical_adjustment 
+      stop[1] -= horizontal_adjustment
+      until start == stop
+        start[0] += vertical_adjustment
+        start[1] += horizontal_adjustment
+        return false unless gameboard.board[start[0]][start[1]] == ' '
+      end
+      return true
+    end
+    if start[0] - stop[0] == 0 || start[1] - stop[1] == 0
+      if start[0] - stop[0] == 0
+        # steps from min number to max number, checking i/f there's a piece along the way
+        ((([start[1], stop[1]].min) + 1)..(([start[1], stop[1]].max) - 1)).each do |i|
+          return false unless gameboard.board[start[0]][i] == ' '
 
+        end
+      else
+        ((([start[0], stop[0]].min) + 1)..(([start[0], stop[0]].max) - 1)).each do |i|
+          return false unless gameboard.board[i][start[1]] == ' '
+
+        end
+      end
+      return true
+    end
+    false
+  end
 end
 
 class King < Piece
@@ -157,6 +202,9 @@ class King < Piece
   end
 
   def valid_move?(start, stop, gameboard)
+    return true if (start[0] - stop[0]).abs <= 1 && (start[1] - stop[1]).abs <= 1
+
+    false
   end
 
   def castle

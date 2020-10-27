@@ -34,6 +34,12 @@ class Gameboard
   def capture?(stop)
   end
 
+  def space_occupied?(space)
+    return true unless board[space[0]][space[1]] == ' '
+
+    false
+  end
+
   def move_piece(start, stop)
   end
 

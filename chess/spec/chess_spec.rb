@@ -11,7 +11,7 @@ RSpec.describe Pawn do
     let(:black_pawn) { Pawn.new('black') }
     let(:gameboard) { Gameboard.new }
 
-    context 'checks for valid moves and returns a boolean' do
+    context 'checks for valid moves and returns a boolean. ' do
       it 'returns true when pawn moves by 1' do
         expect(black_pawn.valid_move?([1, 2], [2, 2], gameboard)).to eql(true)
       end
@@ -61,7 +61,7 @@ RSpec.describe Rook do
     let(:white_rook) { Rook.new('white') }
     let(:gameboard) { Gameboard.new }
 
-    context 'checks for valid moves and returns a boolean' do
+    context 'checks for valid moves and returns a boolean. ' do
       it 'returns true when rook moves 1 space vertically' do
         expect(white_rook.valid_move?([1, 1], [2, 1], gameboard)).to eql(true)
       end
@@ -94,7 +94,7 @@ RSpec.describe Knight do
     let(:white_knight) { Knight.new('white')}
     let(:gameboard) { Gameboard.new }
 
-    context 'checks for valid moves and returns a boolean' do
+    context 'checks for valid moves and returns a boolean. ' do
       it 'returns true when piece moves 2up 1left' do
         expect(white_knight.valid_move?([3, 3], [1, 2], gameboard)).to eql(true)
       end
@@ -157,6 +157,315 @@ RSpec.describe Knight do
 
       it 'returns false when piece moves 1left' do
         expect(white_knight.valid_move?([3, 3], [3, 2], gameboard)).to eql(false)
+      end
+    end
+  end
+end
+
+RSpec.describe Bishop do
+  describe 'valid_move?' do
+    let(:white_bishop) { Bishop.new('white')}
+    let(:gameboard) { Gameboard.new }
+
+    context 'checks for valid moves and returns a boolean. ' do
+      it 'returns true when bishop moves diagonally down and right by 1' do
+        expect(white_bishop.valid_move?([3, 3], [4, 4], gameboard)).to eql(true)
+      end
+
+      it 'returns true when bishop moves diagonally down and left by 1' do
+        expect(white_bishop.valid_move?([3, 3], [4, 2], gameboard)).to eql(true)
+      end
+
+      it 'returns true when bishop moves diagonally up and right by 1' do
+        expect(white_bishop.valid_move?([3, 3], [2, 4], gameboard)).to eql(true)
+      end
+
+      it 'returns true when bishop moves diagonally up and left by 1' do
+        expect(white_bishop.valid_move?([3, 3], [2, 2], gameboard)).to eql(true)
+      end
+
+      it 'returns true when bishop moves diagonally down and right by more than 1' do
+        expect(white_bishop.valid_move?([2, 2], [5, 5], gameboard)).to eql(true)
+      end
+
+      it 'returns true when bishop moves diagonally up and left by more than 1' do
+        expect(white_bishop.valid_move?([5, 7], [2, 4], gameboard)).to eql(true)
+      end
+
+      it 'returns true when bishop moves diagonally down and left by more than 1' do
+        expect(white_bishop.valid_move?([2, 4], [5, 1], gameboard)).to eql(true)
+      end
+
+      it 'returns true when bishop moves diagonally down and right by 1' do
+        expect(white_bishop.valid_move?([3, 3], [4, 4], gameboard)).to eql(true)
+      end
+
+      it 'returns true when bishop moves diagonally up and right by more than 1' do
+        expect(white_bishop.valid_move?([5, 0], [2, 3], gameboard)).to eql(true)
+      end
+
+      it 'returns false when bishop moves laterally' do
+        expect(white_bishop.valid_move?([3, 3], [3, 7], gameboard)).to eql(false)
+      end
+
+      it 'returns false when bishop moves vertically' do
+        expect(white_bishop.valid_move?([3, 3], [5, 3], gameboard)).to eql(false)
+      end
+
+      it 'returns false when bishop moves in a fashion that is not exactly diagonal' do
+        expect(white_bishop.valid_move?([2, 2], [4, 5], gameboard)).to eql(false)
+      end
+
+      it 'returns false when bishop moves in a fashion that is not exactly diagonal' do
+        expect(white_bishop.valid_move?([4, 0], [2, 6], gameboard)).to eql(false)
+      end
+
+      it 'returns false when bishop tries to move through a friendly piece' do
+        expect(white_bishop.valid_move?([7, 2], [4, 5], gameboard)).to eql(false)
+      end
+
+      it 'returns false when bishop tries to move through an enemy piece' do
+        gameboard.board = [[' ', Knight.new('black'), Bishop.new('black'), Queen.new('black'), King.new('black'), Bishop.new('black'), Knight.new('black'), Rook.new('black')], 
+        [Pawn.new('black'), Pawn.new('black'), Pawn.new('black'), Pawn.new('black'), Pawn.new('black'), Pawn.new('black'), Pawn.new('black'), Pawn.new('black')], 
+        [' ', ' ', ' ', ' ', ' ', ' ', ' ', ' '], 
+        [' ', ' ', ' ', ' ', ' ', ' ', ' ', ' '], 
+        [' ', ' ', ' ', Pawn.new('white'), ' ', ' ', ' ', ' '], 
+        [' ', ' ', ' ', ' ', Rook.new('black'), ' ', ' ', ' '], 
+        [Pawn.new('white'), Pawn.new('white'), Pawn.new('white'), ' ', Pawn.new('white'), Pawn.new('white'), Pawn.new('white'), Pawn.new('white')], 
+        [Rook.new('white'), Knight.new('white'), Bishop.new('white'), Queen.new('white'), King.new('white'), Bishop.new('white'), Knight.new('white'), Rook.new('white')]]
+        expect(white_bishop.valid_move?([7, 2], [3, 6], gameboard)).to eql(false)
+      end
+    end
+  end
+end
+
+RSpec.describe Queen do
+  describe 'valid_move?' do
+    let(:white_queen) { Queen.new('white')}
+    let(:gameboard) { Gameboard.new }
+
+    context 'checks for valid moves and returns a boolean. ' do
+      it 'returns true when queen moves diagonally down and right by 1' do
+        expect(white_queen.valid_move?([3, 3], [4, 4], gameboard)).to eql(true)
+      end
+
+      it 'returns true when queen moves diagonally down and left by 1' do
+        expect(white_queen.valid_move?([3, 3], [4, 2], gameboard)).to eql(true)
+      end
+
+      it 'returns true when queen moves diagonally up and right by 1' do
+        expect(white_queen.valid_move?([3, 3], [2, 4], gameboard)).to eql(true)
+      end
+
+      it 'returns true when queen moves diagonally up and left by 1' do
+        expect(white_queen.valid_move?([3, 3], [2, 2], gameboard)).to eql(true)
+      end
+
+      it 'returns true when queen moves diagonally down and right by more than 1' do
+        expect(white_queen.valid_move?([2, 2], [5, 5], gameboard)).to eql(true)
+      end
+
+      it 'returns true when queen moves diagonally up and left by more than 1' do
+        expect(white_queen.valid_move?([5, 7], [2, 4], gameboard)).to eql(true)
+      end
+
+      it 'returns true when queen moves diagonally down and left by more than 1' do
+        expect(white_queen.valid_move?([2, 4], [5, 1], gameboard)).to eql(true)
+      end
+
+      it 'returns true when queen moves diagonally down and right by 1' do
+        expect(white_queen.valid_move?([3, 3], [4, 4], gameboard)).to eql(true)
+      end
+
+      it 'returns true when queen moves diagonally up and right by more than 1' do
+        expect(white_queen.valid_move?([5, 0], [2, 3], gameboard)).to eql(true)
+      end
+
+      it 'returns true when queen moves 1 space vertically' do
+        expect(white_queen.valid_move?([1, 1], [2, 1], gameboard)).to eql(true)
+      end
+
+      it 'returns true when queen moves more than 1 space vertically' do
+        expect(white_queen.valid_move?([1, 3], [4, 3], gameboard)).to eql(true)
+      end
+
+      it 'returns true when queen moves 1 space laterally' do
+        expect(white_queen.valid_move?([3, 2], [3, 3], gameboard)).to eql(true)
+      end
+
+      it 'returns true when queen moves more than 1 space laterally' do
+        expect(white_queen.valid_move?([2, 0], [2, 5], gameboard)).to eql(true)
+      end
+
+      it 'returns false when queen moves in a fashion that is not allowed' do
+        expect(white_queen.valid_move?([2, 2], [4, 5], gameboard)).to eql(false)
+      end
+
+      it 'returns false when queen moves in a fashion that is not allowed' do
+        expect(white_queen.valid_move?([4, 0], [2, 6], gameboard)).to eql(false)
+      end
+
+      it 'returns false when queen tries to move through a friendly piece' do
+        expect(white_queen.valid_move?([7, 2], [4, 5], gameboard)).to eql(false)
+      end
+
+      it 'returns false when queen tries to move through an enemy piece diagonally' do
+        gameboard.board = [[' ', Knight.new('black'), Bishop.new('black'), Queen.new('black'), King.new('black'), Bishop.new('black'), Knight.new('black'), Rook.new('black')], 
+        [Pawn.new('black'), Pawn.new('black'), Pawn.new('black'), Pawn.new('black'), Pawn.new('black'), Pawn.new('black'), Pawn.new('black'), Pawn.new('black')], 
+        [' ', ' ', ' ', ' ', ' ', ' ', ' ', ' '], 
+        [' ', ' ', ' ', ' ', ' ', ' ', ' ', ' '], 
+        [' ', ' ', ' ', Pawn.new('white'), ' ', ' ', ' ', ' '], 
+        [' ', ' ', ' ', ' ', Rook.new('black'), ' ', ' ', ' '], 
+        [Pawn.new('white'), Pawn.new('white'), Pawn.new('white'), ' ', Pawn.new('white'), Pawn.new('white'), Pawn.new('white'), Pawn.new('white')], 
+        [Rook.new('white'), Knight.new('white'), Bishop.new('white'), Queen.new('white'), King.new('white'), Bishop.new('white'), Knight.new('white'), Rook.new('white')]]
+        expect(white_queen.valid_move?([7, 2], [3, 6], gameboard)).to eql(false)
+      end
+
+      it 'returns false when queen tries to move through a piece on the board laterally' do
+        expect(white_queen.valid_move?([0, 0], [0, 4], gameboard)).to eql(false)
+      end
+    end
+  end
+end
+
+RSpec.describe King do
+  describe 'valid_move?' do
+    let(:black_king) { King.new('black') }
+    let(:gameboard) {Gameboard.new }
+
+    context 'checks for valid moves and returns a boolean. ' do
+      it 'returns true when King moves one space up' do
+        expect(black_king.valid_move?([3, 3], [2, 3], gameboard)).to eql(true)
+      end
+
+      it 'returns true when King moves one space down' do
+        expect(black_king.valid_move?([3, 3], [4, 3], gameboard)).to eql(true)
+      end
+
+      it 'returns true when King moves one space left' do
+        expect(black_king.valid_move?([3, 3], [3, 2], gameboard)).to eql(true)
+      end
+
+      it 'returns true when King moves one space right' do
+        expect(black_king.valid_move?([3, 3], [3, 4], gameboard)).to eql(true)
+      end
+
+      it 'returns true when King moves one space diagonally up and left' do
+        expect(black_king.valid_move?([3, 3], [2, 2], gameboard)).to eql(true)
+      end
+
+      it 'returns true when King moves one space diagonally up and right' do
+        expect(black_king.valid_move?([3, 3], [2, 4], gameboard)).to eql(true)
+      end
+
+      it 'returns true when King moves one space diagonally down and left' do
+        expect(black_king.valid_move?([3, 3], [4, 2], gameboard)).to eql(true)
+      end
+
+      it 'returns true when King moves one space diagonally down and right' do
+        expect(black_king.valid_move?([3, 3], [4, 4], gameboard)).to eql(true)
+      end
+
+      it 'returns false when King tries to move by 2 spaces' do
+        expect(black_king.valid_move?([2, 2], [2, 4], gameboard)).to eql(false)
+      end
+
+      it 'returns false when King tries to move by more than 2 spaces' do
+        expect(black_king.valid_move?([2, 2], [5, 5], gameboard)).to eql(false)
+      end
+    end
+  end
+end
+
+RSpec.describe Gameplay do
+  describe '#move_input' do
+    let(:game) { Gameplay.new }
+    let(:io1) { StringIO.new }
+    let(:io2) { StringIO.new}
+
+    context 'Checks for valid moves and returns [[start], [stop]] once one is found' do
+
+      before do
+        allow($stdout).to receive(:puts)
+        io1.puts '4'
+        io1.puts '0'
+        io1.puts '1'
+        io1.puts '2'
+        io1.rewind
+      end
+
+      it 'returns correct start stop values when user input is all acceptable' do
+        $stdin = io1
+        expect(game.move_input).to eql([[4, 0], [1, 2]])
+      end
+
+      before do 
+        allow($stdout).to receive(:puts)
+        io2.puts 'r'
+        io2.puts '5'
+        io2.puts '9'
+        io2.puts ']'
+        io2.puts '2'
+        io2.puts '4'
+        io2.puts '.'
+        io2.puts '-4'
+        io2.puts '2'
+        io2.rewind
+      end
+
+      it 'rejects unacceptable values and returns correct start stop values' do
+        $stdin = io2
+        expect(game.move_input).to eql([[5, 2], [4, 2]])
+      end
+    end
+  end
+end
+
+RSpec.describe Player do
+  describe '#own_piece?' do
+    let(:player1) { Player.new(1, 'white') }
+    let(:player2) { Player.new(2, 'black') }
+    let(:board) { Gameboard.new }
+
+    context 'returns a boolean depending on whether or not the input space contains a piece belonging to the player' do
+      it 'returns true when space contains a white piece which belongs to player one' do
+        expect(player1.own_piece?([7, 0], board)).to eql(true)
+      end
+
+      it 'returns false when space contains a black piece which does not belong to player one' do
+        expect(player1.own_piece?([0, 0], board)).to eql(false)
+      end
+
+      it 'returns false when space contains no piece' do
+        expect(player1.own_piece?([4, 0], board)).to eql(false)
+      end
+
+      it 'returns true when space contains a black piece which belongs to player two' do
+        expect(player2.own_piece?([0, 0], board)).to eql(true)
+      end
+
+      it 'returns false when space contains a white piece which does not belong to player two' do
+        expect(player2.own_piece?([7, 0], board)).to eql(false)
+      end
+
+      it 'returns false when space contains no piece' do
+        expect(player2.own_piece?([4, 0], board)).to eql(false)
+      end
+    end
+  end
+end
+
+RSpec.describe Gameboard do
+  describe '#space_occupied?' do
+    let(:board) { Gameboard.new }
+
+    context 'returns a boolean depending on if input space is occupied or not' do
+      it 'returns false when space is empty' do
+        expect(board.space_occupied?([4, 0])).to eql(false)
+      end
+
+      it 'returns true when space is occupied' do
+        expect(board.space_occupied?([0, 0])).to eql(true)
       end
     end
   end
