@@ -46,6 +46,7 @@ class Gameboard
     piece = board[start[0]][start[1]]
     board[start[0]][start[1]] = ' '
     board[stop[0]][stop[1]] = piece
+    piece
   end
 
   def check?

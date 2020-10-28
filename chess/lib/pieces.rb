@@ -1,7 +1,7 @@
 # frozen-string-literal: true
 
 class Piece
-  
+
   attr_accessor :color
 
   def initialize(color)
@@ -15,8 +15,8 @@ class Pawn < Piece
   attr_accessor :symbol, :moved
   
   def initialize(color)
-    @moved = false
     super(color)
+    @moved = false
     @symbol = assign_unicode
   end
 
@@ -30,7 +30,7 @@ class Pawn < Piece
         return false if gameboard.board[stop[0]][stop[1]] == ' '
 
         if ((gameboard.board[start[0]][start[1]]).color != (gameboard.board[stop[0]][stop[1]]).color)
-          moved = true
+          self.moved = true
           return true
         else
           return false
@@ -40,23 +40,22 @@ class Pawn < Piece
 
       return false unless start[1] - stop[1] == 0
 
-      if moved == false
+      if self.moved == false
         if start[0] - stop[0] == 2
-          moved = true
+          self.moved = true
           return true
         end
       end
       if start[0] - stop[0] == 1
-        moved = true
+        self.moved = true
         return true
       end
-
     else
       if (start[1] - stop[1]).abs == 1 && start[0] - stop[0] == -1
         return false if gameboard.board[stop[0]][stop[1]] == ' '
 
         if ((gameboard.board[start[0]][start[1]]).color != (gameboard.board[stop[0]][stop[1]]).color)
-          moved = true
+          self.moved = true
           return true
         else
           return false
@@ -65,16 +64,14 @@ class Pawn < Piece
       return false if gameboard.space_occupied?(stop)
 
       return false unless start[1] - stop[1] == 0
-      puts 'here'
-      if moved == false
-        puts 'here?'
+      if self.moved == false
         if start[0] - stop[0] == -2
-          moved = true
+          self.moved = true
           return true
         end
       end
       if start[0] - stop[0] == -1
-        moved = true
+        self.moved = true
         return true
       end
     end
@@ -84,14 +81,35 @@ class Pawn < Piece
   def en_passant
   end
 
+  def promotion(stop, board, piece)
+    puts "Congrats, you can promote your pawn!"
+    options = %w[r k b q]
+    entry = ' '
+    until options.include?(entry)
+      puts "Choose one of these letters\nr: rook\nk: knight\nb: bishop\nq: queen"
+      entry = gets.chomp.downcase
+      puts("That was an unacceptable entry") unless options.include?(entry)
+    end
+    case entry
+    when 'r'
+      board.board[stop[0]][stop[1]] = Rook.new(piece.color)
+    when 'k'
+      board.board[stop[0]][stop[1]] = Knight.new(piece.color)
+    when 'b'
+      board.board[stop[0]][stop[1]] = Bishop.new(piece.color)
+    when 'q'
+      board.board[stop[0]][stop[1]] = Queen.new(piece.color)
+    end
+  end
 end
 
 class Rook < Piece
 
-  attr_accessor :symbol
+  attr_accessor :symbol, :moved
 
   def initialize(color)
     super(color)
+    @moved = false
     @symbol = assign_unicode
   end
 
@@ -114,6 +132,7 @@ class Rook < Piece
 
       end
     end
+    self.moved = true
     true
   end
 end
@@ -146,7 +165,7 @@ end
 class Bishop < Piece
 
   attr_accessor :symbol
-  
+
   def initialize(color)
     super(color)
     @symbol = assign_unicode

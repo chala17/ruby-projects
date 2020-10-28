@@ -50,7 +50,8 @@ class Gameplay
       return
     end
     board.capture(stop, player) if board.space_occupied?(stop)
-    board.move_piece(start, stop)
+    piece = board.move_piece(start, stop)
+    piece.promotion(stop, board, piece) if (stop[0] == 0 && piece.symbol == "\u265f") || (stop[0] == 7 && piece.symbol == "\u2659")
     board.display_board
   end
 
@@ -66,8 +67,5 @@ class Gameplay
   end
 end
 
-
-
-
 game = Gameplay.new
-#game.game_logic
+game.game_logic
