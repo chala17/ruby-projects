@@ -13,14 +13,14 @@ class Gameplay
     true
   end
 
-  def move_input
+  def move_input(player)
     start = []
     stop = []
     counter = 1
     while counter < 5
       entry = -1
       until valid_entry?(entry)
-        puts "Please enter the #{counter.even? ? 'column' : 'row'} #{counter < 3 ? 
+        puts "Player#{player.player} please enter the #{counter.even? ? 'column' : 'row'} #{counter < 3 ? 
         'of the piece that you would like to move' : 'of the space you would like to move your piece to'}."
         entry = gets.chomp
         puts('That is not a valid entry') unless valid_entry?(entry)
@@ -30,5 +30,44 @@ class Gameplay
     end
     return start, stop
   end
+
+  def player_move(player, board)
+    start, stop = move_input(player)
+    unless player.own_piece?(start, board)
+      puts 'You did not pick a space that contains your own piece!'
+      player_move(player, board)
+      return
+    end
+    if player.own_piece?(stop, board)
+      puts 'The space you picked to move your piece to already contains one of your own pieces!'
+      player_move(player, board)
+      return
+    end
+    piece = board.board[start[0]][start[1]]
+    unless piece.valid_move?(start, stop, board)
+      puts 'The piece you chose can not move to the space you specified.'
+      player_move(player, board)
+      return
+    end
+    board.capture(stop, player) if board.space_occupied?(stop)
+    board.move_piece(start, stop)
+    board.display_board
+  end
+
+  def game_logic
+    board = Gameboard.new
+    player1 = Player.new(1, 'white')
+    player2 = Player.new(2, 'black')
+    round = 1
+    loop do
+      round.odd? ? player_move(player1, board) : player_move(player2, board)
+      round += 1
+    end
+  end
 end
 
+
+
+
+game = Gameplay.new
+#game.game_logic

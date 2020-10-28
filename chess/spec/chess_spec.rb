@@ -17,6 +17,7 @@ RSpec.describe Pawn do
       end
 
       it 'returns true when pawn moves by 2 on initial move' do
+        black_pawn.moved = false
         expect(black_pawn.valid_move?([1, 1], [3, 1], gameboard)).to eql(true)
       end
 
@@ -37,7 +38,7 @@ RSpec.describe Pawn do
         expect(black_pawn.valid_move?([1, 4], [1, 3], gameboard)).to eql(false)
       end
 
-      xit 'returns true when pawn moves in an attacking fashion and captures a piece' do
+      it 'returns true when pawn moves in an attacking fashion and captures a piece' do
         gameboard.board = [[Rook.new('black'), Knight.new('black'), Bishop.new('black'), Queen.new('black'), King.new('black'), Bishop.new('black'), Knight.new('black'), Rook.new('black')], 
         [Pawn.new('black'), Pawn.new('black'), Pawn.new('black'), Pawn.new('black'), Pawn.new('black'), Pawn.new('black'), Pawn.new('black'), Pawn.new('black')], 
         [' ', Pawn.new('white'), ' ', ' ', ' ', ' ', ' ', ' '], 
@@ -49,7 +50,7 @@ RSpec.describe Pawn do
         expect(black_pawn.valid_move?([1, 0], [2, 1], gameboard)).to eql(true)
       end
 
-      xit 'returns false when pawn moves diagonally and does not capture a piece' do
+      it 'returns false when pawn moves diagonally and does not capture a piece' do
         expect(black_pawn.valid_move?([1, 5], [2, 6], gameboard)).to eql(false)
       end
     end
@@ -381,7 +382,8 @@ RSpec.describe Gameplay do
   describe '#move_input' do
     let(:game) { Gameplay.new }
     let(:io1) { StringIO.new }
-    let(:io2) { StringIO.new}
+    let(:io2) { StringIO.new }
+    let(:player) { Player.new(1, 'white') }
 
     context 'Checks for valid moves and returns [[start], [stop]] once one is found' do
 
@@ -396,7 +398,7 @@ RSpec.describe Gameplay do
 
       it 'returns correct start stop values when user input is all acceptable' do
         $stdin = io1
-        expect(game.move_input).to eql([[4, 0], [1, 2]])
+        expect(game.move_input(player)).to eql([[4, 0], [1, 2]])
       end
 
       before do 
@@ -415,7 +417,7 @@ RSpec.describe Gameplay do
 
       it 'rejects unacceptable values and returns correct start stop values' do
         $stdin = io2
-        expect(game.move_input).to eql([[5, 2], [4, 2]])
+        expect(game.move_input(player)).to eql([[5, 2], [4, 2]])
       end
     end
   end

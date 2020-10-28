@@ -14,7 +14,7 @@ class Player
     return false if piece == ' '
 
     return true if piece.color == color
-    
+
     false
   end
 end

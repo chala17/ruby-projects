@@ -4,7 +4,7 @@ require './pieces.rb'
 
 class Gameboard
 
-  attr_accessor :board 
+  attr_accessor :board, :p1_captured, :p2_captured
 
   def initialize
     @p1_captured = []
@@ -31,7 +31,9 @@ class Gameboard
     puts "\n  ---------------------------------"
   end
 
-  def capture?(stop)
+  def capture(stop, player)
+    piece = board[stop[0]][stop[1]]
+    player.player == 1 ? p1_captured.push(piece) : p2_captured.push(piece)
   end
 
   def space_occupied?(space)
@@ -41,6 +43,9 @@ class Gameboard
   end
 
   def move_piece(start, stop)
+    piece = board[start[0]][start[1]]
+    board[start[0]][start[1]] = ' '
+    board[stop[0]][stop[1]] = piece
   end
 
   def check?

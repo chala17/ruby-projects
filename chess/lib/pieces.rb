@@ -2,10 +2,9 @@
 
 class Piece
   
-  attr_accessor :color, :moved
+  attr_accessor :color
 
   def initialize(color)
-    @moved = false
     @color = color
   end
 
@@ -13,9 +12,10 @@ end
 
 class Pawn < Piece
 
-  attr_accessor :symbol
+  attr_accessor :symbol, :moved
   
   def initialize(color)
+    @moved = false
     super(color)
     @symbol = assign_unicode
   end
@@ -26,27 +26,57 @@ class Pawn < Piece
 
   def valid_move?(start, stop, gameboard)
     if color == 'white'
-      return gameboard.capture? if (start[0] - stop[0]).abs == 1 && start[1] - stop[1] == 1
+      if (start[1] - stop[1]).abs == 1 && start[0] - stop[0] == 1
+        return false if gameboard.board[stop[0]][stop[1]] == ' '
+
+        if ((gameboard.board[start[0]][start[1]]).color != (gameboard.board[stop[0]][stop[1]]).color)
+          moved = true
+          return true
+        else
+          return false
+        end
+      end
+      return false if gameboard.space_occupied?(stop)
 
       return false unless start[1] - stop[1] == 0
 
       if moved == false
-        return true if start[0] - stop[0] == 2
-
+        if start[0] - stop[0] == 2
+          moved = true
+          return true
+        end
       end
-      return true if start[0] - stop[0] == 1
+      if start[0] - stop[0] == 1
+        moved = true
+        return true
+      end
 
     else
-      return game.capture? if (start[0] - stop[0]).abs == 1 && start[1] - stop[1] == -1
+      if (start[1] - stop[1]).abs == 1 && start[0] - stop[0] == -1
+        return false if gameboard.board[stop[0]][stop[1]] == ' '
+
+        if ((gameboard.board[start[0]][start[1]]).color != (gameboard.board[stop[0]][stop[1]]).color)
+          moved = true
+          return true
+        else
+          return false
+        end
+      end
+      return false if gameboard.space_occupied?(stop)
 
       return false unless start[1] - stop[1] == 0
-      
+      puts 'here'
       if moved == false
-        return true if start[0] - stop[0] == -2
-
+        puts 'here?'
+        if start[0] - stop[0] == -2
+          moved = true
+          return true
+        end
       end
-      return true if start[0] - stop[0] == -1
-
+      if start[0] - stop[0] == -1
+        moved = true
+        return true
+      end
     end
     false
   end
@@ -129,14 +159,16 @@ class Bishop < Piece
   def valid_move?(start, stop, gameboard)
     return false unless (start[0] - stop[0]).abs == (start[1] - stop[1]).abs
 
-    vertical_adjustment = start[0] - stop[0] > 0 ? -1 : 1
-    horizontal_adjustment = start[1] - stop[1] > 0 ? -1 : 1
-    stop[0] -= vertical_adjustment 
-    stop[1] -= horizontal_adjustment
-    until start == stop
-      start[0] += vertical_adjustment
-      start[1] += horizontal_adjustment
-      return false unless gameboard.board[start[0]][start[1]] == ' '
+    start_check = start.clone
+    stop_check = stop.clone
+    vertical_adjustment = start_check[0] - stop_check[0] > 0 ? -1 : 1
+    horizontal_adjustment = start_check[1] - stop_check[1] > 0 ? -1 : 1
+    stop_check[0] -= vertical_adjustment 
+    stop_check[1] -= horizontal_adjustment
+    until start_check == stop_check
+      start_check[0] += vertical_adjustment
+      start_check[1] += horizontal_adjustment
+      return false unless gameboard.board[start_check[0]][start_check[1]] == ' '
     end
     true
   end
@@ -158,14 +190,16 @@ class Queen < Piece
   # combined bishops and rooks move logic
   def valid_move?(start, stop, gameboard)
     if (start[0] - stop[0]).abs == (start[1] - stop[1]).abs
-      vertical_adjustment = start[0] - stop[0] > 0 ? -1 : 1
-      horizontal_adjustment = start[1] - stop[1] > 0 ? -1 : 1
-      stop[0] -= vertical_adjustment 
-      stop[1] -= horizontal_adjustment
-      until start == stop
-        start[0] += vertical_adjustment
-        start[1] += horizontal_adjustment
-        return false unless gameboard.board[start[0]][start[1]] == ' '
+      start_check = start.clone
+      stop_check = stop.clone
+      vertical_adjustment = start_check[0] - stop_check[0] > 0 ? -1 : 1
+      horizontal_adjustment = start_check[1] - stop_check[1] > 0 ? -1 : 1
+      stop_check[0] -= vertical_adjustment 
+      stop_check[1] -= horizontal_adjustment
+      until start_check == stop_check
+        start_check[0] += vertical_adjustment
+        start_check[1] += horizontal_adjustment
+        return false unless gameboard.board[start_check[0]][start_check[1]] == ' '
       end
       return true
     end
