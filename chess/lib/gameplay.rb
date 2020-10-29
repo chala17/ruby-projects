@@ -68,4 +68,4 @@ class Gameplay
 end
 
 game = Gameplay.new
-game.game_logic
+#game.game_logic

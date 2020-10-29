@@ -49,12 +49,34 @@ class Gameboard
     piece
   end
 
-  def check?
+  def check?(color)
+    symbol = color == 'black' ? "\u2654" : "\u265a"
+     space = nil
+     (0..7).each do |row|
+      (0..7).each do |column|
+        unless board[row][column] == ' '
+          if board[row][column].symbol == symbol
+            space = [row, column]
+            break
+          end
+        end
+      end
+    end
+    (0..7).each do |row|
+      (0..7).each do |column|
+        unless board[row][column] == ' '
+          piece = board[row][column]
+          unless piece.color == color
+            return true if piece.valid_move?([row, column], space, self)
+
+          end
+        end
+      end
+    end
+    false
   end
 
   def checkmate?
+    
   end
 end
-
-game = Gameboard.new
-game.display_board
