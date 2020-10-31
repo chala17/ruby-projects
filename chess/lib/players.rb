@@ -1,5 +1,9 @@
 # frozen-string-literal: true
 
+require_relative 'gameboard'
+require_relative 'pieces'
+require_relative 'gameplay'
+
 class Player
 
   attr_accessor :color, :player

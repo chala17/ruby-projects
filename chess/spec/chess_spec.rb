@@ -635,7 +635,7 @@ RSpec.describe Gameboard do
         [' ', ' ', ' ', ' ', Rook.new('white'), ' ', ' ', ' '], 
         [Pawn.new('white'), Pawn.new('white'), Pawn.new('white'), Pawn.new('white'), Pawn.new('white'), Pawn.new('white'), Pawn.new('white'), Pawn.new('white')], 
         [' ', Knight.new('white'), Bishop.new('white'), Queen.new('white'), King.new('white'), Bishop.new('white'), Knight.new('white'), Rook.new('white')]]
-        expect(board.checkmate?('black')).to eql(true)
+        expect(board.checkmate?('black', [0, 4])).to eql(true)
       end
 
       it 'returns true when the black King is in checkmate from a two pieces' do
@@ -647,7 +647,7 @@ RSpec.describe Gameboard do
         [' ', ' ', ' ', ' ', Rook.new('white'), ' ', ' ', ' '], 
         [Pawn.new('white'), Pawn.new('white'), Pawn.new('white'), Pawn.new('white'), Pawn.new('white'), Pawn.new('white'), Pawn.new('white'), Pawn.new('white')], 
         [' ', Knight.new('white'), ' ', Queen.new('white'), King.new('white'), Bishop.new('white'), Knight.new('white'), Rook.new('white')]]
-        expect(board.checkmate?('black')).to eql(true)
+        expect(board.checkmate?('black', [0, 4])).to eql(true)
       end
 
       it 'returns true when the black King is in checkmate from a three pieces' do
@@ -659,7 +659,7 @@ RSpec.describe Gameboard do
         [' ', ' ', ' ', ' ', Rook.new('white'), ' ', ' ', ' '], 
         [Pawn.new('white'), Pawn.new('white'), Pawn.new('white'), Pawn.new('white'), Pawn.new('white'), Pawn.new('white'), Pawn.new('white'), Pawn.new('white')], 
         [' ', Knight.new('white'), ' ', Queen.new('white'), King.new('white'), Bishop.new('white'), ' ', Rook.new('white')]]
-        expect(board.checkmate?('black')).to eql(true)
+        expect(board.checkmate?('black', [0, 4])).to eql(true)
       end
 
       it 'returns true when the black King is in checkmate from a three pieces (in a different location)' do
@@ -671,7 +671,7 @@ RSpec.describe Gameboard do
         [' ', ' ', ' ', Pawn.new('white'), ' ', ' ', ' ', Rook.new('white')], 
         [' ', Pawn.new('white'), Pawn.new('white'), Pawn.new('white'), Pawn.new('white'), Pawn.new('white'), Pawn.new('white'), Pawn.new('white')], 
         [' ', Knight.new('white'), Bishop.new('white'), ' ', King.new('white'), Bishop.new('white'), Knight.new('white'), ' ']]
-        expect(board.checkmate?('black')).to eql(true)
+        expect(board.checkmate?('black', [4, 4])).to eql(true)
       end
 
       it 'returns false when the black King is only in check, not checkmate' do
@@ -683,7 +683,7 @@ RSpec.describe Gameboard do
         [' ', ' ', ' ', ' ', Rook.new('white'), ' ', ' ', ' '], 
         [Pawn.new('white'), Pawn.new('white'), Pawn.new('white'), Pawn.new('black'), Pawn.new('white'), Pawn.new('white'), Pawn.new('white'), Pawn.new('white')], 
         [' ', Knight.new('white'), Bishop.new('white'), Queen.new('white'), King.new('white'), Bishop.new('white'), Knight.new('white'), Rook.new('white')]]
-        expect(board.checkmate?('black')).to eql(false)
+        expect(board.checkmate?('black', [0, 4])).to eql(false)
       end
 
       it 'returns false when the black King is only in check, not checkmate (case2)' do
@@ -694,8 +694,8 @@ RSpec.describe Gameboard do
         [Bishop.new('white'), ' ', ' ', ' ', ' ', ' ', ' ', ' '], 
         [' ', ' ', ' ', ' ', ' ', ' ', ' ', ' '], 
         [Pawn.new('white'), Pawn.new('white'), Pawn.new('white'), Pawn.new('white'), Pawn.new('white'), Pawn.new('white'), Pawn.new('white'), Pawn.new('white')], 
-        [Rook.new('white'), Knight.new('white'), , Queen.new('white'), King.new('white'), Bishop.new('white'), Knight.new('white'), Rook.new('white')]]
-        expect(board.checkmate?('black')).to eql(false)
+        [Rook.new('white'), Knight.new('white'), ' ', Queen.new('white'), King.new('white'), Bishop.new('white'), Knight.new('white'), Rook.new('white')]]
+        expect(board.checkmate?('black', [0, 4])).to eql(false)
       end
 
       it 'returns false when King can eliminate threat to move out of check' do
@@ -707,7 +707,7 @@ RSpec.describe Gameboard do
         [' ', ' ', ' ', ' ', ' ', ' ', ' ', ' '], 
         [Pawn.new('white'), Pawn.new('white'), Pawn.new('white'), Pawn.new('white'), Pawn.new('white'), Pawn.new('white'), Pawn.new('white'), Pawn.new('white')], 
         [Rook.new('white'), Knight.new('white'), Bishop.new('white'), Queen.new('white'), King.new('white'), Bishop.new('white'), Knight.new('white'), Rook.new('white')]]
-        expect(board.checkmate?('black')).to eql(false)
+        expect(board.checkmate?('black', [0, 4])).to eql(false)
       end
 
       it 'returns true when white King is in checkmate as well' do
@@ -719,7 +719,7 @@ RSpec.describe Gameboard do
         [' ', ' ', ' ', ' ', ' ', ' ', ' ', ' '], 
         [Pawn.new('white'), Pawn.new('white'), Pawn.new('white'), ' ', Pawn.new('white'), Pawn.new('white'), Pawn.new('white'), Pawn.new('white')], 
         [Rook.new('white'), Knight.new('white'), Bishop.new('white'), Queen.new('white'), King.new('white'), Bishop.new('white'), Knight.new('white'), Rook.new('white')]]
-        expect(board.checkmate?('white')).to eql(true)
+        expect(board.checkmate?('white', [7, 4])).to eql(true)
       end
 
       it 'returns false when another piece can eliminate threat in order to move King out of danger' do
@@ -731,7 +731,7 @@ RSpec.describe Gameboard do
         [' ', ' ', ' ', ' ', ' ', ' ', ' ', ' '], 
         [Pawn.new('white'), Pawn.new('white'), Pawn.new('white'), Pawn.new('white'), Pawn.new('white'), Pawn.new('white'), Pawn.new('white'), Pawn.new('white')], 
         [Rook.new('white'), Knight.new('white'), ' ', Queen.new('white'), King.new('white'), Bishop.new('white'), Knight.new('white'), Rook.new('white')]]
-        expect(board.checkmate?('black')).to eql(false)
+        expect(board.checkmate?('black', [0, 4])).to eql(false)
       end
     end
   end

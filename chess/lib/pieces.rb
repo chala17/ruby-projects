@@ -1,5 +1,9 @@
 # frozen-string-literal: true
 
+require_relative 'gameboard'
+require_relative 'gameplay'
+require_relative 'players'
+
 class Piece
 
   attr_accessor :color
@@ -255,8 +259,13 @@ class King < Piece
   end
 
   def valid_move?(start, stop, gameboard)
-    return true if (start[0] - stop[0]).abs <= 1 && (start[1] - stop[1]).abs <= 1
-
+    if (start[0] - stop[0]).abs <= 1 && (start[1] - stop[1]).abs <= 1
+      if gameboard.space_occupied?(stop)
+        return false if gameboard.board[stop[0]][stop[1]].color == color
+      end
+      return true
+    end
+    
     false
   end
 

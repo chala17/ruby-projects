@@ -1,6 +1,8 @@
- # frozen-string-literal: true
+# frozen-string-literal: true
 
-require './pieces.rb'
+require_relative 'gameplay'
+require_relative 'pieces'
+require_relative 'players'
 
 class Gameboard
 
@@ -51,32 +53,79 @@ class Gameboard
 
   def check?(color)
     symbol = color == 'black' ? "\u2654" : "\u265a"
-     space = nil
+     king_space = nil
      (0..7).each do |row|
       (0..7).each do |column|
         unless board[row][column] == ' '
           if board[row][column].symbol == symbol
-            space = [row, column]
+            king_space = [row, column]
             break
           end
         end
       end
     end
-    (0..7).each do |row|
-      (0..7).each do |column|
-        unless board[row][column] == ' '
-          piece = board[row][column]
-          unless piece.color == color
-            return true if piece.valid_move?([row, column], space, self)
-
-          end
-        end
-      end
+    enemy_pieces = pieces_set('enemy', color)
+    enemy_pieces.each do |piece|
+      return true if board[piece[0]][piece[1]].valid_move?(piece, king_space, self)
     end
     false
   end
 
-  def checkmate?
-    
+  def valid_num?(num)
+    return false unless num > -1 && num < 8
+    true
+  end
+
+  def checkmate?(color, king_space)
+    king_moves = [[-1, -1], [-1, 0], [-1, 1], [0, -1], [0, 1], [1, -1], [1, 0], [1, 1]]
+    valid_possible_moves = []
+    king_moves.each do |move|
+      possible_move = [king_space[0] + move[0], king_space[1] + move[1]]
+      next unless valid_num?(possible_move[0]) && valid_num?(possible_move[1])
+      valid_possible_moves.append(possible_move) if board[king_space[0]][king_space[1]].valid_move?(king_space, possible_move, self)
+    end
+    return true if valid_possible_moves.empty?
+
+    enemy_pieces = pieces_set('enemy', color)
+    friendly_pieces = pieces_set('friend', color)
+    successfully_covered = nil
+    in_checkmate = nil
+    p "#{valid_possible_moves}"
+    valid_possible_moves.each do |move|
+      enemy_pieces.each do |enemy|
+        p "#{enemy} #{move}"
+        if board[enemy[0]][enemy[1]].valid_move?(enemy, move, self)
+          in_checkmate = true
+          successfully_covered = false
+          p "#{enemy} hit at #{move}"
+          friendly_pieces.each do |friend|
+            if board[friend[0]][friend[1]].valid_move?(friend, enemy, self)
+              successfully_covered = true
+              p "#{friend} successfully covered"
+              break
+            end
+          end
+        end
+        in_checkmate = false if successfully_covered
+      end
+      return false unless in_checkmate
+
+    end
+    true
+  end
+
+  def pieces_set(friend_enemy, color)
+    pieces_set = []
+    (0..7).each do |row|
+      (0..7).each do |column|
+        unless board[row][column] == ' '
+          piece = board[row][column]
+          if friend_enemy == 'friend' ? piece.color == color : piece.color != color
+            pieces_set.append([row, column])
+          end
+        end
+      end
+    end
+    pieces_set
   end
 end

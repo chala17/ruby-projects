@@ -1,8 +1,8 @@
 # frozen-string-literal: true
 
-require './players.rb'
-require './gameboard.rb'
-require './pieces.rb'
+require_relative 'gameboard'
+require_relative 'pieces'
+require_relative 'players'
 
 class Gameplay
 
