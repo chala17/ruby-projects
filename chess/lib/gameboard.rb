@@ -57,7 +57,7 @@ class Gameboard
      (0..7).each do |row|
       (0..7).each do |column|
         unless board[row][column] == ' '
-          if board[row][column].symbol == symbol
+          if self.board[row][column].symbol == symbol
             king_space = [row, column]
             break
           end
@@ -78,8 +78,8 @@ class Gameboard
 
   def checkmate?(color, king_space)
     mock_board = Gameboard.new 
-    board_copy = self.board.clone
-    mock_board.board = board_copy
+    board_copy = Marshal.dump(self.board)
+    mock_board.board = Marshal.load(board_copy)
     king_moves = [[-1, -1], [-1, 0], [-1, 1], [0, -1], [0, 1], [1, -1], [1, 0], [1, 1]]
     valid_possible_moves = []
     king_moves.each do |move|
@@ -87,13 +87,11 @@ class Gameboard
       next unless valid_num?(possible_move[0]) && valid_num?(possible_move[1])
       if board[king_space[0]][king_space[1]].valid_move?(king_space, possible_move, self)
         mock_board.move_piece(king_space, possible_move)
-
         return false unless mock_board.check?(color)
 
-        mock_board.board = board_copy
+        mock_board.board = Marshal.load(board_copy)
       end
     end
-    p 'here'
     enemy_pieces = pieces_set('enemy', color)
     friendly_pieces = pieces_set('friend', color)
     enemy_pieces.each do |enemy|
@@ -102,84 +100,24 @@ class Gameboard
           if board[friend[0]][friend[1]].valid_move?(friend, enemy, self)
             mock_board.move_piece(friend, enemy)
             return false unless mock_board.check?(color)
-            p 'here2'
 
-            if ["\u2656", "\u265c", "\u2657", "\u265d", "\u2655", "\u265b"].include?(board[enemy[0]][enemy[1]].symbol)
-              path = path_to_king(enemy, king_space)
-              path.each do |path_space|
+            mock_board.board = Marshal.load(board_copy)
+          end
+          if ["\u2656", "\u265c", "\u2657", "\u265d", "\u2655", "\u265b"].include?(board[enemy[0]][enemy[1]].symbol)
+            path = path_to_king(enemy, king_space)
+            path.each do |path_space|
+              unless ["\u2654", "\u265a"].include?(board[friend[0]][friend[1]].symbol)
                 if board[friend[0]][friend[1]].valid_move?(friend, path_space, self)
                   mock_board.move_piece(friend, path_space)
                   return false unless mock_board.check?(color)
-                  p 'here3'
 
+                  mock_board.board = Marshal.load(board_copy)
                 end
               end
             end
           end
         end
       end
-    end
-    true
-  end
-
-
-  def old_checkmate?(color, king_space)
-    king_moves = [[-1, -1], [-1, 0], [-1, 1], [0, -1], [0, 1], [1, -1], [1, 0], [1, 1]]
-    valid_possible_moves = []
-    enemy_pieces = pieces_set('enemy', color)
-    friendly_pieces = pieces_set('friend', color)
-    kill = nil
-    protection_moves = 0
-    enemy_pieces.each do |enemy|
-      kill = false
-      if board[enemy[0]][enemy[1]].valid_move?(enemy, king_space, self)
-        kill = true
-        if ["\u2656", "\u265c", "\u2657", "\u265d", "\u2655", "\u265b"].include?(board[enemy[0]][enemy[1]].symbol)
-          path = path_to_king(enemy, king_space)
-          p "#{path}"
-          path.each do |path_space|
-            friendly_pieces.each do |friend|
-              unless ["\u2654", "\u265a"].include?(board[friend[0]][friend[1]].symbol)
-                if board[friend[0]][friend[1]].valid_move?(friend, path_space, self)
-                  kill = false
-                  protection_moves += 1
-                  p "protecter: #{friend}"
-                end
-              end
-            end
-            break unless kill
-          end
-        end
-        break if kill
-      end
-    end
-    return false if kill == false && protection_moves < 2
-
-    king_moves.each do |move|
-      possible_move = [king_space[0] + move[0], king_space[1] + move[1]]
-      next unless valid_num?(possible_move[0]) && valid_num?(possible_move[1])
-      valid_possible_moves.append(possible_move) if board[king_space[0]][king_space[1]].valid_move?(king_space, possible_move, self)
-    end
-    return true if valid_possible_moves.empty?
-
-    successfully_covered = nil
-    valid_possible_moves.each do |move|
-      in_checkmate = false
-      enemy_pieces.each do |enemy|
-        if board[enemy[0]][enemy[1]].valid_move?(enemy, move, self)
-          in_checkmate = true
-          successfully_covered = false
-          friendly_pieces.each do |friend|
-            if board[friend[0]][friend[1]].valid_move?(friend, enemy, self)
-              successfully_covered = true
-              break
-            end
-          end
-        end
-        in_checkmate = false if successfully_covered
-        break if in_checkmate
-      end
-      return false unless in_checkmate
     end
     true
   end
