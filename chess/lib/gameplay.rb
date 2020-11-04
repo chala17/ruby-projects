@@ -13,6 +13,29 @@ class Gameplay
     true
   end
 
+  def castling(board, player)
+    error_message = 'You were unable to castle your King, please make a regular move'
+    if player.color == 'black'
+      return false unless board[0][4].is_a?(King) && board[0][4].moved == false
+      
+      puts 'Would you like to try and castle your King? Press Y if yes'
+      answer = gets.chomp.downcase
+      return false unless answer == 'y'
+      puts 'Press Q to castle Queenside, or K to castle Kingside, anything else will cancel castling.'
+      answer = gets.chomp.downcase
+      return false unless %w[q k].include?(answer)
+      if answer == 'q'
+        unless board[0][0].is_a?(Rook) && board[0][0].moved == false
+          puts error_message
+          return false
+        end
+        unless board[0][1] == ' '
+
+
+      
+
+  end
+
   def move_input(player)
     start = []
     stop = []

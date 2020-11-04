@@ -247,11 +247,12 @@ end
 
 class King < Piece
 
-  attr_accessor :symbol
+  attr_accessor :symbol, :moved
   
   def initialize(color)
     super(color)
     @symbol = assign_unicode
+    @moved = false
   end
 
   def assign_unicode
@@ -263,13 +264,16 @@ class King < Piece
       if gameboard.space_occupied?(stop)
         return false if gameboard.board[stop[0]][stop[1]].color == color
       end
+      mock_board = Gameboard.new 
+      board_copy = Marshal.dump(gameboard.board)
+      mock_board.board = Marshal.load(board_copy)
+      mock_board.move_piece(start, stop)
+      return false if mock_board.check?(mock_board.board[stop[0]][stop[1]].color)
+
+      self.moved = true
       return true
     end
     
     false
   end
-
-  def castle
-  end
-
 end
