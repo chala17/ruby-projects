@@ -510,6 +510,301 @@ RSpec.describe Gameplay do
       it 'rejects unacceptable values and returns correct start stop values' do
         $stdin = io2
         expect(game.move_input(player)).to eql([[5, 2], [4, 2]])
+        $stdin = STDIN
+      end
+    end
+  end
+
+  describe '#castling' do
+    let(:game) { Gameplay.new }
+    let(:io1) { StringIO.new }
+    let(:io2) { StringIO.new }
+    let(:io3) { StringIO.new }
+    let(:io4) { StringIO.new }
+    let(:gameboard) { Gameboard.new }
+    let(:player1) { Player.new(1, 'black') }
+    let(:player2) { Player.new(2, 'white') }
+
+    context 'checks to see if castling is possible and returns a boolean' do 
+      
+      before do
+        allow($stdout).to receive(:puts)
+        io1.puts 'y'
+        io1.puts 'q'
+        io1.rewind
+      end
+      
+      it 'returns true when castling is possible for black player on queenside' do
+        $stdin = io1
+        gameboard.board = [[Rook.new('black'), ' ', ' ', ' ', King.new('black'), Bishop.new('black'), Knight.new('black'), Rook.new('black')], 
+        [Pawn.new('black'), Pawn.new('black'), Pawn.new('black'), Pawn.new('black'), Pawn.new('black'), Pawn.new('black'), Pawn.new('black'), Pawn.new('black')], 
+        [' ', ' ', ' ', ' ', ' ', ' ', ' ', ' '], 
+        [' ', ' ', ' ', ' ', ' ', ' ', ' ', ' '], 
+        [' ', ' ', ' ', ' ', ' ', ' ', ' ', ' '], 
+        [' ', ' ', ' ', ' ', ' ', ' ', ' ', ' '], 
+        [Pawn.new('white'), Pawn.new('white'), Pawn.new('white'), Pawn.new('white'), Pawn.new('white'), Pawn.new('white'), Pawn.new('white'), Pawn.new('white')], 
+        [Rook.new('white'), Knight.new('white'), Bishop.new('white'), Queen.new('white'), King.new('white'), Bishop.new('white'), Knight.new('white'), Rook.new('white')]]
+        expect(game.castling(gameboard, player1)).to eql(true)
+        $stdin = STDIN
+      end
+
+      before do
+        allow($stdout).to receive(:puts)
+        io2.puts 'y'
+        io2.puts 'k'
+        io2.rewind
+      end
+      
+      it 'returns true when castling is possible for black player on kingside' do
+        $stdin = io2
+        gameboard.board = [[Rook.new('black'), Knight.new('black'), Bishop.new('black'), Queen.new('black'), King.new('black'), ' ', ' ', Rook.new('black')], 
+        [Pawn.new('black'), Pawn.new('black'), Pawn.new('black'), Pawn.new('black'), Pawn.new('black'), Pawn.new('black'), Pawn.new('black'), Pawn.new('black')], 
+        [' ', ' ', ' ', ' ', ' ', ' ', ' ', ' '], 
+        [' ', ' ', ' ', ' ', ' ', ' ', ' ', ' '], 
+        [' ', ' ', ' ', ' ', ' ', ' ', ' ', ' '], 
+        [' ', ' ', ' ', ' ', ' ', ' ', ' ', ' '], 
+        [Pawn.new('white'), Pawn.new('white'), Pawn.new('white'), Pawn.new('white'), Pawn.new('white'), Pawn.new('white'), Pawn.new('white'), Pawn.new('white')], 
+        [Rook.new('white'), Knight.new('white'), Bishop.new('white'), Queen.new('white'), King.new('white'), Bishop.new('white'), Knight.new('white'), Rook.new('white')]]
+        expect(game.castling(gameboard, player1)).to eql(true)
+        $stdin = STDIN
+      end
+
+      before do
+        allow($stdout).to receive(:puts)
+        io3.puts 'y'
+        io3.puts 'k'
+        io3.rewind
+      end
+      
+      it 'returns true when castling is possible for white player on kingside' do
+        $stdin = io3
+        gameboard.board = [[Rook.new('black'), Knight.new('black'), Bishop.new('black'), Queen.new('black'), King.new('black'), Bishop.new('black'), Knight.new('black'), Rook.new('black')], 
+        [Pawn.new('black'), Pawn.new('black'), Pawn.new('black'), Pawn.new('black'), Pawn.new('black'), Pawn.new('black'), Pawn.new('black'), Pawn.new('black')], 
+        [' ', ' ', ' ', ' ', ' ', ' ', ' ', ' '], 
+        [' ', ' ', ' ', ' ', ' ', ' ', ' ', ' '], 
+        [' ', ' ', ' ', ' ', ' ', ' ', ' ', ' '], 
+        [' ', ' ', ' ', ' ', ' ', ' ', ' ', ' '], 
+        [Pawn.new('white'), Pawn.new('white'), Pawn.new('white'), Pawn.new('white'), Pawn.new('white'), Pawn.new('white'), Pawn.new('white'), Pawn.new('white')], 
+        [Rook.new('white'), Knight.new('white'), Bishop.new('white'), Queen.new('white'), King.new('white'), ' ', ' ', Rook.new('white')]]
+        expect(game.castling(gameboard, player2)).to eql(true)
+        $stdin = STDIN
+      end
+
+      before do
+        allow($stdout).to receive(:puts)
+        io4.puts 'y'
+        io4.puts 'q'
+        io4.rewind
+      end
+      
+      it 'returns true when castling is possible for white player on queenside' do
+        $stdin = io4
+        gameboard.board = [[Rook.new('black'), Knight.new('black'), Bishop.new('black'), Queen.new('black'), King.new('black'), Bishop.new('black'), Knight.new('black'), Rook.new('black')], 
+        [Pawn.new('black'), Pawn.new('black'), Pawn.new('black'), Pawn.new('black'), Pawn.new('black'), Pawn.new('black'), Pawn.new('black'), Pawn.new('black')], 
+        [' ', ' ', ' ', ' ', ' ', ' ', ' ', ' '], 
+        [' ', ' ', ' ', ' ', ' ', ' ', ' ', ' '], 
+        [' ', ' ', ' ', ' ', ' ', ' ', ' ', ' '], 
+        [' ', ' ', ' ', ' ', ' ', ' ', ' ', ' '], 
+        [Pawn.new('white'), Pawn.new('white'), Pawn.new('white'), Pawn.new('white'), Pawn.new('white'), Pawn.new('white'), Pawn.new('white'), Pawn.new('white')], 
+        [Rook.new('white'), ' ', ' ', ' ', King.new('white'), Bishop.new('white'), Knight.new('white'), Rook.new('white')]]
+        expect(game.castling(gameboard, player2)).to eql(true)
+        $stdin = STDIN
+      end
+
+      before do
+        allow($stdout).to receive(:puts)
+        io2.puts 'y'
+        io2.puts 'k'
+        io2.rewind
+      end
+      
+      it 'returns false when king has moved and player tries to castle kingside' do
+        $stdin = io2
+        gameboard.board = [[Rook.new('black'), Knight.new('black'), Bishop.new('black'), Queen.new('black'), King.new('black'), ' ', ' ', Rook.new('black')], 
+        [Pawn.new('black'), Pawn.new('black'), Pawn.new('black'), Pawn.new('black'), Pawn.new('black'), Pawn.new('black'), Pawn.new('black'), Pawn.new('black')], 
+        [' ', ' ', ' ', ' ', ' ', ' ', ' ', ' '], 
+        [' ', ' ', ' ', ' ', ' ', ' ', ' ', ' '], 
+        [' ', ' ', ' ', ' ', ' ', ' ', ' ', ' '], 
+        [' ', ' ', ' ', ' ', ' ', ' ', ' ', ' '], 
+        [Pawn.new('white'), Pawn.new('white'), Pawn.new('white'), Pawn.new('white'), Pawn.new('white'), Pawn.new('white'), Pawn.new('white'), Pawn.new('white')], 
+        [Rook.new('white'), Knight.new('white'), Bishop.new('white'), Queen.new('white'), King.new('white'), Bishop.new('white'), Knight.new('white'), Rook.new('white')]]
+        gameboard.board[0][4].moved = true
+        expect(game.castling(gameboard, player1)).to eql(false)
+        $stdin = STDIN
+      end
+
+      before do
+        allow($stdout).to receive(:puts)
+        io4.puts 'y'
+        io4.puts 'q'
+        io4.rewind
+      end
+      
+      it 'returns false when king has moved and white player tries to castle on queenside' do
+        $stdin = io4
+        gameboard.board = [[Rook.new('black'), Knight.new('black'), Bishop.new('black'), Queen.new('black'), King.new('black'), Bishop.new('black'), Knight.new('black'), Rook.new('black')], 
+        [Pawn.new('black'), Pawn.new('black'), Pawn.new('black'), Pawn.new('black'), Pawn.new('black'), Pawn.new('black'), Pawn.new('black'), Pawn.new('black')], 
+        [' ', ' ', ' ', ' ', ' ', ' ', ' ', ' '], 
+        [' ', ' ', ' ', ' ', ' ', ' ', ' ', ' '], 
+        [' ', ' ', ' ', ' ', ' ', ' ', ' ', ' '], 
+        [' ', ' ', ' ', ' ', ' ', ' ', ' ', ' '], 
+        [Pawn.new('white'), Pawn.new('white'), Pawn.new('white'), Pawn.new('white'), Pawn.new('white'), Pawn.new('white'), Pawn.new('white'), Pawn.new('white')], 
+        [Rook.new('white'), ' ', ' ', ' ', King.new('white'), Bishop.new('white'), Knight.new('white'), Rook.new('white')]]
+        gameboard.board[7][4].moved = true
+        expect(game.castling(gameboard, player2)).to eql(false)
+        $stdin = STDIN
+      end
+
+      before do
+        allow($stdout).to receive(:puts)
+        io2.puts 'y'
+        io2.puts 'k'
+        io2.rewind
+      end
+      
+      it 'returns false when kingside rook has moved and player tries to castle kingside' do
+        $stdin = io2
+        gameboard.board = [[Rook.new('black'), Knight.new('black'), Bishop.new('black'), Queen.new('black'), King.new('black'), ' ', ' ', Rook.new('black')], 
+        [Pawn.new('black'), Pawn.new('black'), Pawn.new('black'), Pawn.new('black'), Pawn.new('black'), Pawn.new('black'), Pawn.new('black'), Pawn.new('black')], 
+        [' ', ' ', ' ', ' ', ' ', ' ', ' ', ' '], 
+        [' ', ' ', ' ', ' ', ' ', ' ', ' ', ' '], 
+        [' ', ' ', ' ', ' ', ' ', ' ', ' ', ' '], 
+        [' ', ' ', ' ', ' ', ' ', ' ', ' ', ' '], 
+        [Pawn.new('white'), Pawn.new('white'), Pawn.new('white'), Pawn.new('white'), Pawn.new('white'), Pawn.new('white'), Pawn.new('white'), Pawn.new('white')], 
+        [Rook.new('white'), Knight.new('white'), Bishop.new('white'), Queen.new('white'), King.new('white'), Bishop.new('white'), Knight.new('white'), Rook.new('white')]]
+        gameboard.board[0][7].moved = true
+        expect(game.castling(gameboard, player1)).to eql(false)
+        $stdin = STDIN
+      end
+
+      before do
+        allow($stdout).to receive(:puts)
+        io4.puts 'y'
+        io4.puts 'q'
+        io4.rewind
+      end
+      
+      it 'returns false when king has moved and white player tries to castle on queenside' do
+        $stdin = io4
+        gameboard.board = [[Rook.new('black'), Knight.new('black'), Bishop.new('black'), Queen.new('black'), King.new('black'), Bishop.new('black'), Knight.new('black'), Rook.new('black')], 
+        [Pawn.new('black'), Pawn.new('black'), Pawn.new('black'), Pawn.new('black'), Pawn.new('black'), Pawn.new('black'), Pawn.new('black'), Pawn.new('black')], 
+        [' ', ' ', ' ', ' ', ' ', ' ', ' ', ' '], 
+        [' ', ' ', ' ', ' ', ' ', ' ', ' ', ' '], 
+        [' ', ' ', ' ', ' ', ' ', ' ', ' ', ' '], 
+        [' ', ' ', ' ', ' ', ' ', ' ', ' ', ' '], 
+        [Pawn.new('white'), Pawn.new('white'), Pawn.new('white'), Pawn.new('white'), Pawn.new('white'), Pawn.new('white'), Pawn.new('white'), Pawn.new('white')], 
+        [Rook.new('white'), ' ', ' ', ' ', King.new('white'), Bishop.new('white'), Knight.new('white'), Rook.new('white')]]
+        gameboard.board[7][0].moved = true
+        expect(game.castling(gameboard, player2)).to eql(false)
+        $stdin = STDIN
+      end
+
+      before do
+        allow($stdout).to receive(:puts)
+        io2.puts 'y'
+        io2.puts 'k'
+        io2.rewind
+      end
+      
+      it 'returns true when queenside rook has moved and player tries to castle kingside' do
+        $stdin = io2
+        gameboard.board = [[Rook.new('black'), Knight.new('black'), Bishop.new('black'), Queen.new('black'), King.new('black'), ' ', ' ', Rook.new('black')], 
+        [Pawn.new('black'), Pawn.new('black'), Pawn.new('black'), Pawn.new('black'), Pawn.new('black'), Pawn.new('black'), Pawn.new('black'), Pawn.new('black')], 
+        [' ', ' ', ' ', ' ', ' ', ' ', ' ', ' '], 
+        [' ', ' ', ' ', ' ', ' ', ' ', ' ', ' '], 
+        [' ', ' ', ' ', ' ', ' ', ' ', ' ', ' '], 
+        [' ', ' ', ' ', ' ', ' ', ' ', ' ', ' '], 
+        [Pawn.new('white'), Pawn.new('white'), Pawn.new('white'), Pawn.new('white'), Pawn.new('white'), Pawn.new('white'), Pawn.new('white'), Pawn.new('white')], 
+        [Rook.new('white'), Knight.new('white'), Bishop.new('white'), Queen.new('white'), King.new('white'), Bishop.new('white'), Knight.new('white'), Rook.new('white')]]
+        gameboard.board[0][0].moved = true
+        expect(game.castling(gameboard, player1)).to eql(true)
+        $stdin = STDIN
+      end
+
+      before do
+        allow($stdout).to receive(:puts)
+        io4.puts 'y'
+        io4.puts 'q'
+        io4.rewind
+      end
+      
+      it 'returns true when king has moved and white player tries to castle on queenside' do
+        $stdin = io4
+        gameboard.board = [[Rook.new('black'), Knight.new('black'), Bishop.new('black'), Queen.new('black'), King.new('black'), Bishop.new('black'), Knight.new('black'), Rook.new('black')], 
+        [Pawn.new('black'), Pawn.new('black'), Pawn.new('black'), Pawn.new('black'), Pawn.new('black'), Pawn.new('black'), Pawn.new('black'), Pawn.new('black')], 
+        [' ', ' ', ' ', ' ', ' ', ' ', ' ', ' '], 
+        [' ', ' ', ' ', ' ', ' ', ' ', ' ', ' '], 
+        [' ', ' ', ' ', ' ', ' ', ' ', ' ', ' '], 
+        [' ', ' ', ' ', ' ', ' ', ' ', ' ', ' '], 
+        [Pawn.new('white'), Pawn.new('white'), Pawn.new('white'), Pawn.new('white'), Pawn.new('white'), Pawn.new('white'), Pawn.new('white'), Pawn.new('white')], 
+        [Rook.new('white'), ' ', ' ', ' ', King.new('white'), Bishop.new('white'), Knight.new('white'), Rook.new('white')]]
+        gameboard.board[7][7].moved = true
+        expect(game.castling(gameboard, player2)).to eql(true)
+        $stdin = STDIN
+      end
+
+      before do
+        allow($stdout).to receive(:puts)
+        io4.puts 'y'
+        io4.puts 'q'
+        io4.rewind
+      end
+      
+      it 'returns true when king has moved and white player tries to castle on queenside' do
+        $stdin = io4
+        gameboard.board = [[' ', Knight.new('black'), Bishop.new('black'), Queen.new('black'), King.new('black'), Bishop.new('black'), Knight.new('black'), Rook.new('black')], 
+        [Pawn.new('black'), Pawn.new('black'), Pawn.new('black'), Pawn.new('black'), Pawn.new('black'), Pawn.new('black'), Pawn.new('black'), Pawn.new('black')], 
+        [' ', ' ', ' ', ' ', Rook.new('black'), ' ', ' ', ' '], 
+        [' ', ' ', ' ', ' ', ' ', ' ', ' ', ' '], 
+        [' ', ' ', ' ', ' ', ' ', ' ', ' ', ' '], 
+        [' ', ' ', ' ', ' ', ' ', ' ', ' ', ' '], 
+        [Pawn.new('white'), Pawn.new('white'), Pawn.new('white'), Pawn.new('white'), ' ', Pawn.new('white'), Pawn.new('white'), Pawn.new('white')], 
+        [Rook.new('white'), ' ', ' ', ' ', King.new('white'), Bishop.new('white'), Knight.new('white'), Rook.new('white')]]
+        expect(game.castling(gameboard, player2)).to eql(false)
+        $stdin = STDIN
+      end
+        
+      before do
+        allow($stdout).to receive(:puts)
+        io4.puts 'y'
+        io4.puts 'q'
+        io4.rewind
+      end
+      
+      it 'returns false when one of the unoccupied spaces is under attack' do
+        $stdin = io4
+        gameboard.board = [[Rook.new('black'), Knight.new('black'), ' ', Queen.new('black'), King.new('black'), Bishop.new('black'), Knight.new('black'), Rook.new('black')], 
+        [Pawn.new('black'), Pawn.new('black'), Pawn.new('black'), Pawn.new('black'), Pawn.new('black'), Pawn.new('black'), Pawn.new('black'), Pawn.new('black')], 
+        [' ', ' ', ' ', ' ', ' ', ' ', ' ', ' '], 
+        [' ', ' ', ' ', ' ', ' ', ' ', ' ', Bishop.new('black')], 
+        [' ', ' ', ' ', ' ', ' ', ' ', ' ', ' '], 
+        [' ', ' ', ' ', ' ', ' ', ' ', ' ', ' '], 
+        [Pawn.new('white'), Pawn.new('white'), Pawn.new('white'), Pawn.new('white'), ' ', Pawn.new('white'), Pawn.new('white'), Pawn.new('white')], 
+        [Rook.new('white'), ' ', ' ', ' ', King.new('white'), Bishop.new('white'), Knight.new('white'), Rook.new('white')]]
+        gameboard.board[7][7].moved = true
+        expect(game.castling(gameboard, player2)).to eql(false)
+        $stdin = STDIN
+      end
+
+      before do
+        allow($stdout).to receive(:puts)
+        io2.puts 'y'
+        io2.puts 'k'
+        io2.rewind
+      end
+      
+      it 'returns false when space is under attack for black player on kingside' do
+        $stdin = io2
+        gameboard.board = [[Rook.new('black'), Knight.new('black'), Bishop.new('black'), Queen.new('black'), King.new('black'), ' ', ' ', Rook.new('black')], 
+        [Pawn.new('black'), Pawn.new('black'), Pawn.new('black'), Pawn.new('black'), Pawn.new('black'), Pawn.new('black'), Pawn.new('black'), Pawn.new('black')], 
+        [' ', ' ', ' ', ' ', ' ', ' ', ' ', Knight.new('white')], 
+        [' ', ' ', ' ', ' ', ' ', ' ', ' ', ' '], 
+        [' ', ' ', ' ', ' ', ' ', ' ', ' ', ' '], 
+        [' ', ' ', ' ', ' ', ' ', ' ', ' ', ' '], 
+        [Pawn.new('white'), Pawn.new('white'), Pawn.new('white'), Pawn.new('white'), Pawn.new('white'), Pawn.new('white'), Pawn.new('white'), Pawn.new('white')], 
+        [Rook.new('white'), ' ', Bishop.new('white'), Queen.new('white'), King.new('white'), Bishop.new('white'), Knight.new('white'), Rook.new('white')]]
+        expect(game.castling(gameboard, player1)).to eql(false)
+        $stdin = STDIN
       end
     end
   end

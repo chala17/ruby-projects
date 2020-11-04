@@ -13,27 +13,62 @@ class Gameplay
     true
   end
 
-  def castling(board, player)
+  def castling(gameboard, player)
     error_message = 'You were unable to castle your King, please make a regular move'
-    if player.color == 'black'
-      return false unless board[0][4].is_a?(King) && board[0][4].moved == false
-      
-      puts 'Would you like to try and castle your King? Press Y if yes'
-      answer = gets.chomp.downcase
-      return false unless answer == 'y'
-      puts 'Press Q to castle Queenside, or K to castle Kingside, anything else will cancel castling.'
-      answer = gets.chomp.downcase
-      return false unless %w[q k].include?(answer)
-      if answer == 'q'
-        unless board[0][0].is_a?(Rook) && board[0][0].moved == false
+    enemy_pieces = gameboard.pieces_set('enemy', player.color)
+    white_black = player.color == 'black' ? 0 : 7
+    return false unless gameboard.board[white_black][4].is_a?(King) && gameboard.board[white_black][4].moved == false
+    
+    puts 'Would you like to try and castle your King? Press Y if yes'
+    answer = gets.chomp.downcase
+    return false unless answer == 'y'
+
+    puts 'Press Q to castle Queenside, or K to castle Kingside, anything else will cancel castling.'
+    answer = gets.chomp.downcase
+    return false unless %w[q k].include?(answer)
+
+    return false if gameboard.check?(player.color)
+    
+    if answer == 'q'
+      unless gameboard.board[white_black][0].is_a?(Rook) && gameboard.board[white_black][0].moved == false
+        puts error_message
+        return false
+      end
+      unless gameboard.board[white_black][1] == ' ' && gameboard.board[white_black][2] == ' ' && gameboard.board[white_black][3] == ' '
+        puts error_message
+        return false
+      end
+      enemy_pieces.each do |enemy|
+        if gameboard.board[enemy[0]][enemy[1]].valid_move?(enemy, [white_black, 1], gameboard) || gameboard.board[enemy[0]][enemy[1]].valid_move?(enemy, [white_black, 2], gameboard) ||
+          gameboard.board[enemy[0]][enemy[1]].valid_move?(enemy, [white_black, 3], gameboard)
           puts error_message
           return false
         end
-        unless board[0][1] == ' '
-
-
-      
-
+      end
+      puts 'You have succesfully castled your King!'
+      gameboard.move_piece([white_black, 4], [white_black, 2])
+      gameboard.move_piece([white_black, 0], [white_black, 3])
+      return true
+    else
+      unless gameboard.board[white_black][7].is_a?(Rook) && gameboard.board[white_black][7].moved == false
+        puts error_message
+        return false
+      end
+      unless gameboard.board[white_black][5] == ' ' && gameboard.board[white_black][6] == ' '
+        puts error_message
+        return false
+      end
+      enemy_pieces.each do |enemy|
+        if gameboard.board[enemy[0]][enemy[1]].valid_move?(enemy, [white_black, 5], gameboard) || gameboard.board[enemy[0]][enemy[1]].valid_move?(enemy, [white_black, 6], gameboard)
+          puts error_message
+          return false
+        end
+      end
+      puts 'You have succesfully castled your King!'
+      gameboard.move_piece([white_black, 4], [white_black, 6])
+      gameboard.move_piece([white_black, 7], [white_black, 5])
+      return true
+    end
   end
 
   def move_input(player)
@@ -89,6 +124,3 @@ class Gameplay
     end
   end
 end
-
-game = Gameplay.new
-#game.game_logic
