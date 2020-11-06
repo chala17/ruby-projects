@@ -1,16 +1,13 @@
 # frozen-string-literal: true
 
-require_relative 'gameboard'
-require_relative 'pieces'
-require_relative 'gameplay'
-
 class Player
 
-  attr_accessor :color, :player
+  attr_accessor :color, :player, :check
 
   def initialize(player, color)
     @player = player
     @color = color
+    @check = false
   end
 
   def own_piece?(space, board)

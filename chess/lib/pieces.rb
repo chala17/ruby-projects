@@ -1,9 +1,5 @@
 # frozen-string-literal: true
 
-require_relative 'gameboard'
-require_relative 'gameplay'
-require_relative 'players'
-
 class Piece
 
   attr_accessor :color
@@ -29,6 +25,7 @@ class Pawn < Piece
   end
 
   def valid_move?(start, stop, gameboard)
+    return true if en_passant(gameboard, start, stop)
     if color == 'white'
       if (start[1] - stop[1]).abs == 1 && start[0] - stop[0] == 1
         return false if gameboard.board[stop[0]][stop[1]] == ' '
@@ -82,7 +79,14 @@ class Pawn < Piece
     false
   end
 
-  def en_passant
+  def en_passant(gameboard, start, stop)
+    return false if gameboard.moves_array.empty?
+
+    return false unless gameboard.moves_array[-1][0].is_a?(Pawn)
+
+    return false unless [(gameboard.moves_array[-1][1][0] + gameboard.moves_array[-1][2][0]) / 2.0, gameboard.moves_array[-1][2][1]] == stop
+    gameboard.board[gameboard.moves_array[-1][2][0]][gameboard.moves_array[-1][2][1]] = ' '
+    true
   end
 
   def promotion(stop, board, piece)

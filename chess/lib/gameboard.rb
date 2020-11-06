@@ -1,16 +1,11 @@
 # frozen-string-literal: true
 
-require_relative 'gameplay'
-require_relative 'pieces'
-require_relative 'players'
-
 class Gameboard
 
-  attr_accessor :board, :p1_captured, :p2_captured
+  attr_accessor :board, :moves_array
 
   def initialize
-    @p1_captured = []
-    @p2_captured = []
+    @moves_array = []
     @board = [[Rook.new('black'), Knight.new('black'), Bishop.new('black'), Queen.new('black'), King.new('black'), Bishop.new('black'), Knight.new('black'), Rook.new('black')], 
     [Pawn.new('black'), Pawn.new('black'), Pawn.new('black'), Pawn.new('black'), Pawn.new('black'), Pawn.new('black'), Pawn.new('black'), Pawn.new('black')], 
     [' ', ' ', ' ', ' ', ' ', ' ', ' ', ' '], 
@@ -33,11 +28,6 @@ class Gameboard
     puts "\n  ---------------------------------"
   end
 
-  def capture(stop, player)
-    piece = board[stop[0]][stop[1]]
-    player.player == 1 ? p1_captured.push(piece) : p2_captured.push(piece)
-  end
-
   def space_occupied?(space)
     return true unless board[space[0]][space[1]] == ' '
 
@@ -48,6 +38,7 @@ class Gameboard
     piece = board[start[0]][start[1]]
     board[start[0]][start[1]] = ' '
     board[stop[0]][stop[1]] = piece
+    moves_array.push([piece, start, stop])
     piece
   end
 
@@ -76,7 +67,19 @@ class Gameboard
     true
   end
 
-  def checkmate?(color, king_space)
+  def checkmate?(color)
+    symbol = color == 'black' ? "\u2654" : "\u265a"
+     king_space = nil
+     (0..7).each do |row|
+      (0..7).each do |column|
+        unless board[row][column] == ' '
+          if self.board[row][column].symbol == symbol
+            king_space = [row, column]
+            break
+          end
+        end
+      end
+    end
     mock_board = Gameboard.new 
     board_copy = Marshal.dump(self.board)
     mock_board.board = Marshal.load(board_copy)
