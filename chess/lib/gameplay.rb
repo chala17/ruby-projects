@@ -83,6 +83,7 @@ class Gameplay
         puts "Player#{player.player} please enter the #{counter.even? ? 'column' : 'row'} #{counter < 3 ? 
         'of the piece that you would like to move' : 'of the space you would like to move your piece to'}."
         entry = gets.chomp
+        return if entry.downcase == 'q'
         puts('That is not a valid entry') unless valid_entry?(entry)
       end
       counter < 3 ? start.push(entry.to_i) : stop.push(entry.to_i)
@@ -93,6 +94,7 @@ class Gameplay
 
   def player_move(player, board)
     start, stop = move_input(player)
+    return 'quit' if start == nil
     unless player.own_piece?(start, board)
       puts 'You did not pick a space that contains your own piece!'
       player_move(player, board)
@@ -132,11 +134,13 @@ class Gameplay
     round = 1
     game_over = false
     board.display_board
+    puts "Enter 'Q' at any time when asked to make a move in order to quit the game."
     until game_over
       player = round.odd? ? player1 : player2
-      puts "#{player.color}'s turn"
+      puts "#{player.color.capitalize}'s turn"
       opposing_player = round.odd? ? player2 : player1
-      player_move(player, board) unless castling(board, player)
+      player_quit = player_move(player, board) unless castling(board, player)
+      break if player_quit == 'quit'
       if board.check?(opposing_player.color)
         opposing_player.check = true
         if board.checkmate?(opposing_player.color)
@@ -150,6 +154,7 @@ class Gameplay
       end
       round += 1
     end
+    puts 'Hope you had fun!'
   end
 end
 
