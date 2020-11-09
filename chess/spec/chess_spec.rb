@@ -39,14 +39,14 @@ RSpec.describe Pawn do
       end
 
       it 'returns true when pawn moves in an attacking fashion and captures a piece' do
-        gameboard.board = [[Rook.new('black'), Knight.new('black'), Bishop.new('black'), Queen.new('black'), King.new('black'), Bishop.new('black'), Knight.new('black'), Rook.new('black')], 
-        [Pawn.new('black'), Pawn.new('black'), Pawn.new('black'), Pawn.new('black'), Pawn.new('black'), Pawn.new('black'), Pawn.new('black'), Pawn.new('black')], 
-        [' ', Pawn.new('white'), ' ', ' ', ' ', ' ', ' ', ' '], 
-        [' ', ' ', ' ', ' ', ' ', ' ', ' ', ' '], 
-        [' ', ' ', ' ', ' ', ' ', ' ', ' ', ' '], 
-        [' ', ' ', ' ', ' ', ' ', ' ', ' ', ' '], 
-        [Pawn.new('white'), ' ', Pawn.new('white'), Pawn.new('white'), Pawn.new('white'), Pawn.new('white'), Pawn.new('white'), Pawn.new('white')], 
-        [Rook.new('white'), Knight.new('white'), Bishop.new('white'), Queen.new('white'), King.new('white'), Bishop.new('white'), Knight.new('white'), Rook.new('white')]]
+        gameboard.board = [[Rook.new('black'), Knight.new('black'), Bishop.new('black'), Queen.new('black'), King.new('black'), Bishop.new('black'), Knight.new('black'), Rook.new('black')],
+                           [Pawn.new('black'), Pawn.new('black'), Pawn.new('black'), Pawn.new('black'), Pawn.new('black'), Pawn.new('black'), Pawn.new('black'), Pawn.new('black')],
+                           [' ', Pawn.new('white'), ' ', ' ', ' ', ' ', ' ', ' '],
+                           [' ', ' ', ' ', ' ', ' ', ' ', ' ', ' '],
+                           [' ', ' ', ' ', ' ', ' ', ' ', ' ', ' '],
+                           [' ', ' ', ' ', ' ', ' ', ' ', ' ', ' '],
+                           [Pawn.new('white'), ' ', Pawn.new('white'), Pawn.new('white'), Pawn.new('white'), Pawn.new('white'), Pawn.new('white'), Pawn.new('white')],
+                           [Rook.new('white'), Knight.new('white'), Bishop.new('white'), Queen.new('white'), King.new('white'), Bishop.new('white'), Knight.new('white'), Rook.new('white')]]
         expect(black_pawn.valid_move?([1, 0], [2, 1], gameboard)).to eql(true)
       end
 
@@ -226,14 +226,14 @@ RSpec.describe Bishop do
       end
 
       it 'returns false when bishop tries to move through an enemy piece' do
-        gameboard.board = [[' ', Knight.new('black'), Bishop.new('black'), Queen.new('black'), King.new('black'), Bishop.new('black'), Knight.new('black'), Rook.new('black')], 
-        [Pawn.new('black'), Pawn.new('black'), Pawn.new('black'), Pawn.new('black'), Pawn.new('black'), Pawn.new('black'), Pawn.new('black'), Pawn.new('black')], 
-        [' ', ' ', ' ', ' ', ' ', ' ', ' ', ' '], 
-        [' ', ' ', ' ', ' ', ' ', ' ', ' ', ' '], 
-        [' ', ' ', ' ', Pawn.new('white'), ' ', ' ', ' ', ' '], 
-        [' ', ' ', ' ', ' ', Rook.new('black'), ' ', ' ', ' '], 
-        [Pawn.new('white'), Pawn.new('white'), Pawn.new('white'), ' ', Pawn.new('white'), Pawn.new('white'), Pawn.new('white'), Pawn.new('white')], 
-        [Rook.new('white'), Knight.new('white'), Bishop.new('white'), Queen.new('white'), King.new('white'), Bishop.new('white'), Knight.new('white'), Rook.new('white')]]
+        gameboard.board = [[' ', Knight.new('black'), Bishop.new('black'), Queen.new('black'), King.new('black'), Bishop.new('black'), Knight.new('black'), Rook.new('black')],
+                           [Pawn.new('black'), Pawn.new('black'), Pawn.new('black'), Pawn.new('black'), Pawn.new('black'), Pawn.new('black'), Pawn.new('black'), Pawn.new('black')],
+                           [' ', ' ', ' ', ' ', ' ', ' ', ' ', ' '],
+                           [' ', ' ', ' ', ' ', ' ', ' ', ' ', ' '],
+                           [' ', ' ', ' ', Pawn.new('white'), ' ', ' ', ' ', ' '],
+                           [' ', ' ', ' ', ' ', Rook.new('black'), ' ', ' ', ' '],
+                           [Pawn.new('white'), Pawn.new('white'), Pawn.new('white'), ' ', Pawn.new('white'), Pawn.new('white'), Pawn.new('white'), Pawn.new('white')],
+                           [Rook.new('white'), Knight.new('white'), Bishop.new('white'), Queen.new('white'), King.new('white'), Bishop.new('white'), Knight.new('white'), Rook.new('white')]]
         expect(white_bishop.valid_move?([7, 2], [3, 6], gameboard)).to eql(false)
       end
     end
@@ -312,13 +312,13 @@ RSpec.describe Queen do
 
       it 'returns false when queen tries to move through an enemy piece diagonally' do
         gameboard.board = [[' ', Knight.new('black'), Bishop.new('black'), Queen.new('black'), King.new('black'), Bishop.new('black'), Knight.new('black'), Rook.new('black')], 
-        [Pawn.new('black'), Pawn.new('black'), Pawn.new('black'), Pawn.new('black'), Pawn.new('black'), Pawn.new('black'), Pawn.new('black'), Pawn.new('black')], 
-        [' ', ' ', ' ', ' ', ' ', ' ', ' ', ' '], 
-        [' ', ' ', ' ', ' ', ' ', ' ', ' ', ' '], 
-        [' ', ' ', ' ', Pawn.new('white'), ' ', ' ', ' ', ' '], 
-        [' ', ' ', ' ', ' ', Rook.new('black'), ' ', ' ', ' '], 
-        [Pawn.new('white'), Pawn.new('white'), Pawn.new('white'), ' ', Pawn.new('white'), Pawn.new('white'), Pawn.new('white'), Pawn.new('white')], 
-        [Rook.new('white'), Knight.new('white'), Bishop.new('white'), Queen.new('white'), King.new('white'), Bishop.new('white'), Knight.new('white'), Rook.new('white')]]
+                           [Pawn.new('black'), Pawn.new('black'), Pawn.new('black'), Pawn.new('black'), Pawn.new('black'), Pawn.new('black'), Pawn.new('black'), Pawn.new('black')], 
+                           [' ', ' ', ' ', ' ', ' ', ' ', ' ', ' '], 
+                           [' ', ' ', ' ', ' ', ' ', ' ', ' ', ' '], 
+                           [' ', ' ', ' ', Pawn.new('white'), ' ', ' ', ' ', ' '], 
+                           [' ', ' ', ' ', ' ', Rook.new('black'), ' ', ' ', ' '], 
+                           [Pawn.new('white'), Pawn.new('white'), Pawn.new('white'), ' ', Pawn.new('white'), Pawn.new('white'), Pawn.new('white'), Pawn.new('white')], 
+                           [Rook.new('white'), Knight.new('white'), Bishop.new('white'), Queen.new('white'), King.new('white'), Bishop.new('white'), Knight.new('white'), Rook.new('white')]]
         expect(white_queen.valid_move?([7, 2], [3, 6], gameboard)).to eql(false)
       end
 
@@ -336,134 +336,134 @@ RSpec.describe King do
 
     context 'checks for valid moves and returns a boolean. ' do
       it 'returns true when King moves one space up' do
-        gameboard.board = [[Rook.new('black'), Knight.new('black'), Bishop.new('black'), Queen.new('black'), ' ', Bishop.new('black'), Knight.new('black'), Rook.new('black')], 
-        [Pawn.new('black'), Pawn.new('black'), Pawn.new('black'), Pawn.new('black'), Pawn.new('black'), Pawn.new('black'), Pawn.new('black'), Pawn.new('black')], 
-        [' ', ' ', ' ', ' ', ' ', ' ', ' ', ' '], 
-        [' ', ' ', ' ', King.new('black'), ' ', ' ', ' ', ' '], 
-        [' ', ' ', ' ', ' ', ' ', ' ', ' ', ' '], 
-        [' ', ' ', ' ', ' ', ' ', ' ', ' ', ' '], 
-        [Pawn.new('white'), Pawn.new('white'), Pawn.new('white'), Pawn.new('white'), Pawn.new('white'), Pawn.new('white'), Pawn.new('white'), Pawn.new('white')], 
-        [Rook.new('white'), Knight.new('white'), Bishop.new('white'), Queen.new('white'), King.new('white'), Bishop.new('white'), Knight.new('white'), Rook.new('white')]]
+        gameboard.board = [[Rook.new('black'), Knight.new('black'), Bishop.new('black'), Queen.new('black'), ' ', Bishop.new('black'), Knight.new('black'), Rook.new('black')],
+                           [Pawn.new('black'), Pawn.new('black'), Pawn.new('black'), Pawn.new('black'), Pawn.new('black'), Pawn.new('black'), Pawn.new('black'), Pawn.new('black')],
+                           [' ', ' ', ' ', ' ', ' ', ' ', ' ', ' '],
+                           [' ', ' ', ' ', King.new('black'), ' ', ' ', ' ', ' '],
+                           [' ', ' ', ' ', ' ', ' ', ' ', ' ', ' '],
+                           [' ', ' ', ' ', ' ', ' ', ' ', ' ', ' '],
+                           [Pawn.new('white'), Pawn.new('white'), Pawn.new('white'), Pawn.new('white'), Pawn.new('white'), Pawn.new('white'), Pawn.new('white'), Pawn.new('white')],
+                           [Rook.new('white'), Knight.new('white'), Bishop.new('white'), Queen.new('white'), King.new('white'), Bishop.new('white'), Knight.new('white'), Rook.new('white')]]
         expect(black_king.valid_move?([3, 3], [2, 3], gameboard)).to eql(true)
       end
 
       it 'returns true when King moves one space down' do
-        gameboard.board = [[Rook.new('black'), Knight.new('black'), Bishop.new('black'), Queen.new('black'), ' ', Bishop.new('black'), Knight.new('black'), Rook.new('black')], 
-        [Pawn.new('black'), Pawn.new('black'), Pawn.new('black'), Pawn.new('black'), Pawn.new('black'), Pawn.new('black'), Pawn.new('black'), Pawn.new('black')], 
-        [' ', ' ', ' ', ' ', ' ', ' ', ' ', ' '], 
-        [' ', ' ', ' ', King.new('black'), ' ', ' ', ' ', ' '], 
-        [' ', ' ', ' ', ' ', ' ', ' ', ' ', ' '], 
-        [' ', ' ', ' ', ' ', ' ', ' ', ' ', ' '], 
-        [Pawn.new('white'), Pawn.new('white'), Pawn.new('white'), Pawn.new('white'), Pawn.new('white'), Pawn.new('white'), Pawn.new('white'), Pawn.new('white')], 
-        [Rook.new('white'), Knight.new('white'), Bishop.new('white'), Queen.new('white'), King.new('white'), Bishop.new('white'), Knight.new('white'), Rook.new('white')]]
+        gameboard.board = [[Rook.new('black'), Knight.new('black'), Bishop.new('black'), Queen.new('black'), ' ', Bishop.new('black'), Knight.new('black'), Rook.new('black')],
+                           [Pawn.new('black'), Pawn.new('black'), Pawn.new('black'), Pawn.new('black'), Pawn.new('black'), Pawn.new('black'), Pawn.new('black'), Pawn.new('black')],
+                           [' ', ' ', ' ', ' ', ' ', ' ', ' ', ' '],
+                           [' ', ' ', ' ', King.new('black'), ' ', ' ', ' ', ' '],
+                           [' ', ' ', ' ', ' ', ' ', ' ', ' ', ' '],
+                           [' ', ' ', ' ', ' ', ' ', ' ', ' ', ' '],
+                           [Pawn.new('white'), Pawn.new('white'), Pawn.new('white'), Pawn.new('white'), Pawn.new('white'), Pawn.new('white'), Pawn.new('white'), Pawn.new('white')],
+                           [Rook.new('white'), Knight.new('white'), Bishop.new('white'), Queen.new('white'), King.new('white'), Bishop.new('white'), Knight.new('white'), Rook.new('white')]]
         expect(black_king.valid_move?([3, 3], [4, 3], gameboard)).to eql(true)
       end
 
       it 'returns true when King moves one space left' do
-        gameboard.board = [[Rook.new('black'), Knight.new('black'), Bishop.new('black'), Queen.new('black'), ' ', Bishop.new('black'), Knight.new('black'), Rook.new('black')], 
-        [Pawn.new('black'), Pawn.new('black'), Pawn.new('black'), Pawn.new('black'), Pawn.new('black'), Pawn.new('black'), Pawn.new('black'), Pawn.new('black')], 
-        [' ', ' ', ' ', ' ', ' ', ' ', ' ', ' '], 
-        [' ', ' ', ' ', King.new('black'), ' ', ' ', ' ', ' '], 
-        [' ', ' ', ' ', ' ', ' ', ' ', ' ', ' '], 
-        [' ', ' ', ' ', ' ', ' ', ' ', ' ', ' '], 
-        [Pawn.new('white'), Pawn.new('white'), Pawn.new('white'), Pawn.new('white'), Pawn.new('white'), Pawn.new('white'), Pawn.new('white'), Pawn.new('white')], 
-        [Rook.new('white'), Knight.new('white'), Bishop.new('white'), Queen.new('white'), King.new('white'), Bishop.new('white'), Knight.new('white'), Rook.new('white')]]
+        gameboard.board = [[Rook.new('black'), Knight.new('black'), Bishop.new('black'), Queen.new('black'), ' ', Bishop.new('black'), Knight.new('black'), Rook.new('black')],
+                           [Pawn.new('black'), Pawn.new('black'), Pawn.new('black'), Pawn.new('black'), Pawn.new('black'), Pawn.new('black'), Pawn.new('black'), Pawn.new('black')],
+                           [' ', ' ', ' ', ' ', ' ', ' ', ' ', ' '],
+                           [' ', ' ', ' ', King.new('black'), ' ', ' ', ' ', ' '],
+                           [' ', ' ', ' ', ' ', ' ', ' ', ' ', ' '],
+                           [' ', ' ', ' ', ' ', ' ', ' ', ' ', ' '],
+                           [Pawn.new('white'), Pawn.new('white'), Pawn.new('white'), Pawn.new('white'), Pawn.new('white'), Pawn.new('white'), Pawn.new('white'), Pawn.new('white')],
+                           [Rook.new('white'), Knight.new('white'), Bishop.new('white'), Queen.new('white'), King.new('white'), Bishop.new('white'), Knight.new('white'), Rook.new('white')]]
         expect(black_king.valid_move?([3, 3], [3, 2], gameboard)).to eql(true)
       end
 
       it 'returns true when King moves one space right' do
-        gameboard.board = [[Rook.new('black'), Knight.new('black'), Bishop.new('black'), Queen.new('black'), ' ', Bishop.new('black'), Knight.new('black'), Rook.new('black')], 
-        [Pawn.new('black'), Pawn.new('black'), Pawn.new('black'), Pawn.new('black'), Pawn.new('black'), Pawn.new('black'), Pawn.new('black'), Pawn.new('black')], 
-        [' ', ' ', ' ', ' ', ' ', ' ', ' ', ' '], 
-        [' ', ' ', ' ', King.new('black'), ' ', ' ', ' ', ' '], 
-        [' ', ' ', ' ', ' ', ' ', ' ', ' ', ' '], 
-        [' ', ' ', ' ', ' ', ' ', ' ', ' ', ' '], 
-        [Pawn.new('white'), Pawn.new('white'), Pawn.new('white'), Pawn.new('white'), Pawn.new('white'), Pawn.new('white'), Pawn.new('white'), Pawn.new('white')], 
-        [Rook.new('white'), Knight.new('white'), Bishop.new('white'), Queen.new('white'), King.new('white'), Bishop.new('white'), Knight.new('white'), Rook.new('white')]]
+        gameboard.board = [[Rook.new('black'), Knight.new('black'), Bishop.new('black'), Queen.new('black'), ' ', Bishop.new('black'), Knight.new('black'), Rook.new('black')],
+                           [Pawn.new('black'), Pawn.new('black'), Pawn.new('black'), Pawn.new('black'), Pawn.new('black'), Pawn.new('black'), Pawn.new('black'), Pawn.new('black')],
+                           [' ', ' ', ' ', ' ', ' ', ' ', ' ', ' '],
+                           [' ', ' ', ' ', King.new('black'), ' ', ' ', ' ', ' '],
+                           [' ', ' ', ' ', ' ', ' ', ' ', ' ', ' '],
+                           [' ', ' ', ' ', ' ', ' ', ' ', ' ', ' '],
+                           [Pawn.new('white'), Pawn.new('white'), Pawn.new('white'), Pawn.new('white'), Pawn.new('white'), Pawn.new('white'), Pawn.new('white'), Pawn.new('white')],
+                           [Rook.new('white'), Knight.new('white'), Bishop.new('white'), Queen.new('white'), King.new('white'), Bishop.new('white'), Knight.new('white'), Rook.new('white')]]
         expect(black_king.valid_move?([3, 3], [3, 4], gameboard)).to eql(true)
       end
 
       it 'returns true when King moves one space diagonally up and left' do
-        gameboard.board = [[Rook.new('black'), Knight.new('black'), Bishop.new('black'), Queen.new('black'), ' ', Bishop.new('black'), Knight.new('black'), Rook.new('black')], 
-        [Pawn.new('black'), Pawn.new('black'), Pawn.new('black'), Pawn.new('black'), Pawn.new('black'), Pawn.new('black'), Pawn.new('black'), Pawn.new('black')], 
-        [' ', ' ', ' ', ' ', ' ', ' ', ' ', ' '], 
-        [' ', ' ', ' ', King.new('black'), ' ', ' ', ' ', ' '], 
-        [' ', ' ', ' ', ' ', ' ', ' ', ' ', ' '], 
-        [' ', ' ', ' ', ' ', ' ', ' ', ' ', ' '], 
-        [Pawn.new('white'), Pawn.new('white'), Pawn.new('white'), Pawn.new('white'), Pawn.new('white'), Pawn.new('white'), Pawn.new('white'), Pawn.new('white')], 
-        [Rook.new('white'), Knight.new('white'), Bishop.new('white'), Queen.new('white'), King.new('white'), Bishop.new('white'), Knight.new('white'), Rook.new('white')]]
+        gameboard.board = [[Rook.new('black'), Knight.new('black'), Bishop.new('black'), Queen.new('black'), ' ', Bishop.new('black'), Knight.new('black'), Rook.new('black')],
+                           [Pawn.new('black'), Pawn.new('black'), Pawn.new('black'), Pawn.new('black'), Pawn.new('black'), Pawn.new('black'), Pawn.new('black'), Pawn.new('black')],
+                           [' ', ' ', ' ', ' ', ' ', ' ', ' ', ' '],
+                           [' ', ' ', ' ', King.new('black'), ' ', ' ', ' ', ' '],
+                           [' ', ' ', ' ', ' ', ' ', ' ', ' ', ' '],
+                           [' ', ' ', ' ', ' ', ' ', ' ', ' ', ' '],
+                           [Pawn.new('white'), Pawn.new('white'), Pawn.new('white'), Pawn.new('white'), Pawn.new('white'), Pawn.new('white'), Pawn.new('white'), Pawn.new('white')],
+                           [Rook.new('white'), Knight.new('white'), Bishop.new('white'), Queen.new('white'), King.new('white'), Bishop.new('white'), Knight.new('white'), Rook.new('white')]]
         expect(black_king.valid_move?([3, 3], [2, 2], gameboard)).to eql(true)
       end
 
       it 'returns true when King moves one space diagonally up and right' do
-        gameboard.board = [[Rook.new('black'), Knight.new('black'), Bishop.new('black'), Queen.new('black'), ' ', Bishop.new('black'), Knight.new('black'), Rook.new('black')], 
-        [Pawn.new('black'), Pawn.new('black'), Pawn.new('black'), Pawn.new('black'), Pawn.new('black'), Pawn.new('black'), Pawn.new('black'), Pawn.new('black')], 
-        [' ', ' ', ' ', ' ', ' ', ' ', ' ', ' '], 
-        [' ', ' ', ' ', King.new('black'), ' ', ' ', ' ', ' '], 
-        [' ', ' ', ' ', ' ', ' ', ' ', ' ', ' '], 
-        [' ', ' ', ' ', ' ', ' ', ' ', ' ', ' '], 
-        [Pawn.new('white'), Pawn.new('white'), Pawn.new('white'), Pawn.new('white'), Pawn.new('white'), Pawn.new('white'), Pawn.new('white'), Pawn.new('white')], 
-        [Rook.new('white'), Knight.new('white'), Bishop.new('white'), Queen.new('white'), King.new('white'), Bishop.new('white'), Knight.new('white'), Rook.new('white')]]
+        gameboard.board = [[Rook.new('black'), Knight.new('black'), Bishop.new('black'), Queen.new('black'), ' ', Bishop.new('black'), Knight.new('black'), Rook.new('black')],
+                           [Pawn.new('black'), Pawn.new('black'), Pawn.new('black'), Pawn.new('black'), Pawn.new('black'), Pawn.new('black'), Pawn.new('black'), Pawn.new('black')],
+                           [' ', ' ', ' ', ' ', ' ', ' ', ' ', ' '],
+                           [' ', ' ', ' ', King.new('black'), ' ', ' ', ' ', ' '],
+                           [' ', ' ', ' ', ' ', ' ', ' ', ' ', ' '],
+                           [' ', ' ', ' ', ' ', ' ', ' ', ' ', ' '],
+                           [Pawn.new('white'), Pawn.new('white'), Pawn.new('white'), Pawn.new('white'), Pawn.new('white'), Pawn.new('white'), Pawn.new('white'), Pawn.new('white')],
+                           [Rook.new('white'), Knight.new('white'), Bishop.new('white'), Queen.new('white'), King.new('white'), Bishop.new('white'), Knight.new('white'), Rook.new('white')]]
         expect(black_king.valid_move?([3, 3], [2, 4], gameboard)).to eql(true)
       end
 
       it 'returns true when King moves one space diagonally down and left' do
-        gameboard.board = [[Rook.new('black'), Knight.new('black'), Bishop.new('black'), Queen.new('black'), ' ', Bishop.new('black'), Knight.new('black'), Rook.new('black')], 
-        [Pawn.new('black'), Pawn.new('black'), Pawn.new('black'), Pawn.new('black'), Pawn.new('black'), Pawn.new('black'), Pawn.new('black'), Pawn.new('black')], 
-        [' ', ' ', ' ', ' ', ' ', ' ', ' ', ' '], 
-        [' ', ' ', ' ', King.new('black'), ' ', ' ', ' ', ' '], 
-        [' ', ' ', ' ', ' ', ' ', ' ', ' ', ' '], 
-        [' ', ' ', ' ', ' ', ' ', ' ', ' ', ' '], 
-        [Pawn.new('white'), Pawn.new('white'), Pawn.new('white'), Pawn.new('white'), Pawn.new('white'), Pawn.new('white'), Pawn.new('white'), Pawn.new('white')], 
-        [Rook.new('white'), Knight.new('white'), Bishop.new('white'), Queen.new('white'), King.new('white'), Bishop.new('white'), Knight.new('white'), Rook.new('white')]]
+        gameboard.board = [[Rook.new('black'), Knight.new('black'), Bishop.new('black'), Queen.new('black'), ' ', Bishop.new('black'), Knight.new('black'), Rook.new('black')],
+                           [Pawn.new('black'), Pawn.new('black'), Pawn.new('black'), Pawn.new('black'), Pawn.new('black'), Pawn.new('black'), Pawn.new('black'), Pawn.new('black')],
+                           [' ', ' ', ' ', ' ', ' ', ' ', ' ', ' '],
+                           [' ', ' ', ' ', King.new('black'), ' ', ' ', ' ', ' '],
+                           [' ', ' ', ' ', ' ', ' ', ' ', ' ', ' '],
+                           [' ', ' ', ' ', ' ', ' ', ' ', ' ', ' '],
+                           [Pawn.new('white'), Pawn.new('white'), Pawn.new('white'), Pawn.new('white'), Pawn.new('white'), Pawn.new('white'), Pawn.new('white'), Pawn.new('white')],
+                           [Rook.new('white'), Knight.new('white'), Bishop.new('white'), Queen.new('white'), King.new('white'), Bishop.new('white'), Knight.new('white'), Rook.new('white')]]
         expect(black_king.valid_move?([3, 3], [4, 2], gameboard)).to eql(true)
       end
 
       it 'returns true when King moves one space diagonally down and right' do
-        gameboard.board = [[Rook.new('black'), Knight.new('black'), Bishop.new('black'), Queen.new('black'), ' ', Bishop.new('black'), Knight.new('black'), Rook.new('black')], 
-        [Pawn.new('black'), Pawn.new('black'), Pawn.new('black'), Pawn.new('black'), Pawn.new('black'), Pawn.new('black'), Pawn.new('black'), Pawn.new('black')], 
-        [' ', ' ', ' ', ' ', ' ', ' ', ' ', ' '], 
-        [' ', ' ', ' ', King.new('black'), ' ', ' ', ' ', ' '], 
-        [' ', ' ', ' ', ' ', ' ', ' ', ' ', ' '], 
-        [' ', ' ', ' ', ' ', ' ', ' ', ' ', ' '], 
-        [Pawn.new('white'), Pawn.new('white'), Pawn.new('white'), Pawn.new('white'), Pawn.new('white'), Pawn.new('white'), Pawn.new('white'), Pawn.new('white')], 
-        [Rook.new('white'), Knight.new('white'), Bishop.new('white'), Queen.new('white'), King.new('white'), Bishop.new('white'), Knight.new('white'), Rook.new('white')]]
+        gameboard.board = [[Rook.new('black'), Knight.new('black'), Bishop.new('black'), Queen.new('black'), ' ', Bishop.new('black'), Knight.new('black'), Rook.new('black')],
+                           [Pawn.new('black'), Pawn.new('black'), Pawn.new('black'), Pawn.new('black'), Pawn.new('black'), Pawn.new('black'), Pawn.new('black'), Pawn.new('black')],
+                           [' ', ' ', ' ', ' ', ' ', ' ', ' ', ' '],
+                           [' ', ' ', ' ', King.new('black'), ' ', ' ', ' ', ' '],
+                           [' ', ' ', ' ', ' ', ' ', ' ', ' ', ' '],
+                           [' ', ' ', ' ', ' ', ' ', ' ', ' ', ' '],
+                           [Pawn.new('white'), Pawn.new('white'), Pawn.new('white'), Pawn.new('white'), Pawn.new('white'), Pawn.new('white'), Pawn.new('white'), Pawn.new('white')],
+                           [Rook.new('white'), Knight.new('white'), Bishop.new('white'), Queen.new('white'), King.new('white'), Bishop.new('white'), Knight.new('white'), Rook.new('white')]]
         expect(black_king.valid_move?([3, 3], [4, 4], gameboard)).to eql(true)
       end
 
       it 'returns false when King tries to move by 2 spaces' do
-        gameboard.board = [[Rook.new('black'), Knight.new('black'), Bishop.new('black'), Queen.new('black'), ' ', Bishop.new('black'), Knight.new('black'), Rook.new('black')], 
-        [Pawn.new('black'), Pawn.new('black'), Pawn.new('black'), Pawn.new('black'), Pawn.new('black'), Pawn.new('black'), Pawn.new('black'), Pawn.new('black')], 
-        [' ', ' ', King.new('black'), ' ', ' ', ' ', ' ', ' '], 
-        [' ', ' ', ' ', ' ', ' ', ' ', ' ', ' '], 
-        [' ', ' ', ' ', ' ', ' ', ' ', ' ', ' '], 
-        [' ', ' ', ' ', ' ', ' ', ' ', ' ', ' '], 
-        [Pawn.new('white'), Pawn.new('white'), Pawn.new('white'), Pawn.new('white'), Pawn.new('white'), Pawn.new('white'), Pawn.new('white'), Pawn.new('white')], 
-        [Rook.new('white'), Knight.new('white'), Bishop.new('white'), Queen.new('white'), King.new('white'), Bishop.new('white'), Knight.new('white'), Rook.new('white')]]
+        gameboard.board = [[Rook.new('black'), Knight.new('black'), Bishop.new('black'), Queen.new('black'), ' ', Bishop.new('black'), Knight.new('black'), Rook.new('black')],
+                           [Pawn.new('black'), Pawn.new('black'), Pawn.new('black'), Pawn.new('black'), Pawn.new('black'), Pawn.new('black'), Pawn.new('black'), Pawn.new('black')],
+                           [' ', ' ', King.new('black'), ' ', ' ', ' ', ' ', ' '],
+                           [' ', ' ', ' ', ' ', ' ', ' ', ' ', ' '],
+                           [' ', ' ', ' ', ' ', ' ', ' ', ' ', ' '],
+                           [' ', ' ', ' ', ' ', ' ', ' ', ' ', ' '],
+                           [Pawn.new('white'), Pawn.new('white'), Pawn.new('white'), Pawn.new('white'), Pawn.new('white'), Pawn.new('white'), Pawn.new('white'), Pawn.new('white')],
+                           [Rook.new('white'), Knight.new('white'), Bishop.new('white'), Queen.new('white'), King.new('white'), Bishop.new('white'), Knight.new('white'), Rook.new('white')]]
         expect(black_king.valid_move?([2, 2], [2, 4], gameboard)).to eql(false)
       end
 
       it 'returns false when King tries to move by more than 2 spaces' do
-        gameboard.board = [[Rook.new('black'), Knight.new('black'), Bishop.new('black'), Queen.new('black'), ' ', Bishop.new('black'), Knight.new('black'), Rook.new('black')], 
-        [Pawn.new('black'), Pawn.new('black'), Pawn.new('black'), Pawn.new('black'), Pawn.new('black'), Pawn.new('black'), Pawn.new('black'), Pawn.new('black')], 
-        [' ', ' ', King.new('black'), ' ', ' ', ' ', ' ', ' '], 
-        [' ', ' ', ' ', ' ', ' ', ' ', ' ', ' '], 
-        [' ', ' ', ' ', ' ', ' ', ' ', ' ', ' '], 
-        [' ', ' ', ' ', ' ', ' ', ' ', ' ', ' '], 
-        [Pawn.new('white'), Pawn.new('white'), Pawn.new('white'), Pawn.new('white'), Pawn.new('white'), Pawn.new('white'), Pawn.new('white'), Pawn.new('white')], 
-        [Rook.new('white'), Knight.new('white'), Bishop.new('white'), Queen.new('white'), King.new('white'), Bishop.new('white'), Knight.new('white'), Rook.new('white')]]
+        gameboard.board = [[Rook.new('black'), Knight.new('black'), Bishop.new('black'), Queen.new('black'), ' ', Bishop.new('black'), Knight.new('black'), Rook.new('black')],
+                           [Pawn.new('black'), Pawn.new('black'), Pawn.new('black'), Pawn.new('black'), Pawn.new('black'), Pawn.new('black'), Pawn.new('black'), Pawn.new('black')],
+                           [' ', ' ', King.new('black'), ' ', ' ', ' ', ' ', ' '],
+                           [' ', ' ', ' ', ' ', ' ', ' ', ' ', ' '],
+                           [' ', ' ', ' ', ' ', ' ', ' ', ' ', ' '],
+                           [' ', ' ', ' ', ' ', ' ', ' ', ' ', ' '],
+                           [Pawn.new('white'), Pawn.new('white'), Pawn.new('white'), Pawn.new('white'), Pawn.new('white'), Pawn.new('white'), Pawn.new('white'), Pawn.new('white')],
+                           [Rook.new('white'), Knight.new('white'), Bishop.new('white'), Queen.new('white'), King.new('white'), Bishop.new('white'), Knight.new('white'), Rook.new('white')]]
         expect(black_king.valid_move?([2, 2], [5, 5], gameboard)).to eql(false)
       end
 
       it 'returns false when King would move itself in to check' do
-        gameboard.board = [[Rook.new('black'), Knight.new('black'), Bishop.new('black'), Queen.new('black'), ' ', Bishop.new('black'), Knight.new('black'), Rook.new('black')], 
-        [Pawn.new('black'), Pawn.new('black'), Pawn.new('black'), Pawn.new('black'), Pawn.new('black'), Pawn.new('black'), Pawn.new('black'), Pawn.new('black')], 
-        [' ', ' ', ' ', ' ', King.new('black'), ' ', ' ', ' '], 
-        [' ', ' ', ' ', ' ', ' ', ' ', ' ', ' '], 
-        [' ', ' ', ' ', ' ', ' ', ' ', ' ', ' '], 
-        [' ', ' ', ' ', Rook.new('white'), ' ', ' ', ' ', ' '], 
-        [Pawn.new('white'), Pawn.new('white'), Pawn.new('white'), Pawn.new('white'), Pawn.new('white'), Pawn.new('white'), Pawn.new('white'), Pawn.new('white')], 
-        [' ', Knight.new('white'), Bishop.new('white'), Queen.new('white'), King.new('white'), Bishop.new('white'), Knight.new('white'), Rook.new('white')]]
+        gameboard.board = [[Rook.new('black'), Knight.new('black'), Bishop.new('black'), Queen.new('black'), ' ', Bishop.new('black'), Knight.new('black'), Rook.new('black')],
+                           [Pawn.new('black'), Pawn.new('black'), Pawn.new('black'), Pawn.new('black'), Pawn.new('black'), Pawn.new('black'), Pawn.new('black'), Pawn.new('black')],
+                           [' ', ' ', ' ', ' ', King.new('black'), ' ', ' ', ' '],
+                           [' ', ' ', ' ', ' ', ' ', ' ', ' ', ' '],
+                           [' ', ' ', ' ', ' ', ' ', ' ', ' ', ' '],
+                           [' ', ' ', ' ', Rook.new('white'), ' ', ' ', ' ', ' '],
+                           [Pawn.new('white'), Pawn.new('white'), Pawn.new('white'), Pawn.new('white'), Pawn.new('white'), Pawn.new('white'), Pawn.new('white'), Pawn.new('white')],
+                           [' ', Knight.new('white'), Bishop.new('white'), Queen.new('white'), King.new('white'), Bishop.new('white'), Knight.new('white'), Rook.new('white')]]
         expect(black_king.valid_move?([2, 4], [2, 3], gameboard)).to eql(false)
       end
     end
@@ -475,6 +475,7 @@ RSpec.describe Gameplay do
     let(:game) { Gameplay.new }
     let(:io1) { StringIO.new }
     let(:io2) { StringIO.new }
+    let(:board) { Gameboard.new }
     let(:player) { Player.new(1, 'white') }
 
     context 'Checks for valid moves and returns [[start], [stop]] once one is found' do
@@ -490,10 +491,10 @@ RSpec.describe Gameplay do
 
       it 'returns correct start stop values when user input is all acceptable' do
         $stdin = io1
-        expect(game.move_input(player)).to eql([[4, 0], [1, 2]])
+        expect(game.move_input(player, board)).to eql([[4, 0], [1, 2]])
       end
 
-      before do 
+      before do
         allow($stdout).to receive(:puts)
         io2.puts 'r'
         io2.puts '5'
@@ -509,7 +510,7 @@ RSpec.describe Gameplay do
 
       it 'rejects unacceptable values and returns correct start stop values' do
         $stdin = io2
-        expect(game.move_input(player)).to eql([[5, 2], [4, 2]])
+        expect(game.move_input(player, board)).to eql([[5, 2], [4, 2]])
         $stdin = STDIN
       end
     end
@@ -525,25 +526,25 @@ RSpec.describe Gameplay do
     let(:player1) { Player.new(1, 'black') }
     let(:player2) { Player.new(2, 'white') }
 
-    context 'checks to see if castling is possible and returns a boolean' do 
-      
+    context 'checks to see if castling is possible and returns a boolean' do
+
       before do
         allow($stdout).to receive(:puts)
         io1.puts 'y'
         io1.puts 'q'
         io1.rewind
       end
-      
+
       it 'returns true when castling is possible for black player on queenside' do
         $stdin = io1
-        gameboard.board = [[Rook.new('black'), ' ', ' ', ' ', King.new('black'), Bishop.new('black'), Knight.new('black'), Rook.new('black')], 
-        [Pawn.new('black'), Pawn.new('black'), Pawn.new('black'), Pawn.new('black'), Pawn.new('black'), Pawn.new('black'), Pawn.new('black'), Pawn.new('black')], 
-        [' ', ' ', ' ', ' ', ' ', ' ', ' ', ' '], 
-        [' ', ' ', ' ', ' ', ' ', ' ', ' ', ' '], 
-        [' ', ' ', ' ', ' ', ' ', ' ', ' ', ' '], 
-        [' ', ' ', ' ', ' ', ' ', ' ', ' ', ' '], 
-        [Pawn.new('white'), Pawn.new('white'), Pawn.new('white'), Pawn.new('white'), Pawn.new('white'), Pawn.new('white'), Pawn.new('white'), Pawn.new('white')], 
-        [Rook.new('white'), Knight.new('white'), Bishop.new('white'), Queen.new('white'), King.new('white'), Bishop.new('white'), Knight.new('white'), Rook.new('white')]]
+        gameboard.board = [[Rook.new('black'), ' ', ' ', ' ', King.new('black'), Bishop.new('black'), Knight.new('black'), Rook.new('black')],
+                           [Pawn.new('black'), Pawn.new('black'), Pawn.new('black'), Pawn.new('black'), Pawn.new('black'), Pawn.new('black'), Pawn.new('black'), Pawn.new('black')],
+                           [' ', ' ', ' ', ' ', ' ', ' ', ' ', ' '],
+                           [' ', ' ', ' ', ' ', ' ', ' ', ' ', ' '],
+                           [' ', ' ', ' ', ' ', ' ', ' ', ' ', ' '],
+                           [' ', ' ', ' ', ' ', ' ', ' ', ' ', ' '],
+                           [Pawn.new('white'), Pawn.new('white'), Pawn.new('white'), Pawn.new('white'), Pawn.new('white'), Pawn.new('white'), Pawn.new('white'), Pawn.new('white')],
+                           [Rook.new('white'), Knight.new('white'), Bishop.new('white'), Queen.new('white'), King.new('white'), Bishop.new('white'), Knight.new('white'), Rook.new('white')]]
         expect(game.castling(gameboard, player1)).to eql(true)
         $stdin = STDIN
       end
@@ -554,17 +555,17 @@ RSpec.describe Gameplay do
         io2.puts 'k'
         io2.rewind
       end
-      
+
       it 'returns true when castling is possible for black player on kingside' do
         $stdin = io2
-        gameboard.board = [[Rook.new('black'), Knight.new('black'), Bishop.new('black'), Queen.new('black'), King.new('black'), ' ', ' ', Rook.new('black')], 
-        [Pawn.new('black'), Pawn.new('black'), Pawn.new('black'), Pawn.new('black'), Pawn.new('black'), Pawn.new('black'), Pawn.new('black'), Pawn.new('black')], 
-        [' ', ' ', ' ', ' ', ' ', ' ', ' ', ' '], 
-        [' ', ' ', ' ', ' ', ' ', ' ', ' ', ' '], 
-        [' ', ' ', ' ', ' ', ' ', ' ', ' ', ' '], 
-        [' ', ' ', ' ', ' ', ' ', ' ', ' ', ' '], 
-        [Pawn.new('white'), Pawn.new('white'), Pawn.new('white'), Pawn.new('white'), Pawn.new('white'), Pawn.new('white'), Pawn.new('white'), Pawn.new('white')], 
-        [Rook.new('white'), Knight.new('white'), Bishop.new('white'), Queen.new('white'), King.new('white'), Bishop.new('white'), Knight.new('white'), Rook.new('white')]]
+        gameboard.board = [[Rook.new('black'), Knight.new('black'), Bishop.new('black'), Queen.new('black'), King.new('black'), ' ', ' ', Rook.new('black')],
+                           [Pawn.new('black'), Pawn.new('black'), Pawn.new('black'), Pawn.new('black'), Pawn.new('black'), Pawn.new('black'), Pawn.new('black'), Pawn.new('black')],
+                           [' ', ' ', ' ', ' ', ' ', ' ', ' ', ' '],
+                           [' ', ' ', ' ', ' ', ' ', ' ', ' ', ' '],
+                           [' ', ' ', ' ', ' ', ' ', ' ', ' ', ' '],
+                           [' ', ' ', ' ', ' ', ' ', ' ', ' ', ' '],
+                           [Pawn.new('white'), Pawn.new('white'), Pawn.new('white'), Pawn.new('white'), Pawn.new('white'), Pawn.new('white'), Pawn.new('white'), Pawn.new('white')],
+                           [Rook.new('white'), Knight.new('white'), Bishop.new('white'), Queen.new('white'), King.new('white'), Bishop.new('white'), Knight.new('white'), Rook.new('white')]]
         expect(game.castling(gameboard, player1)).to eql(true)
         $stdin = STDIN
       end
@@ -575,17 +576,17 @@ RSpec.describe Gameplay do
         io3.puts 'k'
         io3.rewind
       end
-      
+
       it 'returns true when castling is possible for white player on kingside' do
         $stdin = io3
-        gameboard.board = [[Rook.new('black'), Knight.new('black'), Bishop.new('black'), Queen.new('black'), King.new('black'), Bishop.new('black'), Knight.new('black'), Rook.new('black')], 
-        [Pawn.new('black'), Pawn.new('black'), Pawn.new('black'), Pawn.new('black'), Pawn.new('black'), Pawn.new('black'), Pawn.new('black'), Pawn.new('black')], 
-        [' ', ' ', ' ', ' ', ' ', ' ', ' ', ' '], 
-        [' ', ' ', ' ', ' ', ' ', ' ', ' ', ' '], 
-        [' ', ' ', ' ', ' ', ' ', ' ', ' ', ' '], 
-        [' ', ' ', ' ', ' ', ' ', ' ', ' ', ' '], 
-        [Pawn.new('white'), Pawn.new('white'), Pawn.new('white'), Pawn.new('white'), Pawn.new('white'), Pawn.new('white'), Pawn.new('white'), Pawn.new('white')], 
-        [Rook.new('white'), Knight.new('white'), Bishop.new('white'), Queen.new('white'), King.new('white'), ' ', ' ', Rook.new('white')]]
+        gameboard.board = [[Rook.new('black'), Knight.new('black'), Bishop.new('black'), Queen.new('black'), King.new('black'), Bishop.new('black'), Knight.new('black'), Rook.new('black')],
+                           [Pawn.new('black'), Pawn.new('black'), Pawn.new('black'), Pawn.new('black'), Pawn.new('black'), Pawn.new('black'), Pawn.new('black'), Pawn.new('black')],
+                           [' ', ' ', ' ', ' ', ' ', ' ', ' ', ' '],
+                           [' ', ' ', ' ', ' ', ' ', ' ', ' ', ' '],
+                           [' ', ' ', ' ', ' ', ' ', ' ', ' ', ' '],
+                           [' ', ' ', ' ', ' ', ' ', ' ', ' ', ' '],
+                           [Pawn.new('white'), Pawn.new('white'), Pawn.new('white'), Pawn.new('white'), Pawn.new('white'), Pawn.new('white'), Pawn.new('white'), Pawn.new('white')],
+                           [Rook.new('white'), Knight.new('white'), Bishop.new('white'), Queen.new('white'), King.new('white'), ' ', ' ', Rook.new('white')]]
         expect(game.castling(gameboard, player2)).to eql(true)
         $stdin = STDIN
       end
@@ -596,17 +597,17 @@ RSpec.describe Gameplay do
         io4.puts 'q'
         io4.rewind
       end
-      
+
       it 'returns true when castling is possible for white player on queenside' do
         $stdin = io4
-        gameboard.board = [[Rook.new('black'), Knight.new('black'), Bishop.new('black'), Queen.new('black'), King.new('black'), Bishop.new('black'), Knight.new('black'), Rook.new('black')], 
-        [Pawn.new('black'), Pawn.new('black'), Pawn.new('black'), Pawn.new('black'), Pawn.new('black'), Pawn.new('black'), Pawn.new('black'), Pawn.new('black')], 
-        [' ', ' ', ' ', ' ', ' ', ' ', ' ', ' '], 
-        [' ', ' ', ' ', ' ', ' ', ' ', ' ', ' '], 
-        [' ', ' ', ' ', ' ', ' ', ' ', ' ', ' '], 
-        [' ', ' ', ' ', ' ', ' ', ' ', ' ', ' '], 
-        [Pawn.new('white'), Pawn.new('white'), Pawn.new('white'), Pawn.new('white'), Pawn.new('white'), Pawn.new('white'), Pawn.new('white'), Pawn.new('white')], 
-        [Rook.new('white'), ' ', ' ', ' ', King.new('white'), Bishop.new('white'), Knight.new('white'), Rook.new('white')]]
+        gameboard.board = [[Rook.new('black'), Knight.new('black'), Bishop.new('black'), Queen.new('black'), King.new('black'), Bishop.new('black'), Knight.new('black'), Rook.new('black')],
+                           [Pawn.new('black'), Pawn.new('black'), Pawn.new('black'), Pawn.new('black'), Pawn.new('black'), Pawn.new('black'), Pawn.new('black'), Pawn.new('black')],
+                           [' ', ' ', ' ', ' ', ' ', ' ', ' ', ' '],
+                           [' ', ' ', ' ', ' ', ' ', ' ', ' ', ' '],
+                           [' ', ' ', ' ', ' ', ' ', ' ', ' ', ' '],
+                           [' ', ' ', ' ', ' ', ' ', ' ', ' ', ' '],
+                           [Pawn.new('white'), Pawn.new('white'), Pawn.new('white'), Pawn.new('white'), Pawn.new('white'), Pawn.new('white'), Pawn.new('white'), Pawn.new('white')],
+                           [Rook.new('white'), ' ', ' ', ' ', King.new('white'), Bishop.new('white'), Knight.new('white'), Rook.new('white')]]
         expect(game.castling(gameboard, player2)).to eql(true)
         $stdin = STDIN
       end
@@ -617,17 +618,17 @@ RSpec.describe Gameplay do
         io2.puts 'k'
         io2.rewind
       end
-      
+
       it 'returns false when king has moved and player tries to castle kingside' do
         $stdin = io2
-        gameboard.board = [[Rook.new('black'), Knight.new('black'), Bishop.new('black'), Queen.new('black'), King.new('black'), ' ', ' ', Rook.new('black')], 
-        [Pawn.new('black'), Pawn.new('black'), Pawn.new('black'), Pawn.new('black'), Pawn.new('black'), Pawn.new('black'), Pawn.new('black'), Pawn.new('black')], 
-        [' ', ' ', ' ', ' ', ' ', ' ', ' ', ' '], 
-        [' ', ' ', ' ', ' ', ' ', ' ', ' ', ' '], 
-        [' ', ' ', ' ', ' ', ' ', ' ', ' ', ' '], 
-        [' ', ' ', ' ', ' ', ' ', ' ', ' ', ' '], 
-        [Pawn.new('white'), Pawn.new('white'), Pawn.new('white'), Pawn.new('white'), Pawn.new('white'), Pawn.new('white'), Pawn.new('white'), Pawn.new('white')], 
-        [Rook.new('white'), Knight.new('white'), Bishop.new('white'), Queen.new('white'), King.new('white'), Bishop.new('white'), Knight.new('white'), Rook.new('white')]]
+        gameboard.board = [[Rook.new('black'), Knight.new('black'), Bishop.new('black'), Queen.new('black'), King.new('black'), ' ', ' ', Rook.new('black')],
+                           [Pawn.new('black'), Pawn.new('black'), Pawn.new('black'), Pawn.new('black'), Pawn.new('black'), Pawn.new('black'), Pawn.new('black'), Pawn.new('black')],
+                           [' ', ' ', ' ', ' ', ' ', ' ', ' ', ' '],
+                           [' ', ' ', ' ', ' ', ' ', ' ', ' ', ' '],
+                           [' ', ' ', ' ', ' ', ' ', ' ', ' ', ' '],
+                           [' ', ' ', ' ', ' ', ' ', ' ', ' ', ' '],
+                           [Pawn.new('white'), Pawn.new('white'), Pawn.new('white'), Pawn.new('white'), Pawn.new('white'), Pawn.new('white'), Pawn.new('white'), Pawn.new('white')],
+                           [Rook.new('white'), Knight.new('white'), Bishop.new('white'), Queen.new('white'), King.new('white'), Bishop.new('white'), Knight.new('white'), Rook.new('white')]]
         gameboard.board[0][4].moved = true
         expect(game.castling(gameboard, player1)).to eql(false)
         $stdin = STDIN
@@ -639,17 +640,17 @@ RSpec.describe Gameplay do
         io4.puts 'q'
         io4.rewind
       end
-      
+
       it 'returns false when king has moved and white player tries to castle on queenside' do
         $stdin = io4
-        gameboard.board = [[Rook.new('black'), Knight.new('black'), Bishop.new('black'), Queen.new('black'), King.new('black'), Bishop.new('black'), Knight.new('black'), Rook.new('black')], 
-        [Pawn.new('black'), Pawn.new('black'), Pawn.new('black'), Pawn.new('black'), Pawn.new('black'), Pawn.new('black'), Pawn.new('black'), Pawn.new('black')], 
-        [' ', ' ', ' ', ' ', ' ', ' ', ' ', ' '], 
-        [' ', ' ', ' ', ' ', ' ', ' ', ' ', ' '], 
-        [' ', ' ', ' ', ' ', ' ', ' ', ' ', ' '], 
-        [' ', ' ', ' ', ' ', ' ', ' ', ' ', ' '], 
-        [Pawn.new('white'), Pawn.new('white'), Pawn.new('white'), Pawn.new('white'), Pawn.new('white'), Pawn.new('white'), Pawn.new('white'), Pawn.new('white')], 
-        [Rook.new('white'), ' ', ' ', ' ', King.new('white'), Bishop.new('white'), Knight.new('white'), Rook.new('white')]]
+        gameboard.board = [[Rook.new('black'), Knight.new('black'), Bishop.new('black'), Queen.new('black'), King.new('black'), Bishop.new('black'), Knight.new('black'), Rook.new('black')],
+                           [Pawn.new('black'), Pawn.new('black'), Pawn.new('black'), Pawn.new('black'), Pawn.new('black'), Pawn.new('black'), Pawn.new('black'), Pawn.new('black')],
+                           [' ', ' ', ' ', ' ', ' ', ' ', ' ', ' '],
+                           [' ', ' ', ' ', ' ', ' ', ' ', ' ', ' '],
+                           [' ', ' ', ' ', ' ', ' ', ' ', ' ', ' '],
+                           [' ', ' ', ' ', ' ', ' ', ' ', ' ', ' '],
+                           [Pawn.new('white'), Pawn.new('white'), Pawn.new('white'), Pawn.new('white'), Pawn.new('white'), Pawn.new('white'), Pawn.new('white'), Pawn.new('white')],
+                           [Rook.new('white'), ' ', ' ', ' ', King.new('white'), Bishop.new('white'), Knight.new('white'), Rook.new('white')]]
         gameboard.board[7][4].moved = true
         expect(game.castling(gameboard, player2)).to eql(false)
         $stdin = STDIN
@@ -661,17 +662,17 @@ RSpec.describe Gameplay do
         io2.puts 'k'
         io2.rewind
       end
-      
+
       it 'returns false when kingside rook has moved and player tries to castle kingside' do
         $stdin = io2
-        gameboard.board = [[Rook.new('black'), Knight.new('black'), Bishop.new('black'), Queen.new('black'), King.new('black'), ' ', ' ', Rook.new('black')], 
-        [Pawn.new('black'), Pawn.new('black'), Pawn.new('black'), Pawn.new('black'), Pawn.new('black'), Pawn.new('black'), Pawn.new('black'), Pawn.new('black')], 
-        [' ', ' ', ' ', ' ', ' ', ' ', ' ', ' '], 
-        [' ', ' ', ' ', ' ', ' ', ' ', ' ', ' '], 
-        [' ', ' ', ' ', ' ', ' ', ' ', ' ', ' '], 
-        [' ', ' ', ' ', ' ', ' ', ' ', ' ', ' '], 
-        [Pawn.new('white'), Pawn.new('white'), Pawn.new('white'), Pawn.new('white'), Pawn.new('white'), Pawn.new('white'), Pawn.new('white'), Pawn.new('white')], 
-        [Rook.new('white'), Knight.new('white'), Bishop.new('white'), Queen.new('white'), King.new('white'), Bishop.new('white'), Knight.new('white'), Rook.new('white')]]
+        gameboard.board = [[Rook.new('black'), Knight.new('black'), Bishop.new('black'), Queen.new('black'), King.new('black'), ' ', ' ', Rook.new('black')],
+                           [Pawn.new('black'), Pawn.new('black'), Pawn.new('black'), Pawn.new('black'), Pawn.new('black'), Pawn.new('black'), Pawn.new('black'), Pawn.new('black')],
+                           [' ', ' ', ' ', ' ', ' ', ' ', ' ', ' '],
+                           [' ', ' ', ' ', ' ', ' ', ' ', ' ', ' '],
+                           [' ', ' ', ' ', ' ', ' ', ' ', ' ', ' '],
+                           [' ', ' ', ' ', ' ', ' ', ' ', ' ', ' '],
+                           [Pawn.new('white'), Pawn.new('white'), Pawn.new('white'), Pawn.new('white'), Pawn.new('white'), Pawn.new('white'), Pawn.new('white'), Pawn.new('white')],
+                           [Rook.new('white'), Knight.new('white'), Bishop.new('white'), Queen.new('white'), King.new('white'), Bishop.new('white'), Knight.new('white'), Rook.new('white')]]
         gameboard.board[0][7].moved = true
         expect(game.castling(gameboard, player1)).to eql(false)
         $stdin = STDIN
@@ -683,17 +684,17 @@ RSpec.describe Gameplay do
         io4.puts 'q'
         io4.rewind
       end
-      
+
       it 'returns false when king has moved and white player tries to castle on queenside' do
         $stdin = io4
-        gameboard.board = [[Rook.new('black'), Knight.new('black'), Bishop.new('black'), Queen.new('black'), King.new('black'), Bishop.new('black'), Knight.new('black'), Rook.new('black')], 
-        [Pawn.new('black'), Pawn.new('black'), Pawn.new('black'), Pawn.new('black'), Pawn.new('black'), Pawn.new('black'), Pawn.new('black'), Pawn.new('black')], 
-        [' ', ' ', ' ', ' ', ' ', ' ', ' ', ' '], 
-        [' ', ' ', ' ', ' ', ' ', ' ', ' ', ' '], 
-        [' ', ' ', ' ', ' ', ' ', ' ', ' ', ' '], 
-        [' ', ' ', ' ', ' ', ' ', ' ', ' ', ' '], 
-        [Pawn.new('white'), Pawn.new('white'), Pawn.new('white'), Pawn.new('white'), Pawn.new('white'), Pawn.new('white'), Pawn.new('white'), Pawn.new('white')], 
-        [Rook.new('white'), ' ', ' ', ' ', King.new('white'), Bishop.new('white'), Knight.new('white'), Rook.new('white')]]
+        gameboard.board = [[Rook.new('black'), Knight.new('black'), Bishop.new('black'), Queen.new('black'), King.new('black'), Bishop.new('black'), Knight.new('black'), Rook.new('black')],
+                           [Pawn.new('black'), Pawn.new('black'), Pawn.new('black'), Pawn.new('black'), Pawn.new('black'), Pawn.new('black'), Pawn.new('black'), Pawn.new('black')],
+                           [' ', ' ', ' ', ' ', ' ', ' ', ' ', ' '],
+                           [' ', ' ', ' ', ' ', ' ', ' ', ' ', ' '],
+                           [' ', ' ', ' ', ' ', ' ', ' ', ' ', ' '],
+                           [' ', ' ', ' ', ' ', ' ', ' ', ' ', ' '],
+                           [Pawn.new('white'), Pawn.new('white'), Pawn.new('white'), Pawn.new('white'), Pawn.new('white'), Pawn.new('white'), Pawn.new('white'), Pawn.new('white')],
+                           [Rook.new('white'), ' ', ' ', ' ', King.new('white'), Bishop.new('white'), Knight.new('white'), Rook.new('white')]]
         gameboard.board[7][0].moved = true
         expect(game.castling(gameboard, player2)).to eql(false)
         $stdin = STDIN
@@ -705,17 +706,17 @@ RSpec.describe Gameplay do
         io2.puts 'k'
         io2.rewind
       end
-      
+
       it 'returns true when queenside rook has moved and player tries to castle kingside' do
         $stdin = io2
-        gameboard.board = [[Rook.new('black'), Knight.new('black'), Bishop.new('black'), Queen.new('black'), King.new('black'), ' ', ' ', Rook.new('black')], 
-        [Pawn.new('black'), Pawn.new('black'), Pawn.new('black'), Pawn.new('black'), Pawn.new('black'), Pawn.new('black'), Pawn.new('black'), Pawn.new('black')], 
-        [' ', ' ', ' ', ' ', ' ', ' ', ' ', ' '], 
-        [' ', ' ', ' ', ' ', ' ', ' ', ' ', ' '], 
-        [' ', ' ', ' ', ' ', ' ', ' ', ' ', ' '], 
-        [' ', ' ', ' ', ' ', ' ', ' ', ' ', ' '], 
-        [Pawn.new('white'), Pawn.new('white'), Pawn.new('white'), Pawn.new('white'), Pawn.new('white'), Pawn.new('white'), Pawn.new('white'), Pawn.new('white')], 
-        [Rook.new('white'), Knight.new('white'), Bishop.new('white'), Queen.new('white'), King.new('white'), Bishop.new('white'), Knight.new('white'), Rook.new('white')]]
+        gameboard.board = [[Rook.new('black'), Knight.new('black'), Bishop.new('black'), Queen.new('black'), King.new('black'), ' ', ' ', Rook.new('black')],
+                           [Pawn.new('black'), Pawn.new('black'), Pawn.new('black'), Pawn.new('black'), Pawn.new('black'), Pawn.new('black'), Pawn.new('black'), Pawn.new('black')],
+                           [' ', ' ', ' ', ' ', ' ', ' ', ' ', ' '],
+                           [' ', ' ', ' ', ' ', ' ', ' ', ' ', ' '],
+                           [' ', ' ', ' ', ' ', ' ', ' ', ' ', ' '],
+                           [' ', ' ', ' ', ' ', ' ', ' ', ' ', ' '],
+                           [Pawn.new('white'), Pawn.new('white'), Pawn.new('white'), Pawn.new('white'), Pawn.new('white'), Pawn.new('white'), Pawn.new('white'), Pawn.new('white')],
+                           [Rook.new('white'), Knight.new('white'), Bishop.new('white'), Queen.new('white'), King.new('white'), Bishop.new('white'), Knight.new('white'), Rook.new('white')]]
         gameboard.board[0][0].moved = true
         expect(game.castling(gameboard, player1)).to eql(true)
         $stdin = STDIN
@@ -727,17 +728,17 @@ RSpec.describe Gameplay do
         io4.puts 'q'
         io4.rewind
       end
-      
+
       it 'returns true when king has moved and white player tries to castle on queenside' do
         $stdin = io4
-        gameboard.board = [[Rook.new('black'), Knight.new('black'), Bishop.new('black'), Queen.new('black'), King.new('black'), Bishop.new('black'), Knight.new('black'), Rook.new('black')], 
-        [Pawn.new('black'), Pawn.new('black'), Pawn.new('black'), Pawn.new('black'), Pawn.new('black'), Pawn.new('black'), Pawn.new('black'), Pawn.new('black')], 
-        [' ', ' ', ' ', ' ', ' ', ' ', ' ', ' '], 
-        [' ', ' ', ' ', ' ', ' ', ' ', ' ', ' '], 
-        [' ', ' ', ' ', ' ', ' ', ' ', ' ', ' '], 
-        [' ', ' ', ' ', ' ', ' ', ' ', ' ', ' '], 
-        [Pawn.new('white'), Pawn.new('white'), Pawn.new('white'), Pawn.new('white'), Pawn.new('white'), Pawn.new('white'), Pawn.new('white'), Pawn.new('white')], 
-        [Rook.new('white'), ' ', ' ', ' ', King.new('white'), Bishop.new('white'), Knight.new('white'), Rook.new('white')]]
+        gameboard.board = [[Rook.new('black'), Knight.new('black'), Bishop.new('black'), Queen.new('black'), King.new('black'), Bishop.new('black'), Knight.new('black'), Rook.new('black')],
+                           [Pawn.new('black'), Pawn.new('black'), Pawn.new('black'), Pawn.new('black'), Pawn.new('black'), Pawn.new('black'), Pawn.new('black'), Pawn.new('black')],
+                           [' ', ' ', ' ', ' ', ' ', ' ', ' ', ' '],
+                           [' ', ' ', ' ', ' ', ' ', ' ', ' ', ' '],
+                           [' ', ' ', ' ', ' ', ' ', ' ', ' ', ' '],
+                           [' ', ' ', ' ', ' ', ' ', ' ', ' ', ' '],
+                           [Pawn.new('white'), Pawn.new('white'), Pawn.new('white'), Pawn.new('white'), Pawn.new('white'), Pawn.new('white'), Pawn.new('white'), Pawn.new('white')],
+                           [Rook.new('white'), ' ', ' ', ' ', King.new('white'), Bishop.new('white'), Knight.new('white'), Rook.new('white')]]
         gameboard.board[7][7].moved = true
         expect(game.castling(gameboard, player2)).to eql(true)
         $stdin = STDIN
@@ -749,38 +750,38 @@ RSpec.describe Gameplay do
         io4.puts 'q'
         io4.rewind
       end
-      
+
       it 'returns true when king has moved and white player tries to castle on queenside' do
         $stdin = io4
-        gameboard.board = [[' ', Knight.new('black'), Bishop.new('black'), Queen.new('black'), King.new('black'), Bishop.new('black'), Knight.new('black'), Rook.new('black')], 
-        [Pawn.new('black'), Pawn.new('black'), Pawn.new('black'), Pawn.new('black'), Pawn.new('black'), Pawn.new('black'), Pawn.new('black'), Pawn.new('black')], 
-        [' ', ' ', ' ', ' ', Rook.new('black'), ' ', ' ', ' '], 
-        [' ', ' ', ' ', ' ', ' ', ' ', ' ', ' '], 
-        [' ', ' ', ' ', ' ', ' ', ' ', ' ', ' '], 
-        [' ', ' ', ' ', ' ', ' ', ' ', ' ', ' '], 
-        [Pawn.new('white'), Pawn.new('white'), Pawn.new('white'), Pawn.new('white'), ' ', Pawn.new('white'), Pawn.new('white'), Pawn.new('white')], 
-        [Rook.new('white'), ' ', ' ', ' ', King.new('white'), Bishop.new('white'), Knight.new('white'), Rook.new('white')]]
+        gameboard.board = [[' ', Knight.new('black'), Bishop.new('black'), Queen.new('black'), King.new('black'), Bishop.new('black'), Knight.new('black'), Rook.new('black')],
+                           [Pawn.new('black'), Pawn.new('black'), Pawn.new('black'), Pawn.new('black'), Pawn.new('black'), Pawn.new('black'), Pawn.new('black'), Pawn.new('black')],
+                           [' ', ' ', ' ', ' ', Rook.new('black'), ' ', ' ', ' '],
+                           [' ', ' ', ' ', ' ', ' ', ' ', ' ', ' '],
+                           [' ', ' ', ' ', ' ', ' ', ' ', ' ', ' '],
+                           [' ', ' ', ' ', ' ', ' ', ' ', ' ', ' '],
+                           [Pawn.new('white'), Pawn.new('white'), Pawn.new('white'), Pawn.new('white'), ' ', Pawn.new('white'), Pawn.new('white'), Pawn.new('white')],
+                           [Rook.new('white'), ' ', ' ', ' ', King.new('white'), Bishop.new('white'), Knight.new('white'), Rook.new('white')]]
         expect(game.castling(gameboard, player2)).to eql(false)
         $stdin = STDIN
       end
-        
+
       before do
         allow($stdout).to receive(:puts)
         io4.puts 'y'
         io4.puts 'q'
         io4.rewind
       end
-      
+
       it 'returns false when one of the unoccupied spaces is under attack' do
         $stdin = io4
-        gameboard.board = [[Rook.new('black'), Knight.new('black'), ' ', Queen.new('black'), King.new('black'), Bishop.new('black'), Knight.new('black'), Rook.new('black')], 
-        [Pawn.new('black'), Pawn.new('black'), Pawn.new('black'), Pawn.new('black'), Pawn.new('black'), Pawn.new('black'), Pawn.new('black'), Pawn.new('black')], 
-        [' ', ' ', ' ', ' ', ' ', ' ', ' ', ' '], 
-        [' ', ' ', ' ', ' ', ' ', ' ', ' ', Bishop.new('black')], 
-        [' ', ' ', ' ', ' ', ' ', ' ', ' ', ' '], 
-        [' ', ' ', ' ', ' ', ' ', ' ', ' ', ' '], 
-        [Pawn.new('white'), Pawn.new('white'), Pawn.new('white'), Pawn.new('white'), ' ', Pawn.new('white'), Pawn.new('white'), Pawn.new('white')], 
-        [Rook.new('white'), ' ', ' ', ' ', King.new('white'), Bishop.new('white'), Knight.new('white'), Rook.new('white')]]
+        gameboard.board = [[Rook.new('black'), Knight.new('black'), ' ', Queen.new('black'), King.new('black'), Bishop.new('black'), Knight.new('black'), Rook.new('black')],
+                           [Pawn.new('black'), Pawn.new('black'), Pawn.new('black'), Pawn.new('black'), Pawn.new('black'), Pawn.new('black'), Pawn.new('black'), Pawn.new('black')],
+                           [' ', ' ', ' ', ' ', ' ', ' ', ' ', ' '],
+                           [' ', ' ', ' ', ' ', ' ', ' ', ' ', Bishop.new('black')],
+                           [' ', ' ', ' ', ' ', ' ', ' ', ' ', ' '],
+                           [' ', ' ', ' ', ' ', ' ', ' ', ' ', ' '],
+                           [Pawn.new('white'), Pawn.new('white'), Pawn.new('white'), Pawn.new('white'), ' ', Pawn.new('white'), Pawn.new('white'), Pawn.new('white')],
+                           [Rook.new('white'), ' ', ' ', ' ', King.new('white'), Bishop.new('white'), Knight.new('white'), Rook.new('white')]]
         gameboard.board[7][7].moved = true
         expect(game.castling(gameboard, player2)).to eql(false)
         $stdin = STDIN
@@ -792,17 +793,17 @@ RSpec.describe Gameplay do
         io2.puts 'k'
         io2.rewind
       end
-      
+
       it 'returns false when space is under attack for black player on kingside' do
         $stdin = io2
-        gameboard.board = [[Rook.new('black'), Knight.new('black'), Bishop.new('black'), Queen.new('black'), King.new('black'), ' ', ' ', Rook.new('black')], 
-        [Pawn.new('black'), Pawn.new('black'), Pawn.new('black'), Pawn.new('black'), Pawn.new('black'), Pawn.new('black'), Pawn.new('black'), Pawn.new('black')], 
-        [' ', ' ', ' ', ' ', ' ', ' ', ' ', Knight.new('white')], 
-        [' ', ' ', ' ', ' ', ' ', ' ', ' ', ' '], 
-        [' ', ' ', ' ', ' ', ' ', ' ', ' ', ' '], 
-        [' ', ' ', ' ', ' ', ' ', ' ', ' ', ' '], 
-        [Pawn.new('white'), Pawn.new('white'), Pawn.new('white'), Pawn.new('white'), Pawn.new('white'), Pawn.new('white'), Pawn.new('white'), Pawn.new('white')], 
-        [Rook.new('white'), ' ', Bishop.new('white'), Queen.new('white'), King.new('white'), Bishop.new('white'), Knight.new('white'), Rook.new('white')]]
+        gameboard.board = [[Rook.new('black'), Knight.new('black'), Bishop.new('black'), Queen.new('black'), King.new('black'), ' ', ' ', Rook.new('black')],
+                           [Pawn.new('black'), Pawn.new('black'), Pawn.new('black'), Pawn.new('black'), Pawn.new('black'), Pawn.new('black'), Pawn.new('black'), Pawn.new('black')],
+                           [' ', ' ', ' ', ' ', ' ', ' ', ' ', Knight.new('white')],
+                           [' ', ' ', ' ', ' ', ' ', ' ', ' ', ' '],
+                           [' ', ' ', ' ', ' ', ' ', ' ', ' ', ' '],
+                           [' ', ' ', ' ', ' ', ' ', ' ', ' ', ' '],
+                           [Pawn.new('white'), Pawn.new('white'), Pawn.new('white'), Pawn.new('white'), Pawn.new('white'), Pawn.new('white'), Pawn.new('white'), Pawn.new('white')],
+                           [Rook.new('white'), ' ', Bishop.new('white'), Queen.new('white'), King.new('white'), Bishop.new('white'), Knight.new('white'), Rook.new('white')]]
         expect(game.castling(gameboard, player1)).to eql(false)
         $stdin = STDIN
       end
@@ -859,363 +860,363 @@ RSpec.describe Gameboard do
     end
   end
 
-  describe '#check?' do 
+  describe '#check?' do
     let(:board) { Gameboard.new }
 
     context 'returns a boolean depending on if the King piece is in check' do
 
       it 'returns false on brand new board' do
-        board.board = [[Rook.new('black'), Knight.new('black'), Bishop.new('black'), Queen.new('black'), King.new('black'), Bishop.new('black'), Knight.new('black'), Rook.new('black')], 
-        [Pawn.new('black'), Pawn.new('black'), Pawn.new('black'), Pawn.new('black'), Pawn.new('black'), Pawn.new('black'), Pawn.new('black'), Pawn.new('black')], 
-        [' ', ' ', ' ', ' ', ' ', ' ', ' ', ' '], 
-        [' ', ' ', ' ', ' ', ' ', ' ', ' ', ' '], 
-        [' ', ' ', ' ', ' ', ' ', ' ', ' ', ' '], 
-        [' ', ' ', ' ', ' ', ' ', ' ', ' ', ' '], 
-        [Pawn.new('white'), Pawn.new('white'), Pawn.new('white'), Pawn.new('white'), Pawn.new('white'), Pawn.new('white'), Pawn.new('white'), Pawn.new('white')], 
-        [Rook.new('white'), Knight.new('white'), Bishop.new('white'), Queen.new('white'), King.new('white'), Bishop.new('white'), Knight.new('white'), Rook.new('white')]]
+        board.board = [[Rook.new('black'), Knight.new('black'), Bishop.new('black'), Queen.new('black'), King.new('black'), Bishop.new('black'), Knight.new('black'), Rook.new('black')],
+                       [Pawn.new('black'), Pawn.new('black'), Pawn.new('black'), Pawn.new('black'), Pawn.new('black'), Pawn.new('black'), Pawn.new('black'), Pawn.new('black')],
+                       [' ', ' ', ' ', ' ', ' ', ' ', ' ', ' '],
+                       [' ', ' ', ' ', ' ', ' ', ' ', ' ', ' '],
+                       [' ', ' ', ' ', ' ', ' ', ' ', ' ', ' '],
+                       [' ', ' ', ' ', ' ', ' ', ' ', ' ', ' '],
+                       [Pawn.new('white'), Pawn.new('white'), Pawn.new('white'), Pawn.new('white'), Pawn.new('white'), Pawn.new('white'), Pawn.new('white'), Pawn.new('white')],
+                       [Rook.new('white'), Knight.new('white'), Bishop.new('white'), Queen.new('white'), King.new('white'), Bishop.new('white'), Knight.new('white'), Rook.new('white')]]
         expect(board.check?('black')).to eql(false)
       end
 
       it 'returns true when the black King is in check from a rook' do
-        board.board = [[Rook.new('black'), Knight.new('black'), Bishop.new('black'), Queen.new('black'), King.new('black'), Bishop.new('black'), Knight.new('black'), Rook.new('black')], 
-        [Pawn.new('black'), Pawn.new('black'), Pawn.new('black'), Pawn.new('black'), ' ', Pawn.new('black'), Pawn.new('black'), Pawn.new('black')], 
-        [' ', ' ', ' ', ' ', ' ', ' ', ' ', ' '], 
-        [' ', ' ', ' ', ' ', ' ', ' ', ' ', ' '], 
-        [' ', ' ', ' ', ' ', ' ', ' ', ' ', ' '], 
-        [' ', ' ', ' ', ' ', Rook.new('white'), ' ', ' ', ' '], 
-        [Pawn.new('white'), Pawn.new('white'), Pawn.new('white'), Pawn.new('white'), Pawn.new('white'), Pawn.new('white'), Pawn.new('white'), Pawn.new('white')], 
-        [' ', Knight.new('white'), Bishop.new('white'), Queen.new('white'), King.new('white'), Bishop.new('white'), Knight.new('white'), Rook.new('white')]]
+        board.board = [[Rook.new('black'), Knight.new('black'), Bishop.new('black'), Queen.new('black'), King.new('black'), Bishop.new('black'), Knight.new('black'), Rook.new('black')],
+                       [Pawn.new('black'), Pawn.new('black'), Pawn.new('black'), Pawn.new('black'), ' ', Pawn.new('black'), Pawn.new('black'), Pawn.new('black')],
+                       [' ', ' ', ' ', ' ', ' ', ' ', ' ', ' '],
+                       [' ', ' ', ' ', ' ', ' ', ' ', ' ', ' '],
+                       [' ', ' ', ' ', ' ', ' ', ' ', ' ', ' '],
+                       [' ', ' ', ' ', ' ', Rook.new('white'), ' ', ' ', ' '],
+                       [Pawn.new('white'), Pawn.new('white'), Pawn.new('white'), Pawn.new('white'), Pawn.new('white'), Pawn.new('white'), Pawn.new('white'), Pawn.new('white')],
+                       [' ', Knight.new('white'), Bishop.new('white'), Queen.new('white'), King.new('white'), Bishop.new('white'), Knight.new('white'), Rook.new('white')]]
         expect(board.check?('black')).to eql(true)
       end
 
       it 'returns true when the black King is in check from a bishop' do
-        board.board = [[Rook.new('black'), Knight.new('black'), Bishop.new('black'), Queen.new('black'), King.new('black'), Bishop.new('black'), Knight.new('black'), Rook.new('black')], 
-        [Pawn.new('black'), Pawn.new('black'), Pawn.new('black'), ' ', ' ', Pawn.new('black'), Pawn.new('black'), Pawn.new('black')], 
-        [' ', ' ', Bishop.new('white'), ' ', ' ', ' ', ' ', ' '], 
-        [' ', ' ', ' ', ' ', ' ', ' ', ' ', ' '], 
-        [' ', ' ', ' ', ' ', ' ', ' ', ' ', ' '], 
-        [' ', ' ', ' ', ' ', ' ', ' ', ' ', ' '], 
-        [Pawn.new('white'), Pawn.new('white'), Pawn.new('white'), Pawn.new('white'), Pawn.new('white'), Pawn.new('white'), Pawn.new('white'), Pawn.new('white')], 
-        [Rook.new('white'), Knight.new('white'), ' ', Queen.new('white'), King.new('white'), Bishop.new('white'), Knight.new('white'), Rook.new('white')]]
+        board.board = [[Rook.new('black'), Knight.new('black'), Bishop.new('black'), Queen.new('black'), King.new('black'), Bishop.new('black'), Knight.new('black'), Rook.new('black')],
+                       [Pawn.new('black'), Pawn.new('black'), Pawn.new('black'), ' ', ' ', Pawn.new('black'), Pawn.new('black'), Pawn.new('black')],
+                       [' ', ' ', Bishop.new('white'), ' ', ' ', ' ', ' ', ' '],
+                       [' ', ' ', ' ', ' ', ' ', ' ', ' ', ' '],
+                       [' ', ' ', ' ', ' ', ' ', ' ', ' ', ' '],
+                       [' ', ' ', ' ', ' ', ' ', ' ', ' ', ' '],
+                       [Pawn.new('white'), Pawn.new('white'), Pawn.new('white'), Pawn.new('white'), Pawn.new('white'), Pawn.new('white'), Pawn.new('white'), Pawn.new('white')],
+                       [Rook.new('white'), Knight.new('white'), ' ', Queen.new('white'), King.new('white'), Bishop.new('white'), Knight.new('white'), Rook.new('white')]]
         expect(board.check?('black')).to eql(true)
       end
 
       it 'returns true when the black King is in check from a knight' do
-        board.board = [[Rook.new('black'), Knight.new('black'), Bishop.new('black'), Queen.new('black'), King.new('black'), Bishop.new('black'), Knight.new('black'), Rook.new('black')], 
-        [Pawn.new('black'), Pawn.new('black'), Pawn.new('black'), ' ', ' ', Pawn.new('black'), Pawn.new('black'), Pawn.new('black')], 
-        [' ', ' ', ' ', Knight.new('white'), ' ', ' ', ' ', ' '], 
-        [' ', ' ', ' ', ' ', ' ', ' ', ' ', ' '], 
-        [' ', ' ', ' ', ' ', ' ', ' ', ' ', ' '], 
-        [' ', ' ', ' ', ' ', ' ', ' ', ' ', ' '], 
-        [Pawn.new('white'), Pawn.new('white'), Pawn.new('white'), Pawn.new('white'), Pawn.new('white'), Pawn.new('white'), Pawn.new('white'), Pawn.new('white')], 
-        [Rook.new('white'), ' ', Bishop.new('white'), Queen.new('white'), King.new('white'), Bishop.new('white'), Knight.new('white'), Rook.new('white')]]
+        board.board = [[Rook.new('black'), Knight.new('black'), Bishop.new('black'), Queen.new('black'), King.new('black'), Bishop.new('black'), Knight.new('black'), Rook.new('black')],
+                       [Pawn.new('black'), Pawn.new('black'), Pawn.new('black'), ' ', ' ', Pawn.new('black'), Pawn.new('black'), Pawn.new('black')],
+                       [' ', ' ', ' ', Knight.new('white'), ' ', ' ', ' ', ' '],
+                       [' ', ' ', ' ', ' ', ' ', ' ', ' ', ' '],
+                       [' ', ' ', ' ', ' ', ' ', ' ', ' ', ' '],
+                       [' ', ' ', ' ', ' ', ' ', ' ', ' ', ' '],
+                       [Pawn.new('white'), Pawn.new('white'), Pawn.new('white'), Pawn.new('white'), Pawn.new('white'), Pawn.new('white'), Pawn.new('white'), Pawn.new('white')],
+                       [Rook.new('white'), ' ', Bishop.new('white'), Queen.new('white'), King.new('white'), Bishop.new('white'), Knight.new('white'), Rook.new('white')]]
         expect(board.check?('black')).to eql(true)
       end
 
       it 'returns true when the black King is in check from a Queen' do
-        board.board = [[Rook.new('black'), Knight.new('black'), Bishop.new('black'), Queen.new('black'), King.new('black'), Bishop.new('black'), Knight.new('black'), Rook.new('black')], 
-        [Pawn.new('black'), Pawn.new('black'), Pawn.new('black'), Pawn.new('black'), Pawn.new('black'), ' ', Pawn.new('black'), Pawn.new('black')], 
-        [' ', ' ', ' ', ' ', ' ', ' ', ' ', ' '], 
-        [' ', ' ', ' ', ' ', ' ', ' ', ' ', Queen.new('white')], 
-        [' ', ' ', ' ', ' ', ' ', ' ', ' ', ' '], 
-        [' ', ' ', ' ', ' ', ' ', ' ', ' ', ' '], 
-        [Pawn.new('white'), Pawn.new('white'), Pawn.new('white'), Pawn.new('white'), Pawn.new('white'), Pawn.new('white'), Pawn.new('white'), Pawn.new('white')], 
-        [Rook.new('white'), Knight.new('white'), Bishop.new('white'), ' ', King.new('white'), Bishop.new('white'), Knight.new('white'), Rook.new('white')]]
+        board.board = [[Rook.new('black'), Knight.new('black'), Bishop.new('black'), Queen.new('black'), King.new('black'), Bishop.new('black'), Knight.new('black'), Rook.new('black')],
+                       [Pawn.new('black'), Pawn.new('black'), Pawn.new('black'), Pawn.new('black'), Pawn.new('black'), ' ', Pawn.new('black'), Pawn.new('black')],
+                       [' ', ' ', ' ', ' ', ' ', ' ', ' ', ' '],
+                       [' ', ' ', ' ', ' ', ' ', ' ', ' ', Queen.new('white')],
+                       [' ', ' ', ' ', ' ', ' ', ' ', ' ', ' '],
+                       [' ', ' ', ' ', ' ', ' ', ' ', ' ', ' '],
+                       [Pawn.new('white'), Pawn.new('white'), Pawn.new('white'), Pawn.new('white'), Pawn.new('white'), Pawn.new('white'), Pawn.new('white'), Pawn.new('white')],
+                       [Rook.new('white'), Knight.new('white'), Bishop.new('white'), ' ', King.new('white'), Bishop.new('white'), Knight.new('white'), Rook.new('white')]]
         expect(board.check?('black')).to eql(true)
       end
 
       it 'returns true when the black King is in check from a pawn' do
-        board.board = [[Rook.new('black'), Knight.new('black'), Bishop.new('black'), Queen.new('black'), King.new('black'), Bishop.new('black'), Knight.new('black'), Rook.new('black')], 
-        [Pawn.new('black'), Pawn.new('black'), Pawn.new('black'), Pawn.new('white'), Pawn.new('black'), ' ', Pawn.new('black'), Pawn.new('black')], 
-        [' ', ' ', ' ', ' ', ' ', ' ', ' ', ' '], 
-        [' ', ' ', ' ', ' ', ' ', ' ', ' ', ' '], 
-        [' ', ' ', ' ', ' ', ' ', ' ', ' ', ' '], 
-        [' ', ' ', ' ', ' ', ' ', ' ', ' ', ' '], 
-        [Pawn.new('white'), Pawn.new('white'), ' ', Pawn.new('white'), Pawn.new('white'), Pawn.new('white'), Pawn.new('white'), Pawn.new('white')], 
-        [Rook.new('white'), Knight.new('white'), Bishop.new('white'), ' ', King.new('white'), Bishop.new('white'), Knight.new('white'), Rook.new('white')]]
+        board.board = [[Rook.new('black'), Knight.new('black'), Bishop.new('black'), Queen.new('black'), King.new('black'), Bishop.new('black'), Knight.new('black'), Rook.new('black')],
+                       [Pawn.new('black'), Pawn.new('black'), Pawn.new('black'), Pawn.new('white'), Pawn.new('black'), ' ', Pawn.new('black'), Pawn.new('black')],
+                       [' ', ' ', ' ', ' ', ' ', ' ', ' ', ' '],
+                       [' ', ' ', ' ', ' ', ' ', ' ', ' ', ' '],
+                       [' ', ' ', ' ', ' ', ' ', ' ', ' ', ' '],
+                       [' ', ' ', ' ', ' ', ' ', ' ', ' ', ' '],
+                       [Pawn.new('white'), Pawn.new('white'), ' ', Pawn.new('white'), Pawn.new('white'), Pawn.new('white'), Pawn.new('white'), Pawn.new('white')],
+                       [Rook.new('white'), Knight.new('white'), Bishop.new('white'), ' ', King.new('white'), Bishop.new('white'), Knight.new('white'), Rook.new('white')]]
         expect(board.check?('black')).to eql(true)
       end
 
       it 'returns false when the black King is not in danger' do
-        board.board = [[Rook.new('black'), Knight.new('black'), Bishop.new('black'), Queen.new('black'), King.new('black'), Bishop.new('black'), Knight.new('black'), Rook.new('black')], 
-        [Pawn.new('black'), Pawn.new('black'), Pawn.new('black'), Pawn.new('black'), Pawn.new('black'), ' ', Pawn.new('black'), Pawn.new('black')], 
-        [' ', ' ', ' ', ' ', ' ', ' ', ' ', ' '], 
-        [' ', ' ', ' ', ' ', ' ', ' ', ' ', ' '], 
-        [' ', ' ', ' ', ' ', ' ', ' ', ' ', ' '], 
-        [' ', ' ', ' ', ' ', ' ', ' ', ' ', ' '], 
-        [Pawn.new('white'), Pawn.new('white'), Pawn.new('white'), Pawn.new('white'), Pawn.new('white'), Pawn.new('white'), Pawn.new('white'), Pawn.new('white')], 
-        [Rook.new('white'), Knight.new('white'), Bishop.new('white'), ' ', King.new('white'), Bishop.new('white'), Knight.new('white'), Rook.new('white')]]
+        board.board = [[Rook.new('black'), Knight.new('black'), Bishop.new('black'), Queen.new('black'), King.new('black'), Bishop.new('black'), Knight.new('black'), Rook.new('black')],
+                       [Pawn.new('black'), Pawn.new('black'), Pawn.new('black'), Pawn.new('black'), Pawn.new('black'), ' ', Pawn.new('black'), Pawn.new('black')],
+                       [' ', ' ', ' ', ' ', ' ', ' ', ' ', ' '],
+                       [' ', ' ', ' ', ' ', ' ', ' ', ' ', ' '],
+                       [' ', ' ', ' ', ' ', ' ', ' ', ' ', ' '],
+                       [' ', ' ', ' ', ' ', ' ', ' ', ' ', ' '],
+                       [Pawn.new('white'), Pawn.new('white'), Pawn.new('white'), Pawn.new('white'), Pawn.new('white'), Pawn.new('white'), Pawn.new('white'), Pawn.new('white')],
+                       [Rook.new('white'), Knight.new('white'), Bishop.new('white'), ' ', King.new('white'), Bishop.new('white'), Knight.new('white'), Rook.new('white')]]
         expect(board.check?('black')).to eql(false)
       end
 
       it 'returns false when the black King is not in danger' do
-        board.board = [[Rook.new('black'), ' ', Bishop.new('black'), Queen.new('black'), King.new('black'), Bishop.new('black'), Knight.new('black'), Rook.new('black')], 
-        [' ', Pawn.new('black'), Pawn.new('black'), Pawn.new('black'), Pawn.new('black'), ' ', Pawn.new('black'), Pawn.new('black')], 
-        [Pawn.new('black'), ' ', Knight.new('black'), ' ', ' ', ' ', ' ', ' '], 
-        [Pawn.new('white'), ' ', ' ', ' ', ' ', ' ', ' ', ' '], 
-        [' ', ' ', ' ', Rook.new('white'), ' ', ' ', ' ', ' '], 
-        [' ', ' ', ' ', ' ', ' ', ' ', ' ', ' '], 
-        [' ', Pawn.new('white'), Pawn.new('white'), Pawn.new('white'), Pawn.new('white'), Pawn.new('white'), Pawn.new('white'), Pawn.new('white')], 
-        [' ', Knight.new('white'), Bishop.new('white'), ' ', King.new('white'), Bishop.new('white'), Knight.new('white'), Rook.new('white')]]
+        board.board = [[Rook.new('black'), ' ', Bishop.new('black'), Queen.new('black'), King.new('black'), Bishop.new('black'), Knight.new('black'), Rook.new('black')],
+                       [' ', Pawn.new('black'), Pawn.new('black'), Pawn.new('black'), Pawn.new('black'), ' ', Pawn.new('black'), Pawn.new('black')],
+                       [Pawn.new('black'), ' ', Knight.new('black'), ' ', ' ', ' ', ' ', ' '],
+                       [Pawn.new('white'), ' ', ' ', ' ', ' ', ' ', ' ', ' '],
+                       [' ', ' ', ' ', Rook.new('white'), ' ', ' ', ' ', ' '],
+                       [' ', ' ', ' ', ' ', ' ', ' ', ' ', ' '],
+                       [' ', Pawn.new('white'), Pawn.new('white'), Pawn.new('white'), Pawn.new('white'), Pawn.new('white'), Pawn.new('white'), Pawn.new('white')],
+                       [' ', Knight.new('white'), Bishop.new('white'), ' ', King.new('white'), Bishop.new('white'), Knight.new('white'), Rook.new('white')]]
         expect(board.check?('black')).to eql(false)
       end
 
       it 'returns true when the white King is in check from a rook' do
-        board.board = [[' ', Knight.new('black'), Bishop.new('black'), Queen.new('black'), King.new('black'), Bishop.new('black'), Knight.new('black'), Rook.new('black')], 
-        [Pawn.new('black'), Pawn.new('black'), Pawn.new('black'), Pawn.new('white'), Pawn.new('black'), ' ', Pawn.new('black'), Pawn.new('black')], 
-        [' ', ' ', ' ', ' ', ' ', ' ', ' ', ' '], 
-        [' ', ' ', ' ', ' ', Rook.new('black'), ' ', ' ', ' '], 
-        [' ', ' ', ' ', ' ', ' ', ' ', ' ', ' '], 
-        [' ', ' ', ' ', ' ', ' ', ' ', ' ', ' '], 
-        [Pawn.new('white'), Pawn.new('white'), ' ', Pawn.new('white'), ' ', Pawn.new('white'), Pawn.new('white'), Pawn.new('white')], 
-        [Rook.new('white'), Knight.new('white'), Bishop.new('white'), ' ', King.new('white'), Bishop.new('white'), Knight.new('white'), Rook.new('white')]]
+        board.board = [[' ', Knight.new('black'), Bishop.new('black'), Queen.new('black'), King.new('black'), Bishop.new('black'), Knight.new('black'), Rook.new('black')],
+                       [Pawn.new('black'), Pawn.new('black'), Pawn.new('black'), Pawn.new('white'), Pawn.new('black'), ' ', Pawn.new('black'), Pawn.new('black')],
+                       [' ', ' ', ' ', ' ', ' ', ' ', ' ', ' '],
+                       [' ', ' ', ' ', ' ', Rook.new('black'), ' ', ' ', ' '],
+                       [' ', ' ', ' ', ' ', ' ', ' ', ' ', ' '],
+                       [' ', ' ', ' ', ' ', ' ', ' ', ' ', ' '],
+                       [Pawn.new('white'), Pawn.new('white'), ' ', Pawn.new('white'), ' ', Pawn.new('white'), Pawn.new('white'), Pawn.new('white')],
+                       [Rook.new('white'), Knight.new('white'), Bishop.new('white'), ' ', King.new('white'), Bishop.new('white'), Knight.new('white'), Rook.new('white')]]
         expect(board.check?('white')).to eql(true)
       end
 
       it 'returns true when the white King is in check from a knight' do
-        board.board = [[Rook.new('black'), ' ', Bishop.new('black'), Queen.new('black'), King.new('black'), Bishop.new('black'), Knight.new('black'), Rook.new('black')], 
-        [Pawn.new('black'), Pawn.new('black'), Pawn.new('black'), Pawn.new('white'), Pawn.new('black'), ' ', Pawn.new('black'), Pawn.new('black')], 
-        [' ', ' ', ' ', ' ', ' ', ' ', ' ', ' '], 
-        [' ', ' ', ' ', ' ', ' ', ' ', ' ', ' '], 
-        [' ', ' ', ' ', ' ', ' ', ' ', ' ', ' '], 
-        [' ', ' ', ' ', Knight.new('black'), ' ', ' ', ' ', ' '], 
-        [Pawn.new('white'), Pawn.new('white'), ' ', Pawn.new('white'), Pawn.new('white'), Pawn.new('white'), Pawn.new('white'), Pawn.new('white')], 
-        [Rook.new('white'), Knight.new('white'), Bishop.new('white'), ' ', King.new('white'), Bishop.new('white'), Knight.new('white'), Rook.new('white')]]
+        board.board = [[Rook.new('black'), ' ', Bishop.new('black'), Queen.new('black'), King.new('black'), Bishop.new('black'), Knight.new('black'), Rook.new('black')],
+                       [Pawn.new('black'), Pawn.new('black'), Pawn.new('black'), Pawn.new('white'), Pawn.new('black'), ' ', Pawn.new('black'), Pawn.new('black')],
+                       [' ', ' ', ' ', ' ', ' ', ' ', ' ', ' '],
+                       [' ', ' ', ' ', ' ', ' ', ' ', ' ', ' '],
+                       [' ', ' ', ' ', ' ', ' ', ' ', ' ', ' '],
+                       [' ', ' ', ' ', Knight.new('black'), ' ', ' ', ' ', ' '],
+                       [Pawn.new('white'), Pawn.new('white'), ' ', Pawn.new('white'), Pawn.new('white'), Pawn.new('white'), Pawn.new('white'), Pawn.new('white')],
+                       [Rook.new('white'), Knight.new('white'), Bishop.new('white'), ' ', King.new('white'), Bishop.new('white'), Knight.new('white'), Rook.new('white')]]
         expect(board.check?('white')).to eql(true)
       end
 
       it 'returns true when the white King is in check from a bishop' do
-        board.board = [[Rook.new('black'), Knight.new('black'), ' ', Queen.new('black'), King.new('black'), Bishop.new('black'), Knight.new('black'), Rook.new('black')], 
-        [Pawn.new('black'), Pawn.new('black'), Pawn.new('black'), Pawn.new('white'), Pawn.new('black'), ' ', Pawn.new('black'), Pawn.new('black')], 
-        [' ', ' ', ' ', ' ', ' ', ' ', ' ', ' '], 
-        [Bishop.new('black'), ' ', ' ', ' ', ' ', ' ', ' ', ' '], 
-        [' ', ' ', ' ', ' ', ' ', ' ', ' ', ' '], 
-        [' ', ' ', ' ', ' ', ' ', ' ', ' ', ' '], 
-        [Pawn.new('white'), Pawn.new('white'), Pawn.new('white'), ' ', Pawn.new('white'), Pawn.new('white'), Pawn.new('white'), Pawn.new('white')], 
-        [Rook.new('white'), Knight.new('white'), Bishop.new('white'), Queen.new('white'), King.new('white'), Bishop.new('white'), Knight.new('white'), Rook.new('white')]]
+        board.board = [[Rook.new('black'), Knight.new('black'), ' ', Queen.new('black'), King.new('black'), Bishop.new('black'), Knight.new('black'), Rook.new('black')],
+                       [Pawn.new('black'), Pawn.new('black'), Pawn.new('black'), Pawn.new('white'), Pawn.new('black'), ' ', Pawn.new('black'), Pawn.new('black')],
+                       [' ', ' ', ' ', ' ', ' ', ' ', ' ', ' '],
+                       [Bishop.new('black'), ' ', ' ', ' ', ' ', ' ', ' ', ' '],
+                       [' ', ' ', ' ', ' ', ' ', ' ', ' ', ' '],
+                       [' ', ' ', ' ', ' ', ' ', ' ', ' ', ' '],
+                       [Pawn.new('white'), Pawn.new('white'), Pawn.new('white'), ' ', Pawn.new('white'), Pawn.new('white'), Pawn.new('white'), Pawn.new('white')],
+                       [Rook.new('white'), Knight.new('white'), Bishop.new('white'), Queen.new('white'), King.new('white'), Bishop.new('white'), Knight.new('white'), Rook.new('white')]]
         expect(board.check?('white')).to eql(true)
       end
 
       it 'returns true when the white King is in check from a Queen' do
-        board.board = [[Rook.new('black'), Knight.new('black'), Bishop.new('black'), ' ', King.new('black'), Bishop.new('black'), Knight.new('black'), Rook.new('black')], 
-        [Pawn.new('black'), Pawn.new('black'), Pawn.new('black'), Pawn.new('white'), Pawn.new('black'), ' ', Pawn.new('black'), Pawn.new('black')], 
-        [' ', ' ', ' ', ' ', ' ', ' ', ' ', ' '], 
-        [Queen.new('black'), ' ', ' ', ' ', ' ', ' ', ' ', ' '], 
-        [' ', ' ', ' ', ' ', ' ', ' ', ' ', ' '], 
-        [' ', ' ', ' ', ' ', ' ', ' ', ' ', ' '], 
-        [Pawn.new('white'), Pawn.new('white'), Pawn.new('white'), ' ', Pawn.new('white'), Pawn.new('white'), Pawn.new('white'), Pawn.new('white')], 
-        [Rook.new('white'), Knight.new('white'), Bishop.new('white'), Queen.new('white'), King.new('white'), Bishop.new('white'), Knight.new('white'), Rook.new('white')]]
+        board.board = [[Rook.new('black'), Knight.new('black'), Bishop.new('black'), ' ', King.new('black'), Bishop.new('black'), Knight.new('black'), Rook.new('black')],
+                       [Pawn.new('black'), Pawn.new('black'), Pawn.new('black'), Pawn.new('white'), Pawn.new('black'), ' ', Pawn.new('black'), Pawn.new('black')],
+                       [' ', ' ', ' ', ' ', ' ', ' ', ' ', ' '],
+                       [Queen.new('black'), ' ', ' ', ' ', ' ', ' ', ' ', ' '],
+                       [' ', ' ', ' ', ' ', ' ', ' ', ' ', ' '],
+                       [' ', ' ', ' ', ' ', ' ', ' ', ' ', ' '],
+                       [Pawn.new('white'), Pawn.new('white'), Pawn.new('white'), ' ', Pawn.new('white'), Pawn.new('white'), Pawn.new('white'), Pawn.new('white')],
+                       [Rook.new('white'), Knight.new('white'), Bishop.new('white'), Queen.new('white'), King.new('white'), Bishop.new('white'), Knight.new('white'), Rook.new('white')]]
         expect(board.check?('white')).to eql(true)
       end
 
       it 'returns true when the white King is in check from a pawn' do
-        board.board = [[Rook.new('black'), Knight.new('black'), Bishop.new('black'), Queen.new('black'), King.new('black'), Bishop.new('black'), Knight.new('black'), Rook.new('black')], 
-        [Pawn.new('black'), Pawn.new('black'), ' ', Pawn.new('white'), Pawn.new('black'), ' ', Pawn.new('black'), Pawn.new('black')], 
-        [' ', ' ', ' ', ' ', ' ', ' ', ' ', ' '], 
-        [' ', ' ', ' ', ' ', ' ', ' ', ' ', ' '], 
-        [' ', ' ', ' ', ' ', ' ', ' ', ' ', ' '], 
-        [' ', ' ', ' ', ' ', ' ', ' ', ' ', ' '], 
-        [Pawn.new('white'), Pawn.new('white'), Pawn.new('white'), Pawn.new('black'), Pawn.new('white'), Pawn.new('white'), Pawn.new('white'), Pawn.new('white')], 
-        [Rook.new('white'), Knight.new('white'), Bishop.new('white'), Queen.new('white'), King.new('white'), Bishop.new('white'), Knight.new('white'), Rook.new('white')]]
+        board.board = [[Rook.new('black'), Knight.new('black'), Bishop.new('black'), Queen.new('black'), King.new('black'), Bishop.new('black'), Knight.new('black'), Rook.new('black')],
+                       [Pawn.new('black'), Pawn.new('black'), ' ', Pawn.new('white'), Pawn.new('black'), ' ', Pawn.new('black'), Pawn.new('black')],
+                       [' ', ' ', ' ', ' ', ' ', ' ', ' ', ' '],
+                       [' ', ' ', ' ', ' ', ' ', ' ', ' ', ' '],
+                       [' ', ' ', ' ', ' ', ' ', ' ', ' ', ' '],
+                       [' ', ' ', ' ', ' ', ' ', ' ', ' ', ' '],
+                       [Pawn.new('white'), Pawn.new('white'), Pawn.new('white'), Pawn.new('black'), Pawn.new('white'), Pawn.new('white'), Pawn.new('white'), Pawn.new('white')],
+                       [Rook.new('white'), Knight.new('white'), Bishop.new('white'), Queen.new('white'), King.new('white'), Bishop.new('white'), Knight.new('white'), Rook.new('white')]]
         expect(board.check?('white')).to eql(true)
       end
     end
   end
 
-  describe '#checkmate?' do 
+  describe '#checkmate?' do
     let(:board) { Gameboard.new }
 
     context 'returns a boolean depending on if the King piece is in checkmate' do
 
       it 'returns true when the black King is in checkmate from a singular piece' do
-        board.board = [[' ', Knight.new('black'), Bishop.new('black'), Rook.new('black'), King.new('black'), Rook.new('black'), Bishop.new('black'), ' '], 
-        [Pawn.new('black'), Pawn.new('black'), Pawn.new('black'), Pawn.new('black'), ' ', Pawn.new('black'), Pawn.new('black'), Pawn.new('black')], 
-        [' ', ' ', ' ', ' ', ' ', ' ', ' ', ' '], 
-        [' ', ' ', ' ', ' ', ' ', ' ', ' ', ' '], 
-        [' ', ' ', ' ', ' ', ' ', ' ', ' ', ' '], 
-        [' ', ' ', ' ', ' ', Rook.new('white'), ' ', ' ', ' '], 
-        [Pawn.new('white'), Pawn.new('white'), Pawn.new('white'), Pawn.new('white'), Pawn.new('white'), Pawn.new('white'), Pawn.new('white'), Pawn.new('white')], 
-        [' ', Knight.new('white'), Bishop.new('white'), Queen.new('white'), King.new('white'), Bishop.new('white'), Knight.new('white'), Rook.new('white')]]
+        board.board = [[' ', Knight.new('black'), Bishop.new('black'), Rook.new('black'), King.new('black'), Rook.new('black'), Bishop.new('black'), ' '],
+                       [Pawn.new('black'), Pawn.new('black'), Pawn.new('black'), Pawn.new('black'), ' ', Pawn.new('black'), Pawn.new('black'), Pawn.new('black')],
+                       [' ', ' ', ' ', ' ', ' ', ' ', ' ', ' '],
+                       [' ', ' ', ' ', ' ', ' ', ' ', ' ', ' '],
+                       [' ', ' ', ' ', ' ', ' ', ' ', ' ', ' '],
+                       [' ', ' ', ' ', ' ', Rook.new('white'), ' ', ' ', ' '],
+                       [Pawn.new('white'), Pawn.new('white'), Pawn.new('white'), Pawn.new('white'), Pawn.new('white'), Pawn.new('white'), Pawn.new('white'), Pawn.new('white')],
+                       [' ', Knight.new('white'), Bishop.new('white'), Queen.new('white'), King.new('white'), Bishop.new('white'), Knight.new('white'), Rook.new('white')]]
         expect(board.checkmate?('black')).to eql(true)
       end
 
       it 'returns true when the black King is in checkmate from a two pieces' do
-        board.board = [[Knight.new('black'), Rook.new('black'), ' ', Pawn.new('black'), King.new('black'), Rook.new('black'), ' ', ' '], 
-        [Pawn.new('black'), Pawn.new('black'), ' ', ' ', ' ', Pawn.new('black'), Pawn.new('black'), Pawn.new('black')], 
-        [' ', ' ', ' ', ' ', ' ', ' ', ' ', ' '], 
-        [' ', Bishop.new('white'), ' ', ' ', ' ', ' ', ' ', ' '], 
-        [' ', ' ', ' ', ' ', ' ', ' ', ' ', ' '], 
-        [' ', ' ', ' ', ' ', Rook.new('white'), ' ', ' ', ' '], 
-        [Pawn.new('white'), Pawn.new('white'), Pawn.new('white'), Pawn.new('white'), Pawn.new('white'), Pawn.new('white'), Pawn.new('white'), Pawn.new('white')], 
-        [' ', Knight.new('white'), ' ', Queen.new('white'), King.new('white'), Bishop.new('white'), Knight.new('white'), Rook.new('white')]]
+        board.board = [[Knight.new('black'), Rook.new('black'), ' ', Pawn.new('black'), King.new('black'), Rook.new('black'), ' ', ' '],
+                       [Pawn.new('black'), Pawn.new('black'), ' ', ' ', ' ', Pawn.new('black'), Pawn.new('black'), Pawn.new('black')],
+                       [' ', ' ', ' ', ' ', ' ', ' ', ' ', ' '],
+                       [' ', Bishop.new('white'), ' ', ' ', ' ', ' ', ' ', ' '],
+                       [' ', ' ', ' ', ' ', ' ', ' ', ' ', ' '],
+                       [' ', ' ', ' ', ' ', Rook.new('white'), ' ', ' ', ' '],
+                       [Pawn.new('white'), Pawn.new('white'), Pawn.new('white'), Pawn.new('white'), Pawn.new('white'), Pawn.new('white'), Pawn.new('white'), Pawn.new('white')],
+                       [' ', Knight.new('white'), ' ', Queen.new('white'), King.new('white'), Bishop.new('white'), Knight.new('white'), Rook.new('white')]]
         expect(board.checkmate?('black')).to eql(true)
       end
 
       it 'returns true when the black King is in checkmate from a three pieces' do
-        board.board = [[Knight.new('black'), Rook.new('black'), ' ', ' ', King.new('black'), Bishop.new('black'), Knight.new('black'), Rook.new('black')], 
-        [Pawn.new('black'),  Knight.new('white'), Pawn.new('black'), ' ', ' ', Pawn.new('black'), Pawn.new('black'), Pawn.new('black')], 
-        [' ', ' ', ' ', ' ', ' ', ' ', ' ', ' '], 
-        [' ', Bishop.new('white'), ' ', ' ', ' ', ' ', ' ', ' '], 
-        [' ', ' ', ' ', ' ', ' ', ' ', ' ', ' '], 
-        [' ', ' ', ' ', ' ', Rook.new('white'), ' ', ' ', ' '], 
-        [Pawn.new('white'), Pawn.new('white'), Pawn.new('white'), Pawn.new('white'), Pawn.new('white'), Pawn.new('white'), Pawn.new('white'), Pawn.new('white')], 
-        [' ', Knight.new('white'), ' ', Queen.new('white'), King.new('white'), Bishop.new('white'), ' ', Rook.new('white')]]
+        board.board = [[Knight.new('black'), Rook.new('black'), ' ', ' ', King.new('black'), Bishop.new('black'), Knight.new('black'), Rook.new('black')],
+                       [Pawn.new('black'),  Knight.new('white'), Pawn.new('black'), ' ', ' ', Pawn.new('black'), Pawn.new('black'), Pawn.new('black')],
+                       [' ', ' ', ' ', ' ', ' ', ' ', ' ', ' '],
+                       [' ', Bishop.new('white'), ' ', ' ', ' ', ' ', ' ', ' '],
+                       [' ', ' ', ' ', ' ', ' ', ' ', ' ', ' '],
+                       [' ', ' ', ' ', ' ', Rook.new('white'), ' ', ' ', ' '],
+                       [Pawn.new('white'), Pawn.new('white'), Pawn.new('white'), Pawn.new('white'), Pawn.new('white'), Pawn.new('white'), Pawn.new('white'), Pawn.new('white')],
+                       [' ', Knight.new('white'), ' ', Queen.new('white'), King.new('white'), Bishop.new('white'), ' ', Rook.new('white')]]
         expect(board.checkmate?('black')).to eql(true)
       end
 
       it 'returns true when the black King is in checkmate from a three pieces (in a different location)' do
-        board.board = [[Rook.new('black'), Knight.new('black'), Bishop.new('black'), Queen.new('black'), ' ', Bishop.new('black'), Knight.new('black'), Rook.new('black')], 
-        [Pawn.new('black'), Pawn.new('black'), Pawn.new('black'), Pawn.new('black'), Pawn.new('black'), Pawn.new('black'), Pawn.new('black'), Pawn.new('black')], 
-        [' ', ' ', ' ', ' ', ' ', ' ', ' ', ' '], 
-        [Rook.new('white'), ' ', ' ', ' ', ' ', ' ', ' ', ' '], 
-        [' ', ' ', ' ', ' ', King.new('black'), ' ', ' ', Queen.new('white')], 
-        [' ', ' ', ' ', Pawn.new('white'), ' ', ' ', ' ', Rook.new('white')], 
-        [' ', Pawn.new('white'), Pawn.new('white'), Pawn.new('white'), Pawn.new('white'), Pawn.new('white'), Pawn.new('white'), Pawn.new('white')], 
-        [' ', Knight.new('white'), Bishop.new('white'), ' ', King.new('white'), Bishop.new('white'), Knight.new('white'), ' ']]
+        board.board = [[Rook.new('black'), Knight.new('black'), Bishop.new('black'), Queen.new('black'), ' ', Bishop.new('black'), Knight.new('black'), Rook.new('black')],
+                       [Pawn.new('black'), Pawn.new('black'), Pawn.new('black'), Pawn.new('black'), Pawn.new('black'), Pawn.new('black'), Pawn.new('black'), Pawn.new('black')],
+                       [' ', ' ', ' ', ' ', ' ', ' ', ' ', ' '],
+                       [Rook.new('white'), ' ', ' ', ' ', ' ', ' ', ' ', ' '],
+                       [' ', ' ', ' ', ' ', King.new('black'), ' ', ' ', Queen.new('white')],
+                       [' ', ' ', ' ', Pawn.new('white'), ' ', ' ', ' ', Rook.new('white')],
+                       [' ', Pawn.new('white'), Pawn.new('white'), Pawn.new('white'), Pawn.new('white'), Pawn.new('white'), Pawn.new('white'), Pawn.new('white')],
+                       [' ', Knight.new('white'), Bishop.new('white'), ' ', King.new('white'), Bishop.new('white'), Knight.new('white'), ' ']]
         expect(board.checkmate?('black')).to eql(true)
       end
 
       it 'returns false when the black King is only in check, not checkmate' do
-        board.board = [[Rook.new('black'), Knight.new('black'), Bishop.new('black'), Queen.new('black'), King.new('black'), Bishop.new('black'), Knight.new('black'), Rook.new('black')], 
-        [Pawn.new('black'), Pawn.new('black'), ' ', Pawn.new('black'), ' ', ' ', Pawn.new('black'), Pawn.new('black')], 
-        [' ', ' ', ' ', ' ', ' ', ' ', ' ', ' '], 
-        [' ', ' ', ' ', ' ', ' ', ' ', ' ', ' '], 
-        [' ', ' ', ' ', ' ', ' ', ' ', ' ', ' '], 
-        [' ', ' ', ' ', ' ', Rook.new('white'), ' ', ' ', ' '], 
-        [Pawn.new('white'), Pawn.new('white'), Pawn.new('white'), Pawn.new('black'), Pawn.new('white'), Pawn.new('white'), Pawn.new('white'), Pawn.new('white')], 
-        [' ', Knight.new('white'), Bishop.new('white'), Queen.new('white'), King.new('white'), Bishop.new('white'), Knight.new('white'), Rook.new('white')]]
+        board.board = [[Rook.new('black'), Knight.new('black'), Bishop.new('black'), Queen.new('black'), King.new('black'), Bishop.new('black'), Knight.new('black'), Rook.new('black')],
+                       [Pawn.new('black'), Pawn.new('black'), ' ', Pawn.new('black'), ' ', ' ', Pawn.new('black'), Pawn.new('black')],
+                       [' ', ' ', ' ', ' ', ' ', ' ', ' ', ' '],
+                       [' ', ' ', ' ', ' ', ' ', ' ', ' ', ' '],
+                       [' ', ' ', ' ', ' ', ' ', ' ', ' ', ' '],
+                       [' ', ' ', ' ', ' ', Rook.new('white'), ' ', ' ', ' '],
+                       [Pawn.new('white'), Pawn.new('white'), Pawn.new('white'), Pawn.new('black'), Pawn.new('white'), Pawn.new('white'), Pawn.new('white'), Pawn.new('white')],
+                       [' ', Knight.new('white'), Bishop.new('white'), Queen.new('white'), King.new('white'), Bishop.new('white'), Knight.new('white'), Rook.new('white')]]
         expect(board.checkmate?('black')).to eql(false)
       end
 
       it 'returns false when the black King is only in check, not checkmate (case2)' do
-        board.board = [[Rook.new('black'), Knight.new('black'), Bishop.new('black'), Queen.new('black'), King.new('black'), ' ', Knight.new('black'), Rook.new('black')], 
-        [Pawn.new('black'), Pawn.new('black'), Pawn.new('black'), ' ', Pawn.new('black'), Pawn.new('black'), Pawn.new('black'), Pawn.new('black')], 
-        [' ', ' ', ' ', ' ', ' ', ' ', ' ', ' '], 
-        [' ', ' ', ' ', ' ', ' ', ' ', ' ', ' '], 
-        [Bishop.new('white'), ' ', ' ', ' ', ' ', ' ', ' ', ' '], 
-        [' ', ' ', ' ', ' ', ' ', ' ', ' ', ' '], 
-        [Pawn.new('white'), Pawn.new('white'), Pawn.new('white'), Pawn.new('white'), Pawn.new('white'), Pawn.new('white'), Pawn.new('white'), Pawn.new('white')], 
-        [Rook.new('white'), Knight.new('white'), ' ', Queen.new('white'), King.new('white'), Bishop.new('white'), Knight.new('white'), Rook.new('white')]]
+        board.board = [[Rook.new('black'), Knight.new('black'), Bishop.new('black'), Queen.new('black'), King.new('black'), ' ', Knight.new('black'), Rook.new('black')],
+                       [Pawn.new('black'), Pawn.new('black'), Pawn.new('black'), ' ', Pawn.new('black'), Pawn.new('black'), Pawn.new('black'), Pawn.new('black')],
+                       [' ', ' ', ' ', ' ', ' ', ' ', ' ', ' '],
+                       [' ', ' ', ' ', ' ', ' ', ' ', ' ', ' '],
+                       [Bishop.new('white'), ' ', ' ', ' ', ' ', ' ', ' ', ' '],
+                       [' ', ' ', ' ', ' ', ' ', ' ', ' ', ' '],
+                       [Pawn.new('white'), Pawn.new('white'), Pawn.new('white'), Pawn.new('white'), Pawn.new('white'), Pawn.new('white'), Pawn.new('white'), Pawn.new('white')],
+                       [Rook.new('white'), Knight.new('white'), ' ', Queen.new('white'), King.new('white'), Bishop.new('white'), Knight.new('white'), Rook.new('white')]]
         expect(board.checkmate?('black')).to eql(false)
       end
 
       it 'returns false when King can eliminate threat to move out of check' do
-        board.board = [[Rook.new('black'), Knight.new('black'), Bishop.new('black'), Queen.new('black'), King.new('black'), Bishop.new('black'), Knight.new('black'), Rook.new('black')], 
-        [Pawn.new('black'), Pawn.new('black'), Pawn.new('black'), Pawn.new('black'), Pawn.new('black'), Pawn.new('white'), Pawn.new('black'), Pawn.new('black')], 
-        [' ', ' ', ' ', ' ', ' ', ' ', ' ', ' '], 
-        [' ', ' ', ' ', ' ', ' ', ' ', ' ', ' '], 
-        [' ', ' ', ' ', ' ', ' ', ' ', ' ', ' '], 
-        [' ', ' ', ' ', ' ', ' ', ' ', ' ', ' '], 
-        [Pawn.new('white'), Pawn.new('white'), Pawn.new('white'), Pawn.new('white'), Pawn.new('white'), Pawn.new('white'), Pawn.new('white'), Pawn.new('white')], 
-        [Rook.new('white'), Knight.new('white'), Bishop.new('white'), Queen.new('white'), King.new('white'), Bishop.new('white'), Knight.new('white'), Rook.new('white')]]
+        board.board = [[Rook.new('black'), Knight.new('black'), Bishop.new('black'), Queen.new('black'), King.new('black'), Bishop.new('black'), Knight.new('black'), Rook.new('black')],
+                       [Pawn.new('black'), Pawn.new('black'), Pawn.new('black'), Pawn.new('black'), Pawn.new('black'), Pawn.new('white'), Pawn.new('black'), Pawn.new('black')],
+                       [' ', ' ', ' ', ' ', ' ', ' ', ' ', ' '],
+                       [' ', ' ', ' ', ' ', ' ', ' ', ' ', ' '],
+                       [' ', ' ', ' ', ' ', ' ', ' ', ' ', ' '],
+                       [' ', ' ', ' ', ' ', ' ', ' ', ' ', ' '],
+                       [Pawn.new('white'), Pawn.new('white'), Pawn.new('white'), Pawn.new('white'), Pawn.new('white'), Pawn.new('white'), Pawn.new('white'), Pawn.new('white')],
+                       [Rook.new('white'), Knight.new('white'), Bishop.new('white'), Queen.new('white'), King.new('white'), Bishop.new('white'), Knight.new('white'), Rook.new('white')]]
         expect(board.checkmate?('black')).to eql(false)
       end
 
       it 'returns true when white King is in checkmate as well' do
-        board.board = [[Rook.new('black'), Knight.new('black'), ' ', Queen.new('black'), King.new('black'), Bishop.new('black'), Knight.new('black'), Rook.new('black')], 
-        [Pawn.new('black'), Pawn.new('black'), Pawn.new('black'), Pawn.new('black'), Pawn.new('black'), Pawn.new('black'), Pawn.new('black'), Pawn.new('black')], 
-        [' ', ' ', ' ', ' ', ' ', ' ', ' ', ' '], 
-        [' ', ' ', ' ', ' ', ' ', ' ', ' ', ' '], 
-        [' ', Bishop.new('black'), ' ', ' ', ' ', ' ', ' ', ' '], 
-        [' ', ' ', ' ', ' ', ' ', ' ', ' ', ' '], 
-        [Pawn.new('white'), Pawn.new('white'), ' ', ' ', Pawn.new('white'), Pawn.new('white'), Pawn.new('white'), Pawn.new('white')], 
-        [Knight.new('white'), Rook.new('white'), ' ', Bishop.new('white'), King.new('white'), Bishop.new('white'), Knight.new('white'), Rook.new('white')]]
+        board.board = [[Rook.new('black'), Knight.new('black'), ' ', Queen.new('black'), King.new('black'), Bishop.new('black'), Knight.new('black'), Rook.new('black')],
+                       [Pawn.new('black'), Pawn.new('black'), Pawn.new('black'), Pawn.new('black'), Pawn.new('black'), Pawn.new('black'), Pawn.new('black'), Pawn.new('black')],
+                       [' ', ' ', ' ', ' ', ' ', ' ', ' ', ' '],
+                       [' ', ' ', ' ', ' ', ' ', ' ', ' ', ' '],
+                       [' ', Bishop.new('black'), ' ', ' ', ' ', ' ', ' ', ' '],
+                       [' ', ' ', ' ', ' ', ' ', ' ', ' ', ' '],
+                       [Pawn.new('white'), Pawn.new('white'), ' ', ' ', Pawn.new('white'), Pawn.new('white'), Pawn.new('white'), Pawn.new('white')],
+                       [Knight.new('white'), Rook.new('white'), ' ', Bishop.new('white'), King.new('white'), Bishop.new('white'), Knight.new('white'), Rook.new('white')]]
         expect(board.checkmate?('white')).to eql(true)
       end
 
       it 'returns false when another piece can eliminate threat in order to move King out of danger' do
-        board.board = [[Rook.new('black'), ' ', Bishop.new('black'), Queen.new('black'), King.new('black'), Bishop.new('black'), Knight.new('black'), Rook.new('black')], 
-        [Pawn.new('black'), Pawn.new('black'), Pawn.new('black'), ' ', Pawn.new('black'), Pawn.new('black'), Pawn.new('black'), Pawn.new('black')], 
-        [' ', ' ', ' ', ' ', ' ', ' ', ' ', ' '], 
-        [' ', Bishop.new('white'), ' ', ' ', ' ', ' ', ' ', ' '], 
-        [' ', ' ', ' ', Knight.new('black'), ' ', ' ', ' ', ' '], 
-        [' ', ' ', ' ', ' ', ' ', ' ', ' ', ' '], 
-        [Pawn.new('white'), Pawn.new('white'), Pawn.new('white'), Pawn.new('white'), Pawn.new('white'), Pawn.new('white'), Pawn.new('white'), Pawn.new('white')], 
-        [Rook.new('white'), Knight.new('white'), ' ', Queen.new('white'), King.new('white'), Bishop.new('white'), Knight.new('white'), Rook.new('white')]]
+        board.board = [[Rook.new('black'), ' ', Bishop.new('black'), Queen.new('black'), King.new('black'), Bishop.new('black'), Knight.new('black'), Rook.new('black')],
+                       [Pawn.new('black'), Pawn.new('black'), Pawn.new('black'), ' ', Pawn.new('black'), Pawn.new('black'), Pawn.new('black'), Pawn.new('black')],
+                       [' ', ' ', ' ', ' ', ' ', ' ', ' ', ' '],
+                       [' ', Bishop.new('white'), ' ', ' ', ' ', ' ', ' ', ' '],
+                       [' ', ' ', ' ', Knight.new('black'), ' ', ' ', ' ', ' '],
+                       [' ', ' ', ' ', ' ', ' ', ' ', ' ', ' '],
+                       [Pawn.new('white'), Pawn.new('white'), Pawn.new('white'), Pawn.new('white'), Pawn.new('white'), Pawn.new('white'), Pawn.new('white'), Pawn.new('white')],
+                       [Rook.new('white'), Knight.new('white'), ' ', Queen.new('white'), King.new('white'), Bishop.new('white'), Knight.new('white'), Rook.new('white')]]
         expect(board.checkmate?('black')).to eql(false)
       end
 
       it 'returns false when a piece can intercept a vertical threat to king (from rook)' do
-        board.board = [[' ', Knight.new('black'), Bishop.new('black'), Pawn.new('black'), King.new('black'), Pawn.new('black'), Knight.new('black'), Rook.new('black')], 
-        [Pawn.new('black'), Pawn.new('black'), Pawn.new('black'), Pawn.new('black'), ' ', Pawn.new('black'), Pawn.new('black'), Pawn.new('black')], 
-        [Rook.new('black'), ' ', ' ', ' ', ' ', ' ', ' ', ' '], 
-        [' ', ' ', ' ', ' ', ' ', ' ', ' ', ' '], 
-        [' ', ' ', ' ', ' ', ' ', ' ', ' ', ' '], 
-        [' ', ' ', ' ', ' ', Rook.new('white'), ' ', ' ', ' '], 
-        [Pawn.new('white'), Pawn.new('white'), Pawn.new('white'), Pawn.new('white'), Pawn.new('white'), Pawn.new('white'), Pawn.new('white'), Pawn.new('white')], 
-        [' ', Knight.new('white'), Bishop.new('white'), Queen.new('white'), King.new('white'), Bishop.new('white'), Knight.new('white'), Rook.new('white')]]
+        board.board = [[' ', Knight.new('black'), Bishop.new('black'), Pawn.new('black'), King.new('black'), Pawn.new('black'), Knight.new('black'), Rook.new('black')],
+                       [Pawn.new('black'), Pawn.new('black'), Pawn.new('black'), Pawn.new('black'), ' ', Pawn.new('black'), Pawn.new('black'), Pawn.new('black')],
+                       [Rook.new('black'), ' ', ' ', ' ', ' ', ' ', ' ', ' '],
+                       [' ', ' ', ' ', ' ', ' ', ' ', ' ', ' '],
+                       [' ', ' ', ' ', ' ', ' ', ' ', ' ', ' '],
+                       [' ', ' ', ' ', ' ', Rook.new('white'), ' ', ' ', ' '],
+                       [Pawn.new('white'), Pawn.new('white'), Pawn.new('white'), Pawn.new('white'), Pawn.new('white'), Pawn.new('white'), Pawn.new('white'), Pawn.new('white')],
+                       [' ', Knight.new('white'), Bishop.new('white'), Queen.new('white'), King.new('white'), Bishop.new('white'), Knight.new('white'), Rook.new('white')]]
         expect(board.checkmate?('black')).to eql(false)
       end
 
       it 'returns false when a piece can intercept a horizontal threat to king (from queen)' do
-        board.board = [[' ', ' ', Bishop.new('black'), Pawn.new('black'), ' ', Pawn.new('black'), Knight.new('black'), Rook.new('black')], 
-        [' ', Pawn.new('black'), Pawn.new('black'), Pawn.new('black'), Pawn.new('black'), Pawn.new('black'), Pawn.new('black'), Pawn.new('black')], 
-        [' ', ' ', ' ', ' ', ' ', Rook.new('black'), Knight.new('black'), Pawn.new('black')], 
-        [Queen.new('white'), ' ', ' ', ' ', ' ', ' ', ' ', King.new('black')], 
-        [' ', ' ', ' ', ' ', ' ', ' ', Pawn.new('black'), Pawn.new('black')], 
-        [' ', ' ', ' ', ' ', ' ', ' ', ' ', ' '], 
-        [Pawn.new('white'), Pawn.new('white'), Pawn.new('white'), Pawn.new('white'), Pawn.new('white'), Pawn.new('white'), Pawn.new('white'), Pawn.new('white')], 
-        [Rook.new('white'), Knight.new('white'), Bishop.new('white'), ' ', King.new('white'), Bishop.new('white'), Knight.new('white'), Rook.new('white')]]
+        board.board = [[' ', ' ', Bishop.new('black'), Pawn.new('black'), ' ', Pawn.new('black'), Knight.new('black'), Rook.new('black')],
+                       [' ', Pawn.new('black'), Pawn.new('black'), Pawn.new('black'), Pawn.new('black'), Pawn.new('black'), Pawn.new('black'), Pawn.new('black')],
+                       [' ', ' ', ' ', ' ', ' ', Rook.new('black'), Knight.new('black'), Pawn.new('black')],
+                       [Queen.new('white'), ' ', ' ', ' ', ' ', ' ', ' ', King.new('black')],
+                       [' ', ' ', ' ', ' ', ' ', ' ', Pawn.new('black'), Pawn.new('black')],
+                       [' ', ' ', ' ', ' ', ' ', ' ', ' ', ' '],
+                       [Pawn.new('white'), Pawn.new('white'), Pawn.new('white'), Pawn.new('white'), Pawn.new('white'), Pawn.new('white'), Pawn.new('white'), Pawn.new('white')],
+                       [Rook.new('white'), Knight.new('white'), Bishop.new('white'), ' ', King.new('white'), Bishop.new('white'), Knight.new('white'), Rook.new('white')]]
         expect(board.checkmate?('black')).to eql(false)
       end
 
       it 'returns false when a piece can intercept a diagonal threat to king (from bishop)' do
-        board.board = [[Rook.new('black'), ' ', Bishop.new('black'), Queen.new('black'), ' ', ' ', Knight.new('black'), Rook.new('black')], 
-        [' ', Pawn.new('black'), Pawn.new('black'), Pawn.new('black'), Pawn.new('black'), Pawn.new('black'), Pawn.new('black'), Pawn.new('black')], 
-        [' ', ' ', ' ', ' ', ' ', Bishop.new('black'), Knight.new('black'), King.new('black')], 
-        [' ', ' ', ' ', ' ', ' ', ' ', ' ', Pawn.new('black')], 
-        [' ', ' ', ' ', ' ', ' ', ' ', ' ', ' '], 
-        [' ', ' ', ' ', ' ', Bishop.new('white'), ' ', ' ', ' '], 
-        [Pawn.new('white'), Pawn.new('white'), Pawn.new('white'), Pawn.new('white'), Pawn.new('white'), Pawn.new('white'), Pawn.new('white'), Pawn.new('white')], 
-        [Rook.new('white'), Knight.new('white'), ' ', Queen.new('white'), King.new('white'), Bishop.new('white'), Knight.new('white'), Rook.new('white')]]
+        board.board = [[Rook.new('black'), ' ', Bishop.new('black'), Queen.new('black'), ' ', ' ', Knight.new('black'), Rook.new('black')],
+                       [' ', Pawn.new('black'), Pawn.new('black'), Pawn.new('black'), Pawn.new('black'), Pawn.new('black'), Pawn.new('black'), Pawn.new('black')],
+                       [' ', ' ', ' ', ' ', ' ', Bishop.new('black'), Knight.new('black'), King.new('black')],
+                       [' ', ' ', ' ', ' ', ' ', ' ', ' ', Pawn.new('black')],
+                       [' ', ' ', ' ', ' ', ' ', ' ', ' ', ' '],
+                       [' ', ' ', ' ', ' ', Bishop.new('white'), ' ', ' ', ' '],
+                       [Pawn.new('white'), Pawn.new('white'), Pawn.new('white'), Pawn.new('white'), Pawn.new('white'), Pawn.new('white'), Pawn.new('white'), Pawn.new('white')],
+                       [Rook.new('white'), Knight.new('white'), ' ', Queen.new('white'), King.new('white'), Bishop.new('white'), Knight.new('white'), Rook.new('white')]]
         expect(board.checkmate?('black')).to eql(false)
       end
 
       it 'returns true on a common checkmate scenario: 1' do
-        board.board = [[' ', ' ', ' ', ' ', ' ', Rook.new('black'), ' ', ' '], 
-        [' ', ' ', ' ', ' ', Knight.new('white'), Pawn.new('black'), Pawn.new('black'), King.new('black')], 
-        [' ', ' ', ' ', ' ', ' ', ' ', ' ', ' '], 
-        [' ', ' ', ' ', ' ', ' ', ' ', ' ', Rook.new('white')], 
-        [' ', ' ', ' ', ' ', ' ', ' ', ' ', ' '], 
-        [' ', ' ', ' ', ' ', ' ', ' ', ' ', ' '], 
-        [' ', ' ', ' ', ' ', ' ', ' ', ' ', ' '], 
-        [' ', ' ', ' ', ' ', ' ', ' ', ' ', King.new('white')]]
+        board.board = [[' ', ' ', ' ', ' ', ' ', Rook.new('black'), ' ', ' '],
+                       [' ', ' ', ' ', ' ', Knight.new('white'), Pawn.new('black'), Pawn.new('black'), King.new('black')],
+                       [' ', ' ', ' ', ' ', ' ', ' ', ' ', ' '],
+                       [' ', ' ', ' ', ' ', ' ', ' ', ' ', Rook.new('white')],
+                       [' ', ' ', ' ', ' ', ' ', ' ', ' ', ' '],
+                       [' ', ' ', ' ', ' ', ' ', ' ', ' ', ' '],
+                       [' ', ' ', ' ', ' ', ' ', ' ', ' ', ' '],
+                       [' ', ' ', ' ', ' ', ' ', ' ', ' ', King.new('white')]]
         expect(board.checkmate?('black')).to eql(true)
       end
 
       it 'returns true on a common checkmate scenario: 2' do
-        board.board = [[Rook.new('white'), ' ', ' ', ' ', ' ', ' ', King.new('black'), ' '], 
-        [' ', ' ', ' ', ' ', ' ', ' ', ' ', ' '], 
-        [' ', ' ', ' ', ' ', ' ', ' ', King.new('white'), ' '], 
-        [' ', ' ', ' ', ' ', ' ', ' ', ' ', ' '], 
-        [' ', ' ', ' ', ' ', ' ', ' ', ' ', ' '], 
-        [' ', ' ', ' ', ' ', ' ', ' ', ' ', ' '], 
-        [' ', ' ', ' ', ' ', ' ', ' ', ' ', ' '], 
-        [' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ']]
+        board.board = [[Rook.new('white'), ' ', ' ', ' ', ' ', ' ', King.new('black'), ' '],
+                       [' ', ' ', ' ', ' ', ' ', ' ', ' ', ' '],
+                       [' ', ' ', ' ', ' ', ' ', ' ', King.new('white'), ' '],
+                       [' ', ' ', ' ', ' ', ' ', ' ', ' ', ' '],
+                       [' ', ' ', ' ', ' ', ' ', ' ', ' ', ' '],
+                       [' ', ' ', ' ', ' ', ' ', ' ', ' ', ' '],
+                       [' ', ' ', ' ', ' ', ' ', ' ', ' ', ' '],
+                       [' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ']]
         expect(board.checkmate?('black')).to eql(true)
       end
 
       it 'returns true on a common checkmate scenario: 3' do
-        board.board = [[' ', ' ', ' ', ' ', ' ', ' ', King.new('black'), ' '], 
-        [' ', ' ', ' ', ' ', ' ', ' ', Queen.new('white'), ' '], 
-        [' ', ' ', ' ', ' ', ' ', King.new('white'), ' ', ' '], 
-        [' ', ' ', ' ', ' ', ' ', ' ', ' ', ' '], 
-        [' ', ' ', ' ', ' ', ' ', ' ', ' ', ' '], 
-        [' ', ' ', ' ', ' ', ' ', ' ', ' ', ' '], 
-        [' ', ' ', ' ', ' ', ' ', ' ', ' ', ' '], 
-        [' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ']]
+        board.board = [[' ', ' ', ' ', ' ', ' ', ' ', King.new('black'), ' '],
+                       [' ', ' ', ' ', ' ', ' ', ' ', Queen.new('white'), ' '],
+                       [' ', ' ', ' ', ' ', ' ', King.new('white'), ' ', ' '],
+                       [' ', ' ', ' ', ' ', ' ', ' ', ' ', ' '],
+                       [' ', ' ', ' ', ' ', ' ', ' ', ' ', ' '],
+                       [' ', ' ', ' ', ' ', ' ', ' ', ' ', ' '],
+                       [' ', ' ', ' ', ' ', ' ', ' ', ' ', ' '],
+                       [' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ']]
         expect(board.checkmate?('black')).to eql(true)
       end
 
       it 'returns false when king is able to save itself, with not many pieces on the board' do
-        board.board = [[' ', ' ', ' ', ' ', ' ', ' ', King.new('black'), ' '], 
-        [' ', ' ', ' ', ' ', ' ', ' ', Queen.new('white'), ' '], 
-        [' ', ' ', ' ', ' ', ' ', ' ', ' ', ' '], 
-        [' ', ' ', ' ', ' ', ' ', King.new('white'), ' ', ' '], 
-        [' ', ' ', ' ', ' ', ' ', ' ', ' ', ' '], 
-        [' ', ' ', ' ', ' ', ' ', ' ', ' ', ' '], 
-        [' ', ' ', ' ', ' ', ' ', ' ', ' ', ' '], 
-        [' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ']]
+        board.board = [[' ', ' ', ' ', ' ', ' ', ' ', King.new('black'), ' '],
+                       [' ', ' ', ' ', ' ', ' ', ' ', Queen.new('white'), ' '],
+                       [' ', ' ', ' ', ' ', ' ', ' ', ' ', ' '],
+                       [' ', ' ', ' ', ' ', ' ', King.new('white'), ' ', ' '],
+                       [' ', ' ', ' ', ' ', ' ', ' ', ' ', ' '],
+                       [' ', ' ', ' ', ' ', ' ', ' ', ' ', ' '],
+                       [' ', ' ', ' ', ' ', ' ', ' ', ' ', ' '],
+                       [' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ']]
         expect(board.checkmate?('black')).to eql(false)
       end
     end

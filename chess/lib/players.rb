@@ -1,7 +1,7 @@
 # frozen-string-literal: true
 
+# contains method to identify if a piece belongs to that player
 class Player
-
   attr_accessor :color, :player, :check
 
   def initialize(player, color)

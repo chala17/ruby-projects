@@ -1,0 +1,171 @@
+---
+- - - &1 !ruby/object:Pawn
+      color: white
+      moved: true
+      symbol: "♟"
+    - - 6
+      - 2
+    - - 4
+      - 2
+  - - &3 !ruby/object:Pawn
+      color: black
+      moved: true
+      symbol: "♙"
+    - - 1
+      - 7
+    - - 3
+      - 7
+  - - *1
+    - - 4
+      - 2
+    - - 3
+      - 2
+  - - &2 !ruby/object:Pawn
+      color: black
+      moved: true
+      symbol: "♙"
+    - - 1
+      - 1
+    - - 3
+      - 1
+- - - !ruby/object:Rook
+      color: black
+      moved: false
+      symbol: "♖"
+    - !ruby/object:Knight
+      color: black
+      symbol: "♘"
+    - !ruby/object:Bishop
+      color: black
+      symbol: "♗"
+    - !ruby/object:Queen
+      color: black
+      symbol: "♕"
+    - !ruby/object:King
+      color: black
+      symbol: "♔"
+      moved: false
+    - !ruby/object:Bishop
+      color: black
+      symbol: "♗"
+    - !ruby/object:Knight
+      color: black
+      symbol: "♘"
+    - !ruby/object:Rook
+      color: black
+      moved: false
+      symbol: "♖"
+  - - !ruby/object:Pawn
+      color: black
+      moved: false
+      symbol: "♙"
+    - " "
+    - !ruby/object:Pawn
+      color: black
+      moved: false
+      symbol: "♙"
+    - !ruby/object:Pawn
+      color: black
+      moved: false
+      symbol: "♙"
+    - !ruby/object:Pawn
+      color: black
+      moved: false
+      symbol: "♙"
+    - !ruby/object:Pawn
+      color: black
+      moved: false
+      symbol: "♙"
+    - !ruby/object:Pawn
+      color: black
+      moved: false
+      symbol: "♙"
+    - " "
+  - - " "
+    - " "
+    - " "
+    - " "
+    - " "
+    - " "
+    - " "
+    - " "
+  - - " "
+    - *2
+    - *1
+    - " "
+    - " "
+    - " "
+    - " "
+    - *3
+  - - " "
+    - " "
+    - " "
+    - " "
+    - " "
+    - " "
+    - " "
+    - " "
+  - - " "
+    - " "
+    - " "
+    - " "
+    - " "
+    - " "
+    - " "
+    - " "
+  - - !ruby/object:Pawn
+      color: white
+      moved: false
+      symbol: "♟"
+    - !ruby/object:Pawn
+      color: white
+      moved: false
+      symbol: "♟"
+    - " "
+    - !ruby/object:Pawn
+      color: white
+      moved: false
+      symbol: "♟"
+    - !ruby/object:Pawn
+      color: white
+      moved: false
+      symbol: "♟"
+    - !ruby/object:Pawn
+      color: white
+      moved: false
+      symbol: "♟"
+    - !ruby/object:Pawn
+      color: white
+      moved: false
+      symbol: "♟"
+    - !ruby/object:Pawn
+      color: white
+      moved: false
+      symbol: "♟"
+  - - !ruby/object:Rook
+      color: white
+      moved: false
+      symbol: "♜"
+    - !ruby/object:Knight
+      color: white
+      symbol: "♞"
+    - !ruby/object:Bishop
+      color: white
+      symbol: "♝"
+    - !ruby/object:Queen
+      color: white
+      symbol: "♛"
+    - !ruby/object:King
+      color: white
+      symbol: "♚"
+      moved: false
+    - !ruby/object:Bishop
+      color: white
+      symbol: "♝"
+    - !ruby/object:Knight
+      color: white
+      symbol: "♞"
+    - !ruby/object:Rook
+      color: white
+      moved: false
+      symbol: "♜"

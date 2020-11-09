@@ -1,19 +1,18 @@
 # frozen-string-literal: true
 
+# contains methods necessary to determine how pieces are allowed to move
 class Piece
-
   attr_accessor :color
 
   def initialize(color)
     @color = color
   end
-
 end
 
+# contains methods necessary for legal moves of the piece: Pawn
 class Pawn < Piece
-
   attr_accessor :symbol, :moved
-  
+
   def initialize(color)
     super(color)
     @moved = false
@@ -25,23 +24,22 @@ class Pawn < Piece
   end
 
   def valid_move?(start, stop, gameboard)
-    return true if en_passant(gameboard, start, stop)
+    return true if en_passant(gameboard, stop)
+
     if color == 'white'
       if (start[1] - stop[1]).abs == 1 && start[0] - stop[0] == 1
         return false if gameboard.board[stop[0]][stop[1]] == ' '
 
-        if ((gameboard.board[start[0]][start[1]]).color != (gameboard.board[stop[0]][stop[1]]).color)
-          self.moved = true
-          return true
-        else
-          return false
-        end
+        return false unless (gameboard.board[start[0]][start[1]]).color != (gameboard.board[stop[0]][stop[1]]).color
+
+        self.moved = true
+        return true
       end
       return false if gameboard.space_occupied?(stop)
 
-      return false unless start[1] - stop[1] == 0
+      return false unless (start[1] - stop[1]).zero?
 
-      if self.moved == false
+      if moved == false
         if start[0] - stop[0] == 2
           self.moved = true
           return true
@@ -55,17 +53,16 @@ class Pawn < Piece
       if (start[1] - stop[1]).abs == 1 && start[0] - stop[0] == -1
         return false if gameboard.board[stop[0]][stop[1]] == ' '
 
-        if ((gameboard.board[start[0]][start[1]]).color != (gameboard.board[stop[0]][stop[1]]).color)
-          self.moved = true
-          return true
-        else
-          return false
-        end
+        return false unless (gameboard.board[start[0]][start[1]]).color != (gameboard.board[stop[0]][stop[1]]).color
+
+        self.moved = true
+        return true
       end
       return false if gameboard.space_occupied?(stop)
 
-      return false unless start[1] - stop[1] == 0
-      if self.moved == false
+      return false unless (start[1] - stop[1]).zero?
+
+      if moved == false
         if start[0] - stop[0] == -2
           self.moved = true
           return true
@@ -79,24 +76,26 @@ class Pawn < Piece
     false
   end
 
-  def en_passant(gameboard, start, stop)
+  def en_passant(gameboard, stop)
     return false if gameboard.moves_array.empty?
 
     return false unless gameboard.moves_array[-1][0].is_a?(Pawn)
 
-    return false unless [(gameboard.moves_array[-1][1][0] + gameboard.moves_array[-1][2][0]) / 2.0, gameboard.moves_array[-1][2][1]] == stop
+    return false unless stop == [(gameboard.moves_array[-1][1][0] + gameboard.moves_array[-1][2][0]) / 2.0,
+                                  gameboard.moves_array[-1][2][1]]
+
     gameboard.board[gameboard.moves_array[-1][2][0]][gameboard.moves_array[-1][2][1]] = ' '
     true
   end
 
   def promotion(stop, board, piece)
-    puts "Congrats, you can promote your pawn!"
+    puts 'Congrats, you can promote your pawn!'
     options = %w[r k b q]
     entry = ' '
     until options.include?(entry)
       puts "Choose one of these letters\nr: rook\nk: knight\nb: bishop\nq: queen"
       entry = gets.chomp.downcase
-      puts("That was an unacceptable entry") unless options.include?(entry)
+      puts('That was an unacceptable entry') unless options.include?(entry)
     end
     case entry
     when 'r'
@@ -111,8 +110,8 @@ class Pawn < Piece
   end
 end
 
+# contains methods necessary for legal moves of the piece: Rook
 class Rook < Piece
-
   attr_accessor :symbol, :moved
 
   def initialize(color)
@@ -126,18 +125,16 @@ class Rook < Piece
   end
 
   def valid_move?(start, stop, gameboard)
-    return false unless start[0] - stop[0] == 0 || start[1] - stop[1] == 0
+    return false unless (start[0] - stop[0]).zero? || (start[1] - stop[1]).zero?
 
-    if start[0] - stop[0] == 0
+    if (start[0] - stop[0]).zero?
       # steps from min number to max number, checking i/f there's a piece along the way
-      ((([start[1], stop[1]].min) + 1)..(([start[1], stop[1]].max) - 1)).each do |i|
+      (([start[1], stop[1]].min + 1)..([start[1], stop[1]].max - 1)).each do |i|
         return false unless gameboard.board[start[0]][i] == ' '
-
       end
     else
-      ((([start[0], stop[0]].min) + 1)..(([start[0], stop[0]].max) - 1)).each do |i|
+      (([start[0], stop[0]].min + 1)..([start[0], stop[0]].max - 1)).each do |i|
         return false unless gameboard.board[i][start[1]] == ' '
-
       end
     end
     self.moved = true
@@ -145,8 +142,8 @@ class Rook < Piece
   end
 end
 
+# contains methods necessary for legal moves of the piece: Knight
 class Knight < Piece
-
   attr_accessor :symbol
 
   def initialize(color)
@@ -158,7 +155,7 @@ class Knight < Piece
     color == 'black' ? "\u2658" : "\u265e"
   end
 
-  def valid_move?(start, stop, gameboard)
+  def valid_move?(start, stop, _gameboard)
     moves = [[1, 2], [1, -2], [-1, 2], [-1, -2], [2, 1], [2, -1], [-2, 1], [-2, -1]]
     moves.each do |move|
       move[0] += start[0]
@@ -167,11 +164,10 @@ class Knight < Piece
     end
     false
   end
-
 end
 
+# contains methods necessary for legal moves of the piece: Bishop
 class Bishop < Piece
-
   attr_accessor :symbol
 
   def initialize(color)
@@ -188,9 +184,9 @@ class Bishop < Piece
 
     start_check = start.clone
     stop_check = stop.clone
-    vertical_adjustment = start_check[0] - stop_check[0] > 0 ? -1 : 1
-    horizontal_adjustment = start_check[1] - stop_check[1] > 0 ? -1 : 1
-    stop_check[0] -= vertical_adjustment 
+    vertical_adjustment = (start_check[0] - stop_check[0]).positive? ? -1 : 1
+    horizontal_adjustment = (start_check[1] - stop_check[1]).positive? ? -1 : 1
+    stop_check[0] -= vertical_adjustment
     stop_check[1] -= horizontal_adjustment
     until start_check == stop_check
       start_check[0] += vertical_adjustment
@@ -201,10 +197,10 @@ class Bishop < Piece
   end
 end
 
+# contains methods necessary for legal moves of the piece: Queen
 class Queen < Piece
-
   attr_accessor :symbol
-  
+
   def initialize(color)
     super(color)
     @symbol = assign_unicode
@@ -219,9 +215,9 @@ class Queen < Piece
     if (start[0] - stop[0]).abs == (start[1] - stop[1]).abs
       start_check = start.clone
       stop_check = stop.clone
-      vertical_adjustment = start_check[0] - stop_check[0] > 0 ? -1 : 1
-      horizontal_adjustment = start_check[1] - stop_check[1] > 0 ? -1 : 1
-      stop_check[0] -= vertical_adjustment 
+      vertical_adjustment = (start_check[0] - stop_check[0]).positive? ? -1 : 1
+      horizontal_adjustment = (start_check[1] - stop_check[1]).positive? ? -1 : 1
+      stop_check[0] -= vertical_adjustment
       stop_check[1] -= horizontal_adjustment
       until start_check == stop_check
         start_check[0] += vertical_adjustment
@@ -230,17 +226,15 @@ class Queen < Piece
       end
       return true
     end
-    if start[0] - stop[0] == 0 || start[1] - stop[1] == 0
-      if start[0] - stop[0] == 0
+    if (start[0] - stop[0]).zero? || (start[1] - stop[1]).zero?
+      if (start[0] - stop[0]).zero?
         # steps from min number to max number, checking i/f there's a piece along the way
-        ((([start[1], stop[1]].min) + 1)..(([start[1], stop[1]].max) - 1)).each do |i|
+        (([start[1], stop[1]].min + 1)..([start[1], stop[1]].max - 1)).each do |i|
           return false unless gameboard.board[start[0]][i] == ' '
-
         end
       else
-        ((([start[0], stop[0]].min) + 1)..(([start[0], stop[0]].max) - 1)).each do |i|
+        (([start[0], stop[0]].min + 1)..([start[0], stop[0]].max - 1)).each do |i|
           return false unless gameboard.board[i][start[1]] == ' '
-
         end
       end
       return true
@@ -249,10 +243,10 @@ class Queen < Piece
   end
 end
 
+# contains methods necessary for legal moves of the piece: King
 class King < Piece
-
   attr_accessor :symbol, :moved
-  
+
   def initialize(color)
     super(color)
     @symbol = assign_unicode
@@ -268,7 +262,7 @@ class King < Piece
       if gameboard.space_occupied?(stop)
         return false if gameboard.board[stop[0]][stop[1]].color == color
       end
-      mock_board = Gameboard.new 
+      mock_board = Gameboard.new
       board_copy = Marshal.dump(gameboard.board)
       mock_board.board = Marshal.load(board_copy)
       mock_board.move_piece(start, stop)
@@ -277,7 +271,7 @@ class King < Piece
       self.moved = true
       return true
     end
-    
+
     false
   end
 end
